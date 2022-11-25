@@ -1,13 +1,24 @@
 
+import React, {useState} from 'react';
+
 //function to create login page
 const Login = () =>{
-    var username;
-    var password;
+   const [userCred, setUserCred]  = useState({});
     const setUserName = (e) =>{
-        username = e.target.value;
+        setUserCred(userD => {
+            return {
+                ...userD,
+                userName: e.target.value,
+            }
+        });
     }
     const setPassword = (e) =>{
-        password = e.target.value;
+        setUserCred(userD => {
+            return {
+                ...userD,
+                password: e.target.value,
+            }
+        });
     }
 
     const checkCredAndLogIn = () => {
@@ -15,7 +26,6 @@ const Login = () =>{
         
     }
     
-    const 
 
     return(
         <div className="loginpage">
