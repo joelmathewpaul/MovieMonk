@@ -28,9 +28,10 @@ const Login = () => {
   };
 
   return (
-    <div className="loginpage">
-      <form className="p-5 position-absolute bg-success" onSubmit={makeLogin}>
-        <div className="input-group mt-5">
+    <div className="loginpage p-5">
+      <h4 className="text-white">Login Here!</h4>
+      <form onSubmit={makeLogin}>
+        <div className="input-group mt-3">
           <div className="form-floating">
             <input
               required={true}
