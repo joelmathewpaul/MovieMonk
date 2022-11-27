@@ -42,7 +42,7 @@ const Register = () => {
     const makeSignUp = (e) => {
         e.preventDefault();
         //function to check if the credentials provided are valid and proceed with login
-        if (userCred.password!== userCred.confirmPassword){
+        if (userCred.password !== userCred.confirmPassword) {
             alert("Passwords don't match! Please try again!");
         }
         return false;
@@ -64,11 +64,11 @@ const Register = () => {
                             placeholder="Enter your first and last name e.g., John Doe"
                         />
                         <label htmlFor="floatingInput" className="text-muted">
-                            <i className="fa fa-user p-2"/>Name
+                            <i className="fa fa-user p-2" />Name
                         </label>
                     </div>
                 </div>
-            <br/>
+                <br />
                 <div className="input-group mt-2">
                     <div className="form-floating">
                         <input
@@ -81,7 +81,7 @@ const Register = () => {
                             placeholder="name@example.com"
                         />
                         <label htmlFor="floatingInput" className="text-muted">
-                            <i className="fa-solid fa-id-card p-2"/>Email
+                            <i className="fa-solid fa-id-card p-2" />Email
                         </label>
                     </div>
                 </div>
@@ -98,11 +98,11 @@ const Register = () => {
                             placeholder="Password"
                         />
                         <label htmlFor="floatingPassword" className="text-muted">
-                            <i className="fa fa-lock p-2"/>Password
+                            <i className="fa fa-lock p-2" />Password
                         </label>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div className="input-group mb-4 mt-2">
                     <div className="form-floating">
                         <input
@@ -115,7 +115,7 @@ const Register = () => {
                             placeholder="Re-enter Password"
                         />
                         <label htmlFor="floatingConfirmPassword" className="text-muted">
-                            <i className="fa fa-lock p-2"/>Confirm Password
+                            <i className="fa fa-lock p-2" />Confirm Password
                         </label>
                     </div>
                 </div>
@@ -126,11 +126,6 @@ const Register = () => {
                     className="rounded-pill ps-5 pe-5">
                     Sign Up
                 </Button>
-                <div className="mt-3">
-                    <a href="#" className="text-white">
-                        Already have an account? Sign In!
-                    </a>
-                </div>
             </form>
         </div>
     );
