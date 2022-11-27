@@ -20,14 +20,7 @@ const Register = () => {
             };
         });
     };
-    const setPhone = (e) => {
-        setUserCred((userCred) => {
-            return {
-                ...userCred,
-                phone: e.target.value,
-            };
-        });
-    };
+
     const setPassword = (e) => {
         setUserCred((userCred) => {
             return {
@@ -89,23 +82,6 @@ const Register = () => {
                         />
                         <label htmlFor="floatingInput" className="text-muted">
                             <i className="fa-solid fa-id-card p-2"/>Email
-                        </label>
-                    </div>
-                </div>
-                <br />
-                <div className="input-group mt-2">
-                    <div className="form-floating">
-                        <input
-                            onChange={setPhone}
-                            value={userCred.phone}
-                            type="tel"
-                            className="form-control rounded-pill"
-                            id="floatingInput"
-                            placeholder="(area code)-xxx-xxxx"
-                            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                        />
-                        <label htmlFor="floatingInput" className="text-muted">
-                            <i className="fa fa-phone p-2"/>Phone
                         </label>
                     </div>
                 </div>
