@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "./login";
+import Register from "./register";
 
 const LoginSignup = () => {
 
@@ -11,7 +12,7 @@ const LoginSignup = () => {
             <Login />
           </div>
           <div className="col-md-6">
-            {/**Here register will come*/}
+          <Register />
           </div>
         </div>
       </div>
