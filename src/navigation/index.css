@@ -1,0 +1,29 @@
+/*
+css for navigation related styles.
+*/
+
+.nav-item{
+    border-radius: 15px;
+    background-color: white;
+    font-weight: bold;
+    font-size: medium;
+    font-family: sans-serif;
+    margin:5px;
+    box-shadow:4px 4px 2px 1px gray;
+}
+
+
+.nav{
+    padding:5px 10px 10px 10px;
+    margin:2px;
+    border-radius:15px;
+    background-color: #a5c7c1;
+}
+
+.nav-item:hover,
+.list-group-item:active
+{
+    font-size: larger;
+    background-color: lightgrey;
+
+}
