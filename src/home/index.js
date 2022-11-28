@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import Header from "../header";
 import Navigation from "../navigation";
+import MovieList from "../movie";
 
 const Home = () => {
   return (
@@ -12,6 +13,8 @@ const Home = () => {
             <Navigation />
           </div>
           <div className="col-md-9">
+              {/*calling the movie list here*/}
+              <MovieList />
             {/* <Routes>
               <Route index
                 element={<Assignment6 />} />
