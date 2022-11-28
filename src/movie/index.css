@@ -1,0 +1,30 @@
+
+/* align the image relative to this and fix the size of each card*/
+.card-body{
+    position: relative;
+    height:270px;
+    width:600px;
+}
+
+/*to give an overflowing effect*/
+.card-img{
+    position: absolute;
+    top:-50px;
+
+}
+
+/*for shadowing effect*/
+.wd-thumbnail{
+    box-shadow: 0 0 10px gray;
+
+}
+
+/*for text to move after the image and restrict to a certain width for text wrap*/
+.wd-float-right{
+    position: absolute;
+    left:220px;
+    width:400px;
+    flex-wrap: wrap;
+;
+}
+
