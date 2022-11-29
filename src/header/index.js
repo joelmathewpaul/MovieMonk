@@ -14,19 +14,24 @@ const Header = (user) => {
         <div className="d-flex ">
           <div className="d-flex align-items-center ps-2">
             <i className='fa fa-list fa-xl text-success p-2 me-2'></i>
-            {/*<Button variant="success" className="btn btn-circle text-sm-start">Login/SignUp</Button>*/}
-            <Dropdown as={ButtonGroup}>
+
+            {/*false(line 18) and true(line 20) should be replace with if userloggedin or not*/}
+
+            {false && <Button variant="success" className="btn btn-circle text-sm-start">Login/SignUp</Button>}
+
+            {
+              true && <Dropdown as={ButtonGroup}>
               <Dropdown.Toggle variant="success" className="rounded-pill"><i className="fa fa-user"></i></Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">To be filled</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">To be filled</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">To be filled</Dropdown.Item>
-
                 <Dropdown.Item href="#/action-2">To be filled</Dropdown.Item>
                 <Dropdown.Item href="#/action-3">Log Out</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            }
           </div>
         </div>
       </div>
