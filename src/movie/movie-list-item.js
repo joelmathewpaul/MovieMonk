@@ -12,28 +12,27 @@ const MovieListItem = (
         }
     }
 ) => {
-
     return (
-        <div className="card border-0 mt-2">
-            <div className={'card-body bg-light rounded-2'}>
-                <div className="card-img">
-                    <img width={"200"} className="float-start wd-thumbnail" src={movie.image} alt={`movie thumbnail`} />
-                </div>
-                <div className="p-2 mb-3 wd-float-right">
-                    <div className={'h4 card-title'}>{movie.title}</div>
-                    <div className={`card-subtitle text-muted`}>by {movie.director}</div>
-                    <div className={'pt-3'}>
-                        <Rating ratings={4} />
-                        <span className={'text-secondary ps-3'}>{movie.votes} votes</span>
+        <div className="mv-card pt-3">
+            <div className="position-relative bg-white p-15 rounded-3">
+                <div className="d-flex flex-row">
+                    <div className="thumbnail-holder position-relative">
+                        <div className="card-img position-absolute rounded-3">
+                            <img src={movie.image} alt={movie.title} />
+                        </div>
                     </div>
-                    <div className={'card-text text-success pt-3'}>{movie.description}</div>
+                    <div className="movie-content ms-3 pt-2">
+                        <p className="m-0">{movie.title}</p>
+                        <p className="m-0 text-muted"><small>By: {movie.director}</small></p>
+                        <div className="mt-2">
+                            <Rating ratings={4} />
+                            <p className="m-0 text-muted"><small>votes: {movie.votes}</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
-
-    );
+    )
 };
 export default MovieListItem;
 

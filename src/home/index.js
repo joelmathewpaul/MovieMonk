@@ -7,12 +7,12 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="container bg-white rounded-3">
+      <div className="container bg-white rounded-3 overflow-hidden">
         <div className="row">
           <div className="col-md-3 pt-3 pb-3">
             <Navigation />
           </div>
-          <div className="col-md-9 pt-3 pb-3">
+          <div className="col-md-9 pt-3 pb-3 bg-light">
             {/*calling the movie list here*/}
             <MovieList />
             {/* <Routes>
