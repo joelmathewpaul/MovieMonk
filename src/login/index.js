@@ -12,7 +12,7 @@ const LoginSignup = () => {
             <Login />
           </div>
           <div className="col-md-6">
-          <Register />
+            <Register />
           </div>
         </div>
       </div>
