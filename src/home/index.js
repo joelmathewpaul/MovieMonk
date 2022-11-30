@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import Header from "../header";
 import Navigation from "../navigation";
-import MovieList from "../movie-list";
+import MovieGenreList from "../movie-genre-list";
 
 
 const movieData = [{
@@ -73,7 +73,7 @@ const Home = () => {
           </div>
           <div className="col-md-9 pt-3 pb-3 bg-light">
             {/*calling the movie list here*/}
-            <MovieList movieList={movieData} />
+            <MovieGenreList movieList={movieData} genre="Action" />
             {/* <Routes>
               <Route index
                 element={<Assignment6 />} />

@@ -13,9 +13,9 @@ const MovieListItem = ({ movie }) => {
                     <div className="movie-content ms-3 pt-2">
                         <p className="m-0">{movie.title}</p>
                         <p className="m-0 text-muted"><small>By: {movie.director}</small></p>
+                        <p className="m-0 text-muted"><small><i className="fa-solid text-warning fa-star pe-1" /> {movie.ratings}</small></p>
                         <div className="mt-2">
-                            <Rating ratings={4} />
-                            <p className="m-0 text-muted"><small>votes: {movie.votes}</small></p>
+                            <p className="m-0 text-muted"><small>Votes: {movie.votes}</small></p>
                         </div>
                     </div>
                 </div>

@@ -10,11 +10,11 @@ import MovieListItem from "./movie-list-item";
 const MovieList = ({ movieList = [] }) => {
 
     return (
-        <div className="row">
+        <div className="row g-3">
             {
                 movieList.map((movie, index) => {
                     return (
-                        <div className="col-lg-4 mt-3">
+                        <div className="col-md-6 col-xl-4 mt-3">
                             <MovieListItem movie={movie} />
                         </div>
                     )
