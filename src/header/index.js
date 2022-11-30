@@ -11,7 +11,7 @@ const Header = (user) => {
         </Link>
         <input className="form-control rounded-pill mt-3 mt-lg-0 ps-4 ms-lg-5 me-lg-5" type="search" placeholder="Search movies, genres, actor ..." aria-label="Search" />
         <div className="d-flex align-items-center mt-3 mt-lg-0">
-          <button type="button" class="me-3 btn d-flex rounded-pill align-items-center btn-outline-success">
+          <button type="button" className="me-3 btn d-flex rounded-pill align-items-center btn-outline-success">
             <i className="fa fa-list"></i>
             <span className="ps-3">Watchlist</span>
           </button>
