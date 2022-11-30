@@ -1,17 +1,6 @@
 import React from "react";
 import Rating from "./rating";
-const MovieListItem = (
-    {
-        movie = {
-            "title": "Black Panther",
-            "director": "Ryan Coogler",
-            "ratings": 4,
-            "votes": "1,987,765",
-            "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-            "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-        }
-    }
-) => {
+const MovieListItem = ({ movie }) => {
     return (
         <div className="mv-card pt-3">
             <div className="position-relative bg-white p-15 rounded-3">
