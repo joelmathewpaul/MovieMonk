@@ -5,16 +5,17 @@ const Header = (user) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-4">
       <div className="container">
-        <Link to="/" className="navbar-brand fw-bold d-flex d-flex-row align-items-center">
-          <img src="/logo.png" height={30} />
-          <span className="ps-3">MovieMonk</span>
-        </Link>
-        <input className="form-control me-2 ms-4 rounded-pill ps-4" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" type="submit">Search</button>
-        <div className="d-flex ">
-          <div className="d-flex align-items-center ps-2">
-            <i className='fa fa-list fa-xl text-success p-2 me-2'></i>
-
+          <Link to="/" className="navbar-brand fw-bold d-flex d-flex-row align-items-center">
+            <img src="/logo.png" height={30} />
+            <span className="ps-3">MovieMonk</span>
+          </Link>
+        <input className="form-control   rounded-pill ps-4 " type="search" placeholder="Search" aria-label="Search" />
+          <div className="d-flex ms-5">
+          <div className="d-flex align-items-center">
+            <div className="d-block pt-3">
+            <i className='fa fa-list fa-xl text-success pe-5 ps-2 mt-3'></i>
+              <p className="text-success">Playlist</p>
+            </div>
             {/*false(line 18) and true(line 20) should be replace with if userloggedin or not*/}
 
             {false && <Button variant="success" className="btn btn-circle text-sm-start">Login/SignUp</Button>}
@@ -32,8 +33,8 @@ const Header = (user) => {
               </Dropdown.Menu>
             </Dropdown>
             }
-          </div>
         </div>
+      </div>
       </div>
     </nav>
   );
