@@ -72,12 +72,8 @@ const Home = () => {
             <Navigation />
           </div>
           <div className="col-md-9 pt-3 pb-3 bg-light">
-            {/*calling the movie list here*/}
-            <MovieGenreList movieList={movieData} genre="Action" />
-            {/* <Routes>
-              <Route index
-                element={<Assignment6 />} />
-            </Routes> */}
+            <MovieGenreList movieList={movieData} genre="Top Grossing" />
+            <MovieGenreList movieList={movieData} genre="Recent Releases" />
           </div>
         </div>
       </div>
