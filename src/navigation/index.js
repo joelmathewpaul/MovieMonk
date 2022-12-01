@@ -17,7 +17,7 @@ function Navigation() {
     { label: 'Thriller', icon: 'fa-home', image: '../../images/thriller.png', path: '/thriller' },
     { label: 'Fiction', icon: 'fa-home', image: '../../images/fiction.png', path: '/fiction' },
     { label: 'Sci-Fi', icon: 'fa-home', image: '../../images/sci-fi.png', path: '/sci-fi' },
-    { label: 'Love & Romance', icon: 'fa-home', image: '../../images/romance.png', path: '/romance' },
+    { label: 'Love & Romance', icon: 'fa-home', image: '../../images/romance.png', path: '/love-and-romance' },
     { label: 'Kids & family', icon: 'fa-home', image: '../../images/family.png', path: '/kids-and-family' },
   ];
   return (

@@ -1,68 +1,24 @@
 import { Route, Routes } from "react-router";
+import * as movieService from '../services/movie-service';
 import Header from "../header";
 import Navigation from "../navigation";
 import MovieGenreList from "../movie-genre-list";
-
-
-const movieData = [{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-},
-{
-  "title": "Black Panther",
-  "director": "Ryan Coogler",
-  "ratings": 4,
-  "votes": "1,987,765",
-  "image": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_.jpg",
-  "description": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the death of King T'Challa."
-}];
-
+import { useEffect, useState } from "react";
+import Movie from '../models/movie';
 
 const Home = () => {
+
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  const getPopular = () => {
+    movieService.getPopular().then(res => {
+      const movies = Movie.getListFromJsonArray(res.results);
+      setPopularMovies(movies);
+    });
+  }
+
+  useEffect(getPopular, []);
+
   return (
     <div>
       <Header />
@@ -72,8 +28,7 @@ const Home = () => {
             <Navigation />
           </div>
           <div className="col-md-9 pt-3 pb-3 bg-light">
-            <MovieGenreList movieList={movieData} genre="Top Grossing" />
-            <MovieGenreList movieList={movieData} genre="Recent Releases" />
+            <MovieGenreList movieList={popularMovies} genre="Top Popular" />
           </div>
         </div>
       </div>

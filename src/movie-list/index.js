@@ -4,7 +4,6 @@ import MovieListItem from "./movie-list-item";
 
 /**
  * represents a movie list displayed as slideshow on the screen.
- * @returns {JSX.Element}
  * @constructor
  */
 const MovieList = ({ movieList = [] }) => {
@@ -14,7 +13,7 @@ const MovieList = ({ movieList = [] }) => {
             {
                 movieList.map((movie, index) => {
                     return (
-                        <div className="col-md-6 col-xl-4 mt-3">
+                        <div key={`${movie.id}-index`} className="col-md-6 col-xl-4 mt-3">
                             <MovieListItem movie={movie} />
                         </div>
                     )

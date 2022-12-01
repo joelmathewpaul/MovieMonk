@@ -43,3 +43,11 @@
     padding-right: 15px;
     padding-bottom: 15px;
 }
+
+.restrict-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    max-height: 20px;
+    line-height: 20px;
+}
