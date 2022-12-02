@@ -3,7 +3,7 @@
     "label": "Home",
     "icon": "fa-home",
     "image": "../../images/action.png",
-    "path": ""
+    "path": "/"
   },
   {
     "label": "Action",
@@ -34,6 +34,13 @@
     "id": "14"
   },
   {
+    "label": "Family",
+    "icon": "fa-home",
+    "image": "../../images/family.png",
+    "path": "/family",
+    "id": "10751"
+  },
+  {
     "label": "Sci-Fi",
     "icon": "fa-home",
     "image": "../../images/sci-fi.png",
@@ -41,17 +48,17 @@
     "id": "878"
   },
   {
-    "label": "Love & Romance",
+    "label": "Romance",
     "icon": "fa-home",
     "image": "../../images/romance.png",
-    "path": "/love-and-romance",
+    "path": "/romance",
     "id": "10749"
   },
   {
-    "label": "Kids & family",
+    "label": "Kids",
     "icon": "fa-home",
     "image": "../../images/family.png",
-    "path": "/kids-and-family",
+    "path": "/kids",
     "id": "16"
   }
 ]

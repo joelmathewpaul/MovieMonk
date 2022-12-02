@@ -14,4 +14,14 @@ export const getPopular = async () => {
   return response.data;
 }
 
+/**
+ * Fetches the movie based on the genre.
+ * @param {*} genre_id the genre for which the moview will be fetched
+ * @returns The list of movie objects.
+ */
+export const getByGenre = async (genre_id) => {
+  let response = await axios.post(`${SEARCH_URL}/discover/movie?with_genres=${genre_id}`, {}, config);
+  return response.data;
+}
+
 
