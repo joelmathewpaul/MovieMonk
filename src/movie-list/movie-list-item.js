@@ -10,7 +10,7 @@ const MovieListItem = ({ movie }) => {
 
     return (
         <div className="mv-card pt-3" title={movie.name} onClick={onMovieItemClick}>
-            <div className="position-relative p-15 rounded-3">
+            <div className="p-15 rounded-3">
                 <div className="d-flex flex-row">
                     <div className="thumbnail-holder position-relative">
                         <div className="card-img position-absolute rounded-3">

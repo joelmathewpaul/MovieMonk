@@ -8,7 +8,8 @@ const MovieDetails = () => {
       <Header />
       <div className="container bg-white rounded-3 overflow-hidden">
         <div className="row">
-          Movie Details
+          <div className="col-lg-7"></div>
+          <div className="col-lg-5"></div>
         </div>
       </div>
     </div>
