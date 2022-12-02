@@ -40,7 +40,23 @@ const MovieDetails = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-5 pt-2"></div>
+          <div className="col-lg-5 pt-2">
+            <p className="m-0 fw-bold">Overview</p>
+            <p className="m-0">
+              <small>
+                {movie.overview}
+              </small>
+            </p>
+            <p className="mt-3"><b>Budget:</b> {movie.budget ? `${movie.budget} ($) USD` : `N/A`}</p>
+            <p className="mt-3">
+              <b>Genre:</b>
+              {
+                movie.genres && movie.genres.map(gen => {
+                  return <span key={`gen-${gen.id}`} class="badge bg-secondary ms-2">{gen.name}</span>;
+                })
+              }
+            </p>
+          </div>
         </div>
       </div>
     </div >
