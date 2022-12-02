@@ -1,6 +1,6 @@
 import axios from "axios";
 const SEARCH_URL = "https://api.themoviedb.org/4";
-const KEY = process.env.MKEY;
+const KEY = process.env.REACT_APP_MKEY;
 const config = {
   headers: { Authorization: `Bearer ${KEY}` }
 };
