@@ -33,7 +33,7 @@ function Navigation() {
       <p className="text-center text-muted mt-5">
         <small>&copy; 2022 | All right reserved.</small>
         <br />
-        <small>With <i className="fa fa-heart text-danger"></i> &nbsp;Saket, Joel & Pratyasha</small>
+        <small>With <i className="fa fa-heart text-danger"></i> &nbsp;Saket, Joel, & Pratyasha</small>
       </p>
     </>
   );
