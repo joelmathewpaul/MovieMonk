@@ -5,7 +5,7 @@ const MovieListItem = ({ movie }) => {
     const navigate = useNavigate();
     const onMovieItemClick = () => {
         let nameEncoded = movie.name.replace(/\s/g, "-").toLowerCase();
-        navigate(`movie/${movie.id}/${nameEncoded}`);
+        navigate(`/movie/${movie.id}/${nameEncoded}`);
     }
 
     return (

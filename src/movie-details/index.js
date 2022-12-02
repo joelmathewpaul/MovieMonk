@@ -4,16 +4,25 @@ import * as movieService from '../services/movie-service';
 import Header from "../header";
 import './index.css';
 import Movie from "../models/movie";
+import MovieGenreList from "../movie-genre-list";
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
   const [movie, setMovie] = useState({});
+  const [similarMovies, setSimilarMovies] = useState([]);
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
     movieService.getMovieDetailsById(movieId).then(movieData => {
       let mov = Movie.getListFromJsonArray([movieData]);
       setMovie(mov[0]);
+    });
+    // Fetch the similar movies as well
+    movieService.getSimilarMovies(movieId).then(res => {
+      const moviesList = Movie.getListFromJsonArray(res.results);
+      // we only want to show 6 movies as similar, but api does not allow it
+      moviesList.length = 6;
+      setSimilarMovies(moviesList);
     });
   }, [movieId]);
 
@@ -43,9 +52,7 @@ const MovieDetails = () => {
           <div className="col-lg-5 pt-2">
             <p className="m-0 fw-bold">Overview</p>
             <p className="m-0">
-              <small>
-                {movie.overview}
-              </small>
+              {movie.overview}
             </p>
             <p className="mt-3"><b>Budget:</b> {movie.budget ? `${movie.budget} ($) USD` : `N/A`}</p>
             <p className="mt-3">
@@ -56,6 +63,12 @@ const MovieDetails = () => {
                 })
               }
             </p>
+            <button className="btn btn-success rounded-pill mt-3"><i className="fa fa-list"></i> <span className="ps-2">Add to my watchlist</span></button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col bg-light p-3 pb-0">
+            <MovieGenreList movieList={similarMovies} genre="Similar movies you may like " />
           </div>
         </div>
       </div>
