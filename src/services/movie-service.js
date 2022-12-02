@@ -1,5 +1,6 @@
 import axios from "axios";
 const SEARCH_URL = "https://api.themoviedb.org/4";
+const SEARCH_URL_V3 = "https://api.themoviedb.org/3";
 const KEY = process.env.REACT_APP_MKEY;
 const config = {
   headers: { Authorization: `Bearer ${KEY}` }
@@ -24,4 +25,12 @@ export const getByGenre = async (genre_id) => {
   return response.data;
 }
 
-
+/**
+ * Fetches the movie details based on the id.
+ * @param {*} movie_id the genre for which the moview will be fetched
+ * @returns The movie object.
+ */
+export const getMovieDetailsById = async (movie_id) => {
+  let response = await axios.get(`${SEARCH_URL_V3}/movie/${movie_id}`, config);
+  return response.data;
+}

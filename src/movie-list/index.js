@@ -13,7 +13,7 @@ const MovieList = ({ movieList = [] }) => {
             {
                 movieList.map((movie, index) => {
                     return (
-                        <div key={`${movie.id}-index`} className="col-md-6 col-xl-4 mt-3">
+                        <div key={`${movie.id}-${index}`} className="col-md-6 col-xl-4 mt-3">
                             <MovieListItem movie={movie} />
                         </div>
                     )
