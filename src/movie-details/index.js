@@ -71,7 +71,7 @@ const MovieDetails = () => {
         </div>
         <div className="row">
           <div className="col bg-light p-3 pb-0">
-            <MovieGenreList movieList={similarMovies} genre="Similar movies you may like " />
+            <MovieGenreList movieList={similarMovies} genre="Movies you may like " />
           </div>
         </div>
       </div>
