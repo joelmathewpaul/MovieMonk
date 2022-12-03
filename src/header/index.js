@@ -1,7 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, ButtonGroup, Dropdown } from "react-bootstrap";
-const Header = (user) => {
+const Header = () => {
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const q = queryParams.get("query")
+  const navigate = useNavigate();
+  const [query, setQuery] = useState(q);
+  const searchNow = (e) => {
+    e.preventDefault();
+    if (query) {
+      navigate(`/search?query=${query}`);
+    }
+    return false;
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-4">
       <div className="container">
@@ -9,7 +22,9 @@ const Header = (user) => {
           <img src="/logo.png" height={30} />
           <span className="ps-3">MovieMonk</span>
         </Link>
-        <input className="form-control rounded-pill mt-3 mt-lg-0 ps-4 ms-lg-5 me-lg-5" type="search" placeholder="Search movies, genres, actor ..." aria-label="Search" />
+        <form method="GET" onSubmit={searchNow} className="d-flex flex-fill">
+          <input className="form-control rounded-pill mt-3 mt-lg-0 ps-4 ms-lg-5 me-lg-5" type="text" placeholder="Search movies, genres, actor ..." aria-label="Search" value={query} onChange={(e) => setQuery(e.target.value)} required />
+        </form>
         <div className="d-flex align-items-center mt-3 mt-lg-0">
           <button type="button" className="me-3 btn d-flex rounded-pill align-items-center btn-outline-success">
             <i className="fa fa-list"></i>

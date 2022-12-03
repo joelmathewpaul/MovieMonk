@@ -44,3 +44,9 @@ export const getSimilarMovies = async (movie_id) => {
   let response = await axios.get(`${SEARCH_URL_V3}/movie/${movie_id}/similar`, config);
   return response.data;
 }
+
+export const searchMovies = async (query) => {
+  let response = await axios.get(`${SEARCH_URL_V3}/search/movie?query=${query}`, config);
+  return response.data;
+}
+

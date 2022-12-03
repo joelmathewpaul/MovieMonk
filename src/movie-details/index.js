@@ -67,6 +67,9 @@ const MovieDetails = () => {
           </div>
         </div>
         <div className="row">
+          {/* Here will go the review section, critic and normal user*/}
+        </div>
+        <div className="row">
           <div className="col bg-light p-3 pb-0">
             <MovieGenreList movieList={similarMovies} genre="Similar movies you may like " />
           </div>

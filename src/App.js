@@ -3,6 +3,7 @@ import './App.css';
 import Home from './home';
 import LoginSignup from './login';
 import MovieDetails from './movie-details';
+import Search from './search';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route exact path="/login" element={<LoginSignup />} />
           <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
+          <Route exact path="/search" element={<Search />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </div>
