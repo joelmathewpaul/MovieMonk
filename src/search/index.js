@@ -29,7 +29,22 @@ const Search = () => {
       <div className="container bg-white rounded-3 overflow-hidden">
         <div className="row">
           <div className="col pt-3 pb-3 bg-light">
-            <MovieGenreList movieList={movies} genre="We have found these movies" />
+            {
+              movies.length > 0 &&
+              <MovieGenreList movieList={movies} genre="Here is what we have got" />
+            }
+            {
+              movies.length == 0 && (
+                <div className="m-5">
+                  <div className="py-100">
+                    <p className="text-center text-primary">
+                      <i class="fa-brands fa-searchengin fa-6x"></i>
+                    </p>
+                    <h4 className="text-muted text-center">Oops! Looks like there is no match for your query</h4>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
