@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/login" element={<LoginSignup />} />
           <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
           <Route exact path="/search" element={<Search />} />
-          <Route exact path="/profile" element={<User />} /> //added route to profile page
+          <Route exact path="/profile" element={<User />} /> added route to profile page
           {/*<Route exact path="/edit-profile" element={<EditProfile />} />*/}
           <Route path="/*" element={<Home />} />
         </Routes>

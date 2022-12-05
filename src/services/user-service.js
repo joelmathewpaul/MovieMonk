@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 const MOVIE_API = `${API_BASE}/movie`;
+//change to user api /user
 /**
  * Creates user on sign up. TODO: use this method upon sign up
  * @param user
