@@ -6,7 +6,7 @@ import {createUserThunk, deleteUserThunk,findUserThunk, updateUserThunk} from ".
 // current dummy user
 const defaultUser = new User(    0, "Pratyasha",
                                  "Sharma", "pratyasharma", "family.png", "10/10/1997",
-                                 "04/2009", 340, 223)
+                                 "04/2009")
 
 const initialState = {
     user: defaultUser,
@@ -26,12 +26,12 @@ const userReducer = createSlice({
                                                state.loading = true
                                                state.user =  new User(    0, "Pratyasha",
                                                                           "Sharma", "pratyasharma", "family.png", "10/10/1997",
-                                                                          "04/2009", 340, 223)
+                                                                          "04/2009")
                                            },
                                        [findUserThunk.fulfilled]:
                                            (state, { payload }) => {
                                                state.loading = false
-                                               state.tuits = payload
+                                               state.user = payload
                                            },
                                        [findUserThunk.rejected]:
                                            (state) => {
@@ -54,7 +54,7 @@ const userReducer = createSlice({
                                                const userNdx = state.user
                                                    .findIndex((u) => u._id === payload._id)
                                                state.user[userNdx] = {
-                                                   ...state.tuits[userNdx],
+                                                   ...state.user[userNdx],
                                                    ...payload
                                                }
                                            }
