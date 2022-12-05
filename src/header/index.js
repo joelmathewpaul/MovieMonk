@@ -33,7 +33,7 @@ const Header = () => {
           <Dropdown as={ButtonGroup}>
             <Dropdown.Toggle variant="success" className="rounded-pill"><i className="fa fa-user"></i> Joel</Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">My Profile</Dropdown.Item>
+              <Dropdown.Item href="/profile">My Profile</Dropdown.Item> //updated path here.
               <Dropdown.Item href="#/action-3">Log Out</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
