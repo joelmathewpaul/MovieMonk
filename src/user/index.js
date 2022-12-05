@@ -40,15 +40,8 @@ const UserInfo = () => {
                     <Link to="/edit-profile" type="button" className="ps-2 btn btn-sm btn-success text-light fw-bold rounded-pill">Edit Profile</Link>
                 </div>
             </div>
-            {/*//Todo*/}
-            {/*replace with cards for reviews and ratings*/}
-            <div className={"row"}>
-                <span className="text-dark fw-bold">Your Ratings here: {user.yourRatings}</span>
-            </div >
-            <div className={"row"}>
-                <p className="text-dark fw-bold">Your Reviews here: {user.yourReviews}</p>
-            </div>
 
+        {/*removed the ratings from here.*/}
 
         </div>
 
