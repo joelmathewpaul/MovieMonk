@@ -22,5 +22,4 @@ export default class User {
     }
 }
 
-// user-model
 // services

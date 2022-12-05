@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_API_BASE;
-const MOVIE_API = `${API_BASE}/movie`;
-//change to user api /user
+const USER_API = `${API_BASE}/user`;
+
 /**
  * Creates user on sign up. TODO: use this method upon sign up
  * @param user
  * @returns {Promise<any>}
  */
 export const createUser = async (user) => {
-    const response = await axios.post(MOVIE_API, user)
+    const response = await axios.post(USER_API, user)
     return response.data;
 }
 
@@ -18,7 +18,7 @@ export const createUser = async (user) => {
  * @returns user object
  */
 export const findUser = async () => {
-    const response = await axios.get(MOVIE_API);
+    const response = await axios.get(USER_API);
     const user = response.data;
     return user;
 }
@@ -30,7 +30,7 @@ export const findUser = async () => {
  */
 export const deleteUser = async (uid) => {
     const response = await axios
-        .delete(`${MOVIE_API}/${uid}`)
+        .delete(`${USER_API}/${uid}`)
     return response.data
 }
 
@@ -41,6 +41,6 @@ export const deleteUser = async (uid) => {
  */
 export const updateProfile = async (user) => {
     const response = await axios
-        .put(`${MOVIE_API}/${user._id}`, user);
+        .put(`${USER_API}/${user._id}`, user);
     return user;
 }
