@@ -31,7 +31,7 @@ const UserInfo = () => {
 
                 <div>
                     <p className="mt-3 ps-2 fw-bold">{user.firstName} {user.lastName}</p>
-                    <p className="small mt-0 ps-2 text-muted"> username not visible>{user.username}</p>
+                    <p className="small mt-0 ps-2 text-muted">{user.userName}</p>
                     <p className="text-muted ps-2">
                         <i className="text-success fa fa-calendar " /> Joined: {user.dateJoined}</p>
                     <p className="text-muted ps-2">
