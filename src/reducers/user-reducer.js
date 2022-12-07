@@ -1,6 +1,5 @@
 import {createSlice } from "@reduxjs/toolkit";
 import User from '../models/user';
-import {createUserThunk, deleteUserThunk,findUserThunk, updateUserThunk} from "../services/user-thunks";
 
 
 // current dummy user
@@ -14,52 +13,13 @@ const initialState = {
 }
 
 /**
- * Reducer for the user to call various services. TOdo: Need a review.
- * @type {Slice<{loading: boolean, user: User}, {deleteUser(*, *): void, createUser(*, *): void}, string>}
+ * Reducer for the user to call various services.
+ * @type {Slice<{loading: boolean, user: User}, {findUser(*, *): void, deleteUser(*, *): void, createUser(*, *): void}, string>}
  */
 const userReducer = createSlice({
                                    name: 'user',
                                    initialState,
-                                   extraReducers: {
-                                       [findUserThunk.pending]:
-                                           (state) => {
-                                               state.loading = true
-                                               state.user =  new User(    0, "Pratyasha",
-                                                                          "Sharma", "pratyasharma", "family.png", "10/10/1997",
-                                                                          "04/2009")
-                                           },
-                                       [findUserThunk.fulfilled]:
-                                           (state, { payload }) => {
-                                               state.loading = false
-                                               state.user = payload
-                                           },
-                                       [findUserThunk.rejected]:
-                                           (state) => {
-                                               state.loading = false
-                                           },
-                                       [deleteUserThunk.fulfilled] :
-                                           (state, { payload }) => {
-                                               state.loading = false
-                                               state.user = state.user
-                                                   .filter(u => u._id !== payload)
-                                           },
-                                       [createUserThunk.fulfilled]:
-                                           (state, { payload }) => {
-                                               state.loading = false
-                                               state.user.push(payload)
-                                           },
-                                       [updateUserThunk.fulfilled]:
-                                           (state, { payload }) => {
-                                               state.loading = false
-                                               const userNdx = state.user
-                                                   .findIndex((u) => u._id === payload._id)
-                                               state.user[userNdx] = {
-                                                   ...state.user[userNdx],
-                                                   ...payload
-                                               }
-                                           }
 
-                                   },
                                    reducers: {
                                        deleteUser(state, action) {
                                            const index = state
@@ -67,6 +27,7 @@ const userReducer = createSlice({
                                                               user._id === action.payload);
                                            state.splice(index, 1);
                                        },
+
 
                                        createUser(state, action) {
                                            state.unshift({

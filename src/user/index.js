@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import { useSelector} from "react-redux";
 import { Link } from "react-router-dom";
-import {findUserThunk} from "../services/user-thunks";
 import Header from "../header";
 
 /**
@@ -10,11 +9,7 @@ import Header from "../header";
  */
 const UserInfo = () => {
 
-    const {user, loading} = useSelector(state => state.user)
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(findUserThunk())
-    }, [])
+    const {user} = useSelector(state => state.user)
     return (
         <div>
         <Header />
