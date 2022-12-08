@@ -8,28 +8,23 @@ import userReducer
   from "./reducers/user-reducer";
 import { configureStore }
   from '@reduxjs/toolkit';
-import {Provider} from "react-redux";
-import User from './user/index';
-import EditProfile from './user/edit-profile';
+import { Provider } from "react-redux";
 const store = configureStore(
-    {reducer: {user: userReducer}});
+  { reducer: { user: userReducer } });
 function App() {
   return (
-      <Provider store={store}>
-    <BrowserRouter>
-      <div className="app">
-        <Routes>
-          <Route exact path="/login" element={<LoginSignup />} />
-          <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
-          <Route exact path="/search" element={<Search />} />
-          <Route exact path="/profile" element={<User />} />
-          {/*added route to profile page*/}
-          {/*<Route exact path="/edit-profile" element={<EditProfile />} />*/}
-          <Route path="/*" element={<Home />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-      </Provider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="app">
+          <Routes>
+            <Route exact path="/login" element={<LoginSignup />} />
+            <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
+            <Route exact path="/search" element={<Search />} />
+            <Route path="/*" element={<Home />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
