@@ -19,7 +19,7 @@ export const findUser = async () => {
  * @param user
  * @returns {Promise<*>}
  */
-export const updateProfile = async (user) => {
+export const updateUser = async (user) => {
     const response = await axios
         .put(`${USER_API}/${user._id}`, user);
     return user;
