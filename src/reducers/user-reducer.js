@@ -4,7 +4,7 @@ import User from '../models/user';
 
 // current dummy user
 const defaultUser = new User(    0, "Pratyasha",
-                                 "Sharma", "pratyasharma", "family.png", "10/10/1997",
+                               "pratyasharma@mail.com", "family.png", "10/10/1997",
                                  "04/2009")
 
 const initialState = {
