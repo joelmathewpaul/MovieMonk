@@ -1,14 +1,14 @@
 import axios from 'axios';
 const API_BASE = process.env.REACT_APP_API_BASE;
 const USER_API = `${API_BASE}/user`;
-
+const api = axios;
 
 /**
  * Finds user profile when user clicks on "My Profile".
  * @returns user object
  */
 export const findUser = async () => {
-    const response = await axios.get(USER_API);
+    const response = await api.get(USER_API);
     const user = response.data;
     return user;
 }
@@ -20,7 +20,6 @@ export const findUser = async () => {
  * @returns {Promise<*>}
  */
 export const updateUser = async (user) => {
-    const response = await axios
-        .put(`${USER_API}/${user._id}`, user);
+    const response = await api.put(`${USER_API}/${user._id}`, user);
     return user;
 }
