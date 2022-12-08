@@ -3,23 +3,21 @@
  * user profile.
  */
 export default class User {
-    constructor(id, firstName, lastName, userName, profilePicture, dateOfBirth, dateJoined) {
-        if (this.userName === null || this.firstName === null || this.lastName === null) {
+    constructor(id, name, email, profilePicture, dateOfBirth, dateJoined) {
+        if (this.email === null || this.name === null) {
             throw new Error('Name cannot be empty');
         }
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
+        this.name = name;
+        this.email = email;
         this.profilePicture = profilePicture;
         this.dateOfBirth = dateOfBirth;
         this.dateJoined = dateJoined;
     }
 
     static getUserDetails(res) {
-        return new User(res._id, res.firstName, res.lastName, res.userName, res.profilePicture, res.dateOfBirth, res.dateJoined);
+        return new User(res._id, res.name, res.email, res.profilePicture, res.dateOfBirth, res.dateJoined);
 
     }
 }
 
-// services
