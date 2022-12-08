@@ -22,22 +22,15 @@ const userReducer = createSlice({
 
                                    reducers: {
                                        deleteUser(state, action) {
-                                           const index = state
-                                               .findIndex(user =>
-                                                              user._id === action.payload);
-                                           state.splice(index, 1);
+                                           return null;
                                        },
 
 
-                                       createUser(state, action) {
-                                           state.unshift({
-                                                             ...action.payload,
-                                                             ...defaultUser,
-                                                             _id: (new Date()).getTime(),
-                                                         })
+                                       saveUser(state, action) {
+                                          return action.payload;
                                        }
                                    }
 
                                });
-export const {createUser, deleteUser} = userReducer.actions;
+export const {saveUser, deleteUser} = userReducer.actions;
 export default userReducer.reducer;
