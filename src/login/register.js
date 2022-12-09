@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { saveUser } from "../reducers/user-reducer";
+import { deleteUser, saveUser } from "../reducers/user-reducer";
 import { signup } from "../services/auth-service";
 
 //function to create register page
@@ -57,6 +57,7 @@ const Register = () => {
             dispatch(saveUser(dbUser));
             navigate("/");
         } catch (error) {
+            dispatch(deleteUser());
             alert(error.message);
         }
         return false;

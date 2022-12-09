@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ButtonGroup, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { signOut } from "../services/auth-service";
+import { deleteUser } from "../reducers/user-reducer";
 
 const Header = () => {
   const { search } = useLocation();
@@ -19,6 +21,13 @@ const Header = () => {
     }
     return false;
   }
+
+  const signOutUser = async (e) => {
+    e.preventDefault();
+    await signOut();
+    deleteUser();
+    return false;
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-4">
@@ -41,7 +50,7 @@ const Header = () => {
                 <Dropdown.Toggle variant="success" className="rounded-pill"><i className="fa fa-user"></i> {user.name}</Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">My Profile</Dropdown.Item>
-                  <Dropdown.Item href="/signout">Sign Out</Dropdown.Item>
+                  <Dropdown.Item href="/signout" onClick={signOutUser}>Sign Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </>
