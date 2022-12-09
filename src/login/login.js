@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { deleteUser, saveUser } from "../reducers/user-reducer";
+import { signin } from '../services/auth-service';
 
 //function to create login page
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userCred, setUserCred] = useState({});
   const setEmail = (e) => {
     setUserCred((userCred) => {
@@ -21,9 +27,16 @@ const Login = () => {
     });
   };
 
-  const makeLogin = (e) => {
+  const makeLogin = async (e) => {
     e.preventDefault();
-    //function to check if the credentials provided are valid and proceed with login
+    try {
+      const dbUser = await signin(userCred);
+      dispatch(saveUser(dbUser));
+      navigate("/");
+    } catch (error) {
+      dispatch(deleteUser());
+      alert(error.message);
+    }
     return false;
   };
 

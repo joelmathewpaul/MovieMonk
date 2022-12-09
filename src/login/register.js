@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { deleteUser, saveUser } from "../reducers/user-reducer";
+import { signup } from "../services/auth-service";
 
 //function to create register page
 const Register = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [userCred, setUserCred] = useState({});
     const setName = (e) => {
         setUserCred((userCred) => {
@@ -39,11 +45,20 @@ const Register = () => {
 
     };
 
-    const makeSignUp = (e) => {
+    const makeSignUp = async (e) => {
         e.preventDefault();
         //function to check if the credentials provided are valid and proceed with login
         if (userCred.password !== userCred.confirmPassword) {
             alert("Passwords don't match! Please try again!");
+            return false;
+        }
+        try {
+            const dbUser = await signup(userCred);
+            dispatch(saveUser(dbUser));
+            navigate("/");
+        } catch (error) {
+            dispatch(deleteUser());
+            alert(error.message);
         }
         return false;
     };

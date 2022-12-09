@@ -4,32 +4,33 @@ import Home from './home';
 import LoginSignup from './login';
 import MovieDetails from './movie-details';
 import Search from './search';
-import userReducer
-  from "./reducers/user-reducer";
-import { configureStore }
-  from '@reduxjs/toolkit';
-import {Provider} from "react-redux";
-import User from './user/index';
-import EditProfile from './user/edit-profile';
-const store = configureStore(
-    {reducer: {user: userReducer}});
+import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { getProfile } from "./services/auth-service";
+import { saveUser } from './reducers/user-reducer';
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProfile().then(dbUser => {
+      dispatch(saveUser(dbUser));
+    }).catch(error => {
+      //user is not logged in
+    });
+  }, []);
+
   return (
-      <Provider store={store}>
     <BrowserRouter>
       <div className="app">
         <Routes>
           <Route exact path="/login" element={<LoginSignup />} />
           <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
           <Route exact path="/search" element={<Search />} />
-          <Route exact path="/profile" element={<User />} />
-          {/*added route to profile page*/}
-          {/*<Route exact path="/edit-profile" element={<EditProfile />} />*/}
           <Route path="/*" element={<Home />} />
         </Routes>
       </div>
     </BrowserRouter>
-      </Provider>
   );
 }
 
