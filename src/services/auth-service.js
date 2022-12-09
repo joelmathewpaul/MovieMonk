@@ -41,7 +41,7 @@ export const signup = async (user) => {
  * Fetches the profile details of the current logged in user.
  * @returns Returns the user object or returns null
  */
-export const profile = async () => {
+export const getProfile = async () => {
   const response = await api
     .get(`${API_BASE}/auth/profile`);
   return response.data
