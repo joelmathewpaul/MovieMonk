@@ -1,21 +1,19 @@
 import axios from 'axios';
 const API_BASE = process.env.REACT_APP_API_BASE;
 
-const api = axios({
-  withCredentials: true,
+const api = axios.create({
+  withCredentials: true
 });
 
 /**
  * Signs the userin using username and password.
  * 
- * @param {String} email The username of the user. 
- * @param {String} password The password of the user. 
+ * @param {user} user containing email and password.
  * 
  * @returns User on successful login else throws and error
  */
-export const signin = async (email, password) => {
-  const response = await api
-    .post(`${API_BASE}/auth/signin`, { email, password });
+export const signin = async (user) => {
+  const response = await api.post(`${API_BASE}/auth/signin`, user);
   return response.data
 }
 
