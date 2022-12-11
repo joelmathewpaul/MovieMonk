@@ -32,8 +32,9 @@ const Profile = () => {
 
                     </div>
                 </div>
+                <UserInfo/>
             </div>
-            <UserInfo/>
+
             </div>
 
     );
