@@ -64,7 +64,7 @@ const EditProfile = () => {
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-unlock-keyhole "/>&nbsp;Confirm Password </h5>
                         </div>
                         <div className={"col-4 border-start"}>
-                            <h5 className="m-0 pe-3 text-muted pb-3">{user.accountType}</h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><input type="text" className="form-control" id="password" placeholder="Enter new password" value={user.accountType}/></h5>
                             <h5 className="m-0 pe-3 text-muted pb-3"><input type="text" className="form-control" id="password" placeholder="Enter new password"/></h5>
                             <h5 className="m-0 pe-3 text-muted pb-3"><input type="text" className="form-control" id="confirmPassword" placeholder="Confirm new password"/></h5>
                         </div>
