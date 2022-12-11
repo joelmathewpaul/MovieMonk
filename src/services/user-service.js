@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASES;
 const USER_API = `${API_BASE}/user`;
 
 const api = axios.create({
