@@ -25,7 +25,7 @@ const UserInfo = () => {
                 </div>
                 <div className="ps-4">
                     <h2 className="text-white fw-bold">{user.name}</h2>
-                    <span>Edit Profile</span>
+                    <p className="text-success fw-bold"><Link to="/edit-profile" style={{ textDecoration: 'none' }}>Edit Profile</Link></p>
                 </div>
 
                 </div>
