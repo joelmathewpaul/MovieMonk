@@ -41,7 +41,7 @@ const UserInfo = () => {
                     <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-pen-to-square"/>&nbsp;Bio </h5>
                     <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa fa-cake-candles"/>&nbsp;Date of Birth</h5>
                         </div>
-                       <div className={"col-4"}>
+                       <div className={"col-4 border-start"}>
                            <h5 className="m-0 pe-3 text-muted pb-3">{user.email}</h5>
                            <h5 className="m-0 pe-3 text-muted pb-3">-----bio placeholder-----</h5>
                            <h5 className="m-0 pe-3 text-muted pb-3">-----dob placeholder-----</h5>
@@ -51,13 +51,13 @@ const UserInfo = () => {
 
                     <h4 className="m-0 pe-3 text-success fw-bold">ACCOUNT INFORMATION</h4>
                     <hr className={"text-muted"}/>
-                    <div className={"row"}>
+                    <div className={"row mb-3"}>
                         <div className={"col-3"}>
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-calendar " />&nbsp;Joined </h5>
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-circle-right"/>&nbsp;Followers </h5>
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-circle-left"/>&nbsp;Following </h5>
                         </div>
-                        <div className={"col-4"}>
+                        <div className={"col-4 border-start"}>
                             <h5 className="m-0 pe-3 text-muted pb-3">{user.joined}</h5>
                             <h5 className="m-0 pe-3 text-muted pb-3">{user.followersCount}</h5>
                             <h5 className="m-0 pe-3 text-muted pb-3">{user.followingCount}</h5>
