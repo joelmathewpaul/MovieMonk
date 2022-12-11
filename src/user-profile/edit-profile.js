@@ -32,19 +32,25 @@ const EditProfile = () => {
                 </div>
                 <div className="ps-4 col-8 bg-light m-2 rounded-3">
                     <br/>
+                    <form>
 
                     <h4 className="m-0 pe-3 text-success fw-bold">PERSONAL INFORMATION</h4>
                     <hr className={"text-muted"}/>
                     <div className={"row"}>
                         <div className={"col-3"}>
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-envelope"/>&nbsp;Email </h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-pen-to-square"/>&nbsp;Bio </h5>
                             <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa fa-cake-candles"/>&nbsp;Date of Birth</h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-pen-to-square"/>&nbsp;Bio </h5>
+
                         </div>
                         <div className={"col-4 border-start"}>
                             <h5 className="m-0 pe-3 text-muted pb-3">{user.email}</h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3">-----bio placeholder-----</h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3">-----dob placeholder-----</h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"> <input type="text" className="form-control" id="bio" placeholder="Enter Date of Birth"/></h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3">
+                                <textarea className="form-control" id="bio" rows="3"
+                                          spellCheck="false"  placeholder="Enter Bio"/>
+                               </h5>
+
                         </div>
                     </div>
                     <br/>
@@ -53,20 +59,21 @@ const EditProfile = () => {
                     <hr className={"text-muted"}/>
                     <div className={"row mb-3"}>
                         <div className={"col-3"}>
-                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-regular fa-calendar " />&nbsp;Joined </h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-circle-right"/>&nbsp;Followers </h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-circle-left"/>&nbsp;Following </h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-circle-right"/>&nbsp;Account Type </h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-unlock-keyhole " />&nbsp;Password </h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><i className="text-success fa-solid fa-unlock-keyhole "/>&nbsp;Confirm Password </h5>
                         </div>
                         <div className={"col-4 border-start"}>
-                            <h5 className="m-0 pe-3 text-muted pb-3">{user.joined}</h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3">{user.followersCount}</h5>
-                            <h5 className="m-0 pe-3 text-muted pb-3">{user.followingCount}</h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3">{user.accountType}</h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><input type="text" className="form-control" id="password" placeholder="Enter new password"/></h5>
+                            <h5 className="m-0 pe-3 text-muted pb-3"><input type="text" className="form-control" id="confirmPassword" placeholder="Confirm new password"/></h5>
                         </div>
                     </div>
                     <div className="d-grid d-flex gap-2 mb-3 float-end">
                     <button type="button" className="btn btn-success">Apply Changes</button>
                         <button type="button" className="btn btn-success">Discard Changes</button>
                     </div>
+                    </form>
                 </div>
 
             </div>
