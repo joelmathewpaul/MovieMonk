@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { getProfile } from "./services/auth-service";
 import { saveUser } from './reducers/user-reducer';
 import UserInfo from "./user-profile";
+import EditProfile from "./user-profile/edit-profile";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ function App() {
           <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/profile" element={<UserInfo />} />
+          <Route exact path="/edit-profile" element={<EditProfile />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </div>
