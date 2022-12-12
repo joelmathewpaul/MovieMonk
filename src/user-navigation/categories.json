@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Profile Details",
+    "icon": "fa-user",
+    "image": "../../images/action.png",
+    "path": "/profile"
+  },
+  {
+    "label": "My Reviews",
+    "icon": "fa-home",
+    "image": "../../images/action.png",
+    "path": "/profile/my-reviews"
+  },
+  {
+    "label": "Followers",
+    "icon": "fa-home",
+    "image": "../../images/horror.png",
+    "path": "/profile/followers"
+  },
+  {
+    "label": "Following",
+    "icon": "fa-home",
+    "image": "../../images/thriller.png",
+    "path": "/profile/following"
+  }
+]

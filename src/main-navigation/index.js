@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import links from './categories.json';
-import './index.css';
 
 /**
  * A navigation component that renders all the possible menu
