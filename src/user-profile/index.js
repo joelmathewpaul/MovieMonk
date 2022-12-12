@@ -43,6 +43,10 @@ const Profile = () => {
                                 </div>
                                 <div className="ps-4">
                                     <h4 className="text-white fw-bold">{user.name}</h4>
+                                    <div className="d-flex flex-row text-white">
+                                        <p className="pe-4">Followers: {user.followersCount}</p>
+                                        <p className="pe-4">Following: {user.followingCount}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
