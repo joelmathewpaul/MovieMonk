@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {saveUser} from "../reducers/user-reducer";
 
 /**
- * Component with user information to be displayed on the profile page.
+ * Component with user information to be displayed on the profile page including the edit-profile part.
  */
 
 
