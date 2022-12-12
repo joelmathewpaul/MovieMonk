@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import * as movieService from '../services/movie-service';
 import Header from "../header";
-import './index.css';
 import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
 

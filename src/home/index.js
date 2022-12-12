@@ -1,11 +1,11 @@
 import { useLocation } from "react-router";
 import * as movieService from '../services/movie-service';
 import Header from "../header";
-import Navigation from "../navigation";
+import Navigation from "../main-navigation";
 import MovieGenreList from "../movie-genre-list";
 import { useEffect, useState } from "react";
 import Movie from '../models/movie';
-import links from '../navigation/categories.json';
+import links from '../main-navigation/categories.json';
 
 const Home = () => {
 

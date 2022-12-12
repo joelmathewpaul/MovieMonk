@@ -10,3 +10,44 @@ body {
   padding-top: 100px;
   padding-bottom: 100px;
 }
+
+.backdrop-holder {
+  height: 300px;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.ptrem {
+  padding-top: calc(var(--bs-gutter-x) * .5);
+  margin-bottom: 70px;
+}
+
+.pull-det-up {
+  position: absolute;
+  margin-top: -70px;
+}
+
+.card-imgs {
+  width: 100px;
+  height: 140px;
+  overflow: hidden;
+  border: 3px #FFF solid;
+}
+
+.card-imgs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-thumb {
+  width: 140px;
+  height: 140px;
+  border-radius: 70px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white !important;
+  background-color: #18bc9b;
+}
