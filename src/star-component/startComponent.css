@@ -1,0 +1,18 @@
+
+
+
+
+label {
+    transition:color  1s;
+}
+
+
+
+
+
+label:hover,
+label:hover ~ label,
+input:checked ~ label  {
+    color: #34AC9E;
+}
+
