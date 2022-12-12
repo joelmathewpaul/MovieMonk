@@ -15,12 +15,8 @@ const userReducer = createSlice({
         saveUser(state, action) {
             return action.payload;
         }
-        ,
-        editUser(state,action){
-            return action.payload;
-        }
     }
 
 });
-export const { saveUser, deleteUser, editUser } = userReducer.actions;
+export const { saveUser, deleteUser } = userReducer.actions;
 export default userReducer.reducer;

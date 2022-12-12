@@ -6,7 +6,7 @@ import Header from "../header";
 import UserInfo from "./user-information";
 
 /**
- * User Component to show the current profile page of the user.
+ * Profile Component to show the current profile page of the user that includes account information, followers, following, movie reviews etc.
  * @returns {JSX.Element}
  */
 const Profile = () => {
@@ -27,14 +27,11 @@ const Profile = () => {
                         <div className="ps-4">
                             <h2 className="text-white fw-bold">{user.name}</h2>
                             <p className="text-success fw-bold"><Link to="/profile" style={{ textDecoration: 'none' }}>Edit Profile</Link></p>
-
                         </div>
-
                     </div>
                 </div>
                 <UserInfo/>
             </div>
-
             </div>
 
     );
