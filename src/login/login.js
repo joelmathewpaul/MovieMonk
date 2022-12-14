@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { deleteUser, saveUser } from "../reducers/user-reducer";
-import { signin } from '../services/auth-service';
+import { signin } from "../services/auth-service";
+import User from "../models/user";
 
 //function to create login page
 const Login = () => {
@@ -31,7 +32,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const dbUser = await signin(userCred);
-      dispatch(saveUser(dbUser));
+      const modelUser = User.getUserDetails(dbUser);
+      dispatch(saveUser(modelUser));
       navigate("/");
     } catch (error) {
       dispatch(deleteUser());
