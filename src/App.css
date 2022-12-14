@@ -51,3 +51,18 @@ body {
   color: white !important;
   background-color: #18bc9b;
 }
+
+.st-label {
+  transition: color 0.1s;
+}
+
+.st-label {
+  color: #ccc;
+}
+
+.st-label:hover,
+.st-label:hover~.st-label,
+.st-label[data-checked="true"],
+.st-label[data-checked="true"]~.st-label {
+  color: #f39c12 !important;
+}
