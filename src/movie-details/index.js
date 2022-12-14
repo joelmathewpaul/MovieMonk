@@ -5,17 +5,35 @@ import Header from "../header";
 import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
 import UserReviewsForm from "../reviews/user-reviews-form";
+import {
+  findReviewByMovieId,
+  findReviewByMovieIdAndType,
+} from "../services/user-review-services";
+import Review from "../models/review";
+import ReviewList from "../reviews/reviews-list";
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
   const [movie, setMovie] = useState({});
   const [similarMovies, setSimilarMovies] = useState([]);
+  const [normalUserReview, setNormalReview] = useState([]);
+  const [criticUserReview, setCriticUserReview] = useState([]);
+
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
     movieService.getMovieDetailsById(movieId).then((movieData) => {
       let mov = Movie.getListFromJsonArray([movieData]);
       setMovie(mov[0]);
+      findReviewByMovieIdAndType(12345, "NORMAL").then((res) => {
+        const resArr = Review.getListFromJsonArray(res);
+        setNormalReview(resArr);
+      });
+
+      findReviewByMovieIdAndType(12345, "CRITIC").then((res) => {
+        const resArr = Review.getListFromJsonArray(res);
+        setCriticUserReview(resArr);
+      });
     });
     // Fetch the similar movies as well
     movieService.getSimilarMovies(movieId).then((res) => {
@@ -85,9 +103,12 @@ const MovieDetails = () => {
         </div>
         <div className="row">
           {/* Here will go the review section, critic and normal user*/}
-          <div className="col-6"></div>
+          <div className="col-6">
+            <ReviewList reviewList={criticUserReview} />
+          </div>
           <div className="col-6">
             <UserReviewsForm movieId={movie.id} />
+            <ReviewList reviewList={normalUserReview} />
           </div>
         </div>
         <div className="row">
