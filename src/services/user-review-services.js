@@ -13,10 +13,7 @@ const api = axios.create({ withCredentials: true });
  * @returns the newly added review as the result to the user
  */
 export const createReview = async (newReview) => {
-  const response = await api.post(
-    `${API_BASE}/movie/reviews/newreview`,
-    newReview
-  );
+  const response = await api.post(`${API_BASE}/movie/reviews`, newReview);
   return response.data;
 };
 
@@ -50,7 +47,7 @@ export const findReviewByUserId = async (uId) => {
  */
 export const updateReviewById = async (rId, updatedReview) => {
   const response = await api.put(
-    `${API_BASE}/movie/reviews/update/${rId}`,
+    `${API_BASE}/movie/reviews/${rId}`,
     updatedReview
   );
   return response.data;
@@ -62,6 +59,6 @@ export const updateReviewById = async (rId, updatedReview) => {
  * @returns the deleted review to the user.
  */
 export const deleteReviewByID = async (rId) => {
-  const response = await api.delete(`${API_BASE}/movie/reviews/delete/${rId}`);
+  const response = await api.delete(`${API_BASE}/movie/reviews/${rId}`);
   return response.data;
 };
