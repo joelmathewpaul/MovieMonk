@@ -35,7 +35,7 @@ const UserReviewsForm = ({ movieId }) => {
 
   return (
     <div className="container">
-      <StarComponent onChange={updateRating} />
+      <StarComponent onChange={updateRating} rating={4} />
       <form onSubmit={submitReview}>
         <fieldset>
           <div className="form-group">
@@ -69,7 +69,7 @@ const UserReviewsForm = ({ movieId }) => {
           <div className="d-flex justify-content-end mt-3">
             <button
               type="reset"
-              className="btn text-white me-4 btn-outline-danger"
+              className="btn text-dark me-4 btn-outline-danger"
             >
               Discard
             </button>

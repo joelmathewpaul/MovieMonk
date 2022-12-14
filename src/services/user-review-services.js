@@ -29,6 +29,19 @@ export const findReviewByMovieId = async (mId) => {
 };
 
 /**
+ * Responsible for fetching the reviews made on a moview by different types of users.
+ * @param {Number} mId passes the movie id whos reviwe is to ve fetched
+ * @param {String} reviewType passes the user type who made the review.
+ */
+export const findReviewByMovieIdAndType = async (mId, reviewType) => {
+  const response = await api.get(
+    `${API_BASE}/movie/reviews/${mId}/${reviewType}`
+  );
+  const review = response.data;
+  return review;
+};
+
+/**
  * Responsible for finding all the reviews made by a particular user.
  * @param {Number} uId passes in the user id whos reviews are to be fetched.
  * @returns the reviews made by a particular user.
