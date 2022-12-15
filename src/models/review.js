@@ -1,5 +1,6 @@
 export default class Review {
   constructor(
+    id,
     reviewedBy,
     movieId,
     reviewTime,
@@ -12,6 +13,7 @@ export default class Review {
     cinematographyRating,
     soundtrackRating
   ) {
+    this.id = id;
     this.reviewedBy = reviewedBy;
     this.movieId = movieId;
     this.reviewTime = reviewTime;
@@ -28,6 +30,7 @@ export default class Review {
     let vals = [];
     results.forEach((res) => {
       const review = new Review(
+        res._id,
         res.reviewedBy,
         res.movieId,
         res.reviewTime,

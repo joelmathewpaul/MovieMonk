@@ -12,14 +12,14 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
     setRating(rating);
   }, [rating]);
   return (
-    <div className="d-flex align-items-center justify-content-center">
-      <div className="row justify-content-center">
+    <div className="d-flex align-items-center">
+      <div className="row">
         <div
-          className="rating-wrapper align-self-center border-5 d-inline-flex pt-2 pe-3 "
+          className="rating-wrapper align-self-center border-5 d-inline-flex"
           dir="rtl"
         >
           <label
-            className="st-label  d-inline-flex  pt-4 ps-2"
+            className="st-label  d-inline-flex ps-2"
             role="button"
             data-checked={currentRating > 4}
           >
@@ -41,7 +41,7 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
 
 
           <label
-            className="st-label star  d-inline-flex  pt-4 ps-2"
+            className="st-label star  d-inline-flex ps-2"
             role="button"
             data-checked={currentRating > 3 && currentRating <= 4}
           >
@@ -62,7 +62,7 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
           </label>
 
           <label
-            className="st-label star  d-inline-flex  pt-4 ps-2"
+            className="st-label star  d-inline-flex ps-2"
             role="button"
             data-checked={currentRating > 2 && currentRating <= 3}
           >
@@ -84,7 +84,7 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
 
 
           <label
-            className="st-label star  d-inline-flex  pt-4 ps-2"
+            className="st-label star  d-inline-flex ps-2"
             role="button"
             data-checked={currentRating > 1 && currentRating <= 2}
           >
@@ -106,7 +106,7 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
 
 
           <label
-            className="st-label star d-inline-flex pt-4 ps-2"
+            className="st-label star d-inline-flex ps-2"
             role="button"
             data-checked={currentRating > 0 && currentRating <= 1}
           >

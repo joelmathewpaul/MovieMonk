@@ -66,3 +66,8 @@ body {
 .st-label[data-checked="true"]~.st-label {
   color: #f39c12 !important;
 }
+
+.smaller-font {
+  font-size: 11px;
+  line-height: 12px;
+}

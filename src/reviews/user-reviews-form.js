@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { createReview } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
 const UserReviewsForm = ({ movieId }) => {
   const user = useSelector((state) => state.user);
-  console.log(movieId);
   const [review, setReview] = useState({ movieId, reviewedBy: user.id });
 
   const submitReview = async (e) => {
@@ -39,27 +37,16 @@ const UserReviewsForm = ({ movieId }) => {
       <form onSubmit={submitReview}>
         <fieldset>
           <div className="form-group">
-            <label className="form-label mt-4 text-white">
-              Review Head Line
-            </label>
             <input
-              id="reviewHeadLine"
-              placeholder="Headline"
-              className="form-control"
+              placeholder="Add Headline"
+              className="form-control mt-3"
               value={review.reviewTitle}
               onChange={(e) => editHandler("reviewTitle", e.target.value)}
             />
           </div>
           <div className="form-group">
-            <label
-              htmlFor="reviewtextarea"
-              className="form-label mt-4 text-white"
-            >
-              Detailed Review
-            </label>
             <textarea
-              className="form-control"
-              id="reviewtextarea"
+              className="form-control mt-3"
               rows="5"
               placeholder="Write your review"
               value={review.reviewDetail}
@@ -69,7 +56,7 @@ const UserReviewsForm = ({ movieId }) => {
           <div className="d-flex justify-content-end mt-3">
             <button
               type="reset"
-              className="btn text-dark me-4 btn-outline-danger"
+              className="btn btn-secondary me-4"
             >
               Discard
             </button>

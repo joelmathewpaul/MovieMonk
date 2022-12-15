@@ -38,7 +38,7 @@ const Search = () => {
                 <div className="m-5">
                   <div className="py-100">
                     <p className="text-center text-primary">
-                      <i class="fa-brands fa-searchengin fa-6x"></i>
+                      <i className="fa-brands fa-searchengin fa-6x"></i>
                     </p>
                     <h4 className="text-muted text-center">Oops! Looks like there is no match for your query</h4>
                   </div>

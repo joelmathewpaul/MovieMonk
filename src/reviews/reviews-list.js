@@ -1,14 +1,12 @@
 import ReviewListItem from "./reviews-list-item";
 
-const ReviewList = ({ reviewList }) => {
+const ReviewList = ({ reviewList = [] }) => {
   return (
-    <>
-      <ul className="list-group">
-        {reviewList.map((review) => (
-          <ReviewListItem ReviewListItem={review} />
-        ))}
-      </ul>
-    </>
+    <ul className="list-group">
+      {reviewList.map((review) => (
+        <ReviewListItem key={review.id} reviewListItem={review} />
+      ))}
+    </ul>
   );
 };
 

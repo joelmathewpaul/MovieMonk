@@ -6,7 +6,6 @@ import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
 import UserReviewsForm from "../reviews/user-reviews-form";
 import {
-  findReviewByMovieId,
   findReviewByMovieIdAndType,
 } from "../services/user-review-services";
 import Review from "../models/review";
@@ -24,13 +23,15 @@ const MovieDetails = () => {
   useEffect(() => {
     movieService.getMovieDetailsById(movieId).then((movieData) => {
       let mov = Movie.getListFromJsonArray([movieData]);
-      setMovie(mov[0]);
-      findReviewByMovieIdAndType(12345, "NORMAL").then((res) => {
+      let movieModel = mov[0];
+      setMovie(movieModel);
+      // Fetch the normal reviews
+      findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
         const resArr = Review.getListFromJsonArray(res);
         setNormalReview(resArr);
       });
-
-      findReviewByMovieIdAndType(12345, "CRITIC").then((res) => {
+      // Fetch the critic reviews
+      findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
         const resArr = Review.getListFromJsonArray(res);
         setCriticUserReview(resArr);
       });
@@ -89,7 +90,7 @@ const MovieDetails = () => {
               {movie.genres &&
                 movie.genres.map((gen) => {
                   return (
-                    <span key={`gen-${gen.id}`} class="badge bg-secondary ms-2">
+                    <span key={`gen-${gen.id}`} className="badge bg-secondary ms-2">
                       {gen.name}
                     </span>
                   );
@@ -101,14 +102,21 @@ const MovieDetails = () => {
             </button>
           </div>
         </div>
-        <div className="row">
+        <div className="row mt-5 bg-light">
           {/* Here will go the review section, critic and normal user*/}
-          <div className="col-6">
-            <ReviewList reviewList={criticUserReview} />
+          <div className="col-6 p-3">
+            <h5 className="fw-bold mb-3 text-capitalize">Critic Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+            {criticUserReview.length > 0 && <ReviewList reviewList={criticUserReview} />}
+            {criticUserReview.length == 0 &&
+              <small className="text-muted">No critic reviews exists yet, once added it will appear here.</small>
+            }
           </div>
-          <div className="col-6">
-            <UserReviewsForm movieId={movie.id} />
-            <ReviewList reviewList={normalUserReview} />
+          <div className="col-6 p-3">
+            <h5 className="fw-bold mb-3 text-capitalize">User Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+            {normalUserReview.length > 0 && <ReviewList reviewList={normalUserReview} />}
+            {normalUserReview.length == 0 &&
+              <small className="text-muted">No user reviews exists yet, once added it will appear here.</small>
+            }
           </div>
         </div>
         <div className="row">

@@ -1,28 +1,38 @@
-import Review from "../models/review";
 import StarComponent from "../star-component/star-component";
-import "./index.css";
-const ReviewListItem = ({ ReviewListItem }) => {
+
+const ReviewListItem = ({ reviewListItem }) => {
+
+  const formatDate = (sentOn) => {
+    const postedOn = new Date(sentOn);
+    const formattedDate = `${postedOn.getFullYear()}/${postedOn.getMonth()}/${postedOn.getDate()}`;
+    return formattedDate;
+  };
+
   return (
-    <li className="rounded mb-4 list-group-item border-4 border-danger m-2">
-      <div className="singleReviewItem d-flex flex-row mb-0">
+    <li className="list-group-item">
+      <div className="d-flex flex-row mb-0">
         <img
-          src={ReviewListItem.profilePhoto}
+          src={reviewListItem.profilePhoto}
           width={48}
           height={48}
           className="rounded-circle m-2"
-          alt=""
+          alt="User DP"
         />
         <div className="flex-fill m-2">
-          <p className="mb-0">{ReviewListItem.reviewedBy.name}</p>
-          <p>{ReviewListItem.reviewTime}</p>
+          <p className="m-0 text-primary fw-bold">{reviewListItem.reviewedBy.name}</p>
+          <small className="smaller-font text-muted">{formatDate(reviewListItem.reviewTime)}</small>
         </div>
       </div>
-      <div className="reviewTitleAndDetaild m-0">
-        <p className="mb-1 mt-0">
-          <StarComponent rating={ReviewListItem.reviewRating} />
+      <div className="m-0 ms-2">
+        <div className="mb-2 mt-0">
+          <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
+        </div>
+        <p className="mb-2">
+          <i class="fa-solid fa-quote-left"></i>
+          <span className="ps-2 pe-2">{reviewListItem.reviewTitle}</span>
+          <i class="fa-solid fa-quote-right"></i>
         </p>
-        <p className="mb-1 ms-2">{ReviewListItem.reviewTitle}</p>
-        <p className="ms-2">{ReviewListItem.reviewDetail}</p>
+        <small>{reviewListItem.reviewDetail}</small>
       </div>
     </li>
   );
