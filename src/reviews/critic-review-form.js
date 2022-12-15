@@ -62,21 +62,21 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
   return (
     <div className="container">
       <form onSubmit={submitReview}>
-        <div>
-          <h5>Acting</h5>
+        <div className="mb-1 d-flex flex-row">
+          <span className="mx-width150">Acting</span>
           <StarComponent onChange={updateActingRating} rating={0} />
         </div>
-        <div>
-          <h5>Direction</h5>
+        <div className="mb-1 d-flex flex-row">
+          <span className="mx-width150">Direction</span>
           <StarComponent onChange={updateDirectionRating} rating={0} />
         </div>
-        <div>
-          <h5>Cinematography</h5>
-          <StarComponent onChange={updateCinematographyRating} rating={0} />
+        <div className="mb-1 d-flex flex-row">
+          <span className="mx-width150">Cinematography</span>
+          <StarComponent rating={0} onChange={updateCinematographyRating} />
         </div>
-        <div>
-          <h5>Soundtrack</h5>
-          <StarComponent onChange={updateSoundtrackRating} rating={0} />
+        <div className="mb-1 d-flex flex-row">
+          <span className="mx-width150">Soundtrack</span>
+          <StarComponent rating={0} onChange={updateSoundtrackRating} />
         </div>
         <fieldset>
           <div className="form-group">
