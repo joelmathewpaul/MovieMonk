@@ -102,7 +102,7 @@ const MovieDetails = () => {
             </button>
           </div>
         </div>
-        <div className="row mt-5 bg-light">
+        <div className="row mt-4 bg-light">
           {/* Here will go the review section, critic and normal user*/}
           <div className="col-6 p-3">
             <h5 className="fw-bold mb-3 text-capitalize">Critic Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>

@@ -32,30 +32,30 @@ const ReviewListItem = ({ reviewListItem }) => {
           <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
         </div>
 
-        {reviewListItem.reviewedBy.accountType === "CRITIC" && (
+        {reviewListItem.reviewType === "CRITIC" && (
           <div>
-            <div className="mb-2 mt-0 d-flex flex-row">
+            <div className="mb-1 mt-0 d-flex flex-row">
               <span>Acting</span>
               <StarComponent
                 rating={reviewListItem.actingRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-2 mt-0 d-flex flex-row">
+            <div className="mb-1 mt-0 d-flex flex-row">
               <span>Direction</span>
               <StarComponent
                 rating={reviewListItem.directionRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-2 mt-0 d-flex flex-row">
+            <div className="mb-1 mt-0 d-flex flex-row">
               <span>Cinematography</span>
               <StarComponent
                 rating={reviewListItem.cinematographyRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-2 mt-0 d-flex flex-row">
+            <div className="mb-1 mt-0 d-flex flex-row">
               <span>Soundtrack</span>
               <StarComponent
                 rating={reviewListItem.soundtrackRating}
