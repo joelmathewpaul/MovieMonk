@@ -123,7 +123,7 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
               {!edit && (
                 <span>
                   {user.dob || (
-                    <span className="small fst-italic">no date of birth</span>
+                    <span className="small fst-italic">No date of birth</span>
                   )}
                 </span>
               )}
@@ -152,7 +152,7 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
               {!edit && (
                 <span>
                   {user.biography || (
-                    <span className="small fst-italic">no biography</span>
+                    <span className="small fst-italic">No biography</span>
                   )}
                 </span>
               )}

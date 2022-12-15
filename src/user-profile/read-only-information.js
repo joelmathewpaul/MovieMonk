@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import Header from "../header";
 import User from "../models/user";
 import { getUserById } from "../services/user-service";
+import { formatDate } from "../utils";
 
 const ReadOnlyUserInfo = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const ReadOnlyUserInfo = () => {
 
   useEffect(() => {
     const paths = pathname.split("/");
-    if (paths.length == 3) {
+    if (paths.length === 3) {
       const uid = paths[2];
       getUserById(uid).then(dbUser => {
         // we got the user
@@ -55,6 +56,15 @@ const ReadOnlyUserInfo = () => {
             <div className="row g-0">
               <div className="col pt-5 pb-3">
                 {/** Here we have to show user details */}
+                <div className="pt-3">
+                  <span>Birthdate:</span> <span>{formatDate(user.joined)}</span>
+                </div>
+                <div className="pt-3">
+                  <span>Bio:</span> <span>{user.biography || "N/A"}</span>
+                </div>
+                <div className="pt-3">
+                  <span>Account Type:</span> <span>{user.accountType}</span>
+                </div>
               </div>
             </div>
           </div>
