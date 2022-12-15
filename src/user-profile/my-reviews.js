@@ -7,13 +7,12 @@ const MyReviews = ({ user }) => {
   const [reviews, setReviewList] = useState([]);
 
   useEffect(() => {
-    findReviewByUserId(user._id).then((reviewList) => {
-      console.log(reviewList);
+    findReviewByUserId(user.id).then((reviewList) => {
       setReviewList(Review.getListFromJsonArray(reviewList));
     });
   }, [user]);
   return (
-    <div>
+    <div className="ps-3 pe-3">
       <ReviewList reviewList={reviews} />
     </div>
   );
