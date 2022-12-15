@@ -13,7 +13,7 @@ const FollowList = ({ followList = [] }) => {
                 followList.map((user) => {
                     return (
                         <div key={`${user.id}`} className="col-md-6 col-xl-4 mt-3">
-                            <FollowListItem />
+                            <FollowListItem user={user} />
                         </div>
                     )
                 })
