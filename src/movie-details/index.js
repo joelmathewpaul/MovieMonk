@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import * as movieService from "../services/movie-service";
 import Header from "../header";
 import Movie from "../models/movie";
@@ -17,6 +17,7 @@ import CriticUserReviewForm from "../reviews/critic-review-form";
 const MovieDetails = () => {
   const user = useSelector(state => state.user);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const [similarMovies, setSimilarMovies] = useState([]);
   const [normalUserReview, setNormalReview] = useState([]);
@@ -30,6 +31,13 @@ const MovieDetails = () => {
       let mov = Movie.getListFromJsonArray([movieData]);
       let movieModel = mov[0];
       setMovie(movieModel);
+      // Fetch the similar movies as well
+      movieService.getSimilarMovies(movieId).then((res) => {
+        const moviesList = Movie.getListFromJsonArray(res.results);
+        // we only want to show 6 movies as similar, but api does not allow it
+        moviesList.length = 6;
+        setSimilarMovies(moviesList);
+      });
       // Fetch the normal reviews
       findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
         const resArr = Review.getListFromJsonArray(res);
@@ -40,13 +48,9 @@ const MovieDetails = () => {
         const resArr = Review.getListFromJsonArray(res);
         setCriticUserReview(resArr);
       });
-    });
-    // Fetch the similar movies as well
-    movieService.getSimilarMovies(movieId).then((res) => {
-      const moviesList = Movie.getListFromJsonArray(res.results);
-      // we only want to show 6 movies as similar, but api does not allow it
-      moviesList.length = 6;
-      setSimilarMovies(moviesList);
+    }).catch(err => {
+      // Cannot fetch details of that movie, navigate to home
+      navigate("/");
     });
   }, [movieId]);
 
