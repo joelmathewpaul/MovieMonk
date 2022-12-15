@@ -3,14 +3,18 @@ import { useSelector } from "react-redux";
 import { createReview } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
-const UserReviewsForm = ({ movieId, onSave }) => {
+const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({ movieId, reviewedBy: user.id, reviewRating: 0 });
+  const [review, setReview] = useState({
+    movieId,
+    reviewedBy: user.id,
+    reviewRating: 0,
+  });
 
   const submitReview = async (e) => {
     e.preventDefault();
     const retReview = await createReview(review);
-    if (onSave && typeof onSave === 'function') {
+    if (onSave && typeof onSave === "function") {
       onSave(retReview);
     }
     return false;
@@ -31,11 +35,17 @@ const UserReviewsForm = ({ movieId, onSave }) => {
 
   useEffect(() => {
     editHandler("movieId", movieId);
+    if (reviewItem) {
+      setReview(reviewItem);
+    }
   }, [movieId]);
 
   return (
     <div className="container">
-      <StarComponent onChange={updateRating} rating={0} />
+      <StarComponent
+        onChange={updateRating}
+        rating={reviewItem.reviewRating ? reviewItem.reviewRating : 0}
+      />
       <form onSubmit={submitReview}>
         <fieldset>
           <div className="form-group">
