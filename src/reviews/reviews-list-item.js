@@ -25,6 +25,9 @@ const ReviewListItem = ({ reviewListItem }) => {
             {formatDate(reviewListItem.reviewTime)}
           </small>
         </div>
+        <div>
+          <i className="fa fa-times pointer p-2" />
+        </div>
       </div>
       <div className="ms-2">
         {reviewListItem.reviewType === "NORMAL" && (
