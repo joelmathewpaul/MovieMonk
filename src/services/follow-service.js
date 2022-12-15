@@ -7,13 +7,23 @@ const api = axios.create({
                          });
 
 
-export const findAllFollowers = async (user) => {
-    const response = await api.post(`${USER_API}/${user._id}`, user);
+export const findAllFollowers = async (userId) => {
+    const response = await api.get(`${USER_API}/${userId}/followers/`, user);
     return response.data
 }
 
-//
-// findAllFollowers(req: Request, res: Response): void;
-// findAllFollowing(req: Request, res: Response): void;
-// addFollowing(req: Request, res: Response): void;
-// deleteFollowing(req: Request, res: Response): void;
+export const findAllFollowing = async (user) => {
+    const response = await api.get(`${USER_API}/${user._id}/following/`, user);
+    return response.data
+}
+
+export const addFollowing = async (user) => {
+    const response = await api.post(`${USER_API}/add/${user._id}/`, user);
+    return response.data
+}
+
+export const deleteFollowing = async (user) => {
+    const response = await api.delete(`${USER_API}/delete/${user._id}`, user);
+    return response.data
+}
+
