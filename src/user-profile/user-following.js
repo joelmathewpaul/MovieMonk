@@ -7,7 +7,7 @@ const UserFollowing = ({user}) => {
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
-        console.log(user)
+        // console.log(user)
         if (user.id){
              findAllFollowing(user.id).then(res => {
                 setFollowing(res);
