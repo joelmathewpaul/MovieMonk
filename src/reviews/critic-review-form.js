@@ -5,21 +5,36 @@ import StarComponent from "../star-component/star-component";
 
 const CriticUserReviewForm = ({ movieId, onSave }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({ movieId, reviewedBy: user.id, reviewType: 'CRITIC' });
+  const [review, setReview] = useState({
+    movieId,
+    reviewedBy: user.id,
+    reviewType: "CRITIC",
+  });
 
   const submitReview = async (e) => {
     e.preventDefault();
     const retReview = await createReview(review);
-    if (typeof onSave === 'function') {
+    if (typeof onSave === "function") {
       onSave(retReview);
     }
     return false;
   };
 
-  const updateRating = (rating) => {
-    editHandler("reviewRating", rating);
+  const updateActingRating = (rating) => {
+    editHandler("actionRating", rating);
   };
 
+  const updateDirectionRating = (rating) => {
+    editHandler("directionRating", rating);
+  };
+
+  const updateSoundtrackRating = (rating) => {
+    editHandler("soundtrackRating", rating);
+  };
+
+  const updateCinematographyRating = (rating) => {
+    editHandler("cinematographyRating", rating);
+  };
   const editHandler = (k, v) => {
     setReview((review) => {
       return {
@@ -38,19 +53,19 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
       <form onSubmit={submitReview}>
         <div>
           <h5>Acting</h5>
-          <StarComponent onChange={updateRating} rating={0} />
+          <StarComponent onChange={updateActingRating} rating={0} />
         </div>
         <div>
           <h5>Direction</h5>
-          <StarComponent onChange={updateRating} rating={0} />
+          <StarComponent onChange={updateDirectionRating} rating={0} />
         </div>
         <div>
           <h5>Cinematography</h5>
-          <StarComponent onChange={updateRating} rating={0} />
+          <StarComponent onChange={updateCinematographyRating} rating={0} />
         </div>
         <div>
           <h5>Soundtrack</h5>
-          <StarComponent onChange={updateRating} rating={0} />
+          <StarComponent onChange={updateSoundtrackRating} rating={0} />
         </div>
         <fieldset>
           <div className="form-group">
