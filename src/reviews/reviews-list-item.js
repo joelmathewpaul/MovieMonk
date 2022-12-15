@@ -18,6 +18,10 @@ const ReviewListItem = ({ reviewListItem }) => {
     await deleteReviewByID(reviewId);
   };
 
+  const updateReview = async () => {
+    const reviewId = reviewListItem.id;
+  };
+
   return (
     <li className="list-group-item">
       <div className="d-flex flex-row mb-0">
@@ -29,7 +33,10 @@ const ReviewListItem = ({ reviewListItem }) => {
           alt="User DP"
         />
         <div className="flex-fill m-2">
-          <Link to={`/view-profile/${reviewListItem.reviewedBy._id}`} className="m-0 d-block text-primary fw-bold text-underline">
+          <Link
+            to={`/view-profile/${reviewListItem.reviewedBy._id}`}
+            className="m-0 d-block text-primary fw-bold text-underline"
+          >
             {reviewListItem.reviewedBy.name}
           </Link>
           <small className="smaller-font text-muted">
