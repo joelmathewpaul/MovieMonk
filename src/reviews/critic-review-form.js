@@ -3,15 +3,16 @@ import { useSelector } from "react-redux";
 import { createReview } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
-const CriticUserReviewForm = ({ movieId }) => {
+const CriticUserReviewForm = ({ movieId, onSave }) => {
   const user = useSelector((state) => state.user);
-  console.log(movieId);
-  const [review, setReview] = useState({ movieId, reviewedBy: user.id });
+  const [review, setReview] = useState({ movieId, reviewedBy: user.id, reviewType: 'CRITIC' });
 
   const submitReview = async (e) => {
     e.preventDefault();
     const retReview = await createReview(review);
-    console.log(retReview);
+    if (typeof onSave === 'function') {
+      onSave(retReview);
+    }
     return false;
   };
 
@@ -37,19 +38,19 @@ const CriticUserReviewForm = ({ movieId }) => {
       <form onSubmit={submitReview}>
         <div>
           <h5>Acting</h5>
-          <StarComponent onChange={updateRating} />
+          <StarComponent onChange={updateRating} rating={0} />
         </div>
         <div>
           <h5>Direction</h5>
-          <StarComponent onChange={updateRating} />
+          <StarComponent onChange={updateRating} rating={0} />
         </div>
         <div>
           <h5>Cinematography</h5>
-          <StarComponent onChange={updateRating} />
+          <StarComponent onChange={updateRating} rating={0} />
         </div>
         <div>
           <h5>Soundtrack</h5>
-          <StarComponent onChange={updateRating} />
+          <StarComponent onChange={updateRating} rating={0} />
         </div>
         <fieldset>
           <div className="form-group">

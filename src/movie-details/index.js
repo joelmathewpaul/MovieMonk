@@ -12,6 +12,7 @@ import {
 import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
 import { useSelector } from "react-redux";
+import CriticUserReviewForm from "../reviews/critic-review-form";
 
 const MovieDetails = () => {
   const user = useSelector(state => state.user);
@@ -52,7 +53,19 @@ const MovieDetails = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const onSave = () => {
+  const onSave = (dbReview) => {
+    const revObj = (Review.getListFromJsonArray([dbReview]))[0];
+    if (revObj.reviewType === 'CRITIC') {
+      setCriticUserReview(revs => {
+        revs.unshift(revObj);
+        return revs;
+      });
+    } else {
+      setNormalReview(revs => {
+        revs.unshift(revObj);
+        return revs;
+      });
+    }
     handleClose();
   }
 
@@ -66,7 +79,8 @@ const MovieDetails = () => {
         <Modal.Body>
           {!!user && user.accountType === 'NORMAL' &&
             <UserReviewsForm movieId={movieId} onSave={onSave} />}
-
+          {!!user && user.accountType === 'CRITIC' &&
+            <CriticUserReviewForm movieId={movieId} onSave={onSave} />}
         </Modal.Body>
       </Modal>
       <div className="container bg-white rounded-3 overflow-hidden">

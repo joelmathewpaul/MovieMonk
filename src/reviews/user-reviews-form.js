@@ -11,7 +11,7 @@ const UserReviewsForm = ({ movieId, onSave }) => {
     e.preventDefault();
     const retReview = await createReview(review);
     if (onSave && typeof onSave === 'function') {
-      onSave();
+      onSave(retReview);
     }
     return false;
   };
