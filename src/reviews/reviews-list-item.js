@@ -1,3 +1,5 @@
+import Review from "../models/review";
+import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
 const ReviewListItem = ({ reviewListItem }) => {
@@ -5,6 +7,13 @@ const ReviewListItem = ({ reviewListItem }) => {
     const postedOn = new Date(sentOn);
     const formattedDate = `${postedOn.getFullYear()}/${postedOn.getMonth()}/${postedOn.getDate()}`;
     return formattedDate;
+  };
+
+  const deleteReview = async () => {
+    const reviewId = reviewListItem.id;
+    const delRev = await deleteReviewByID(reviewId);
+    window.Location.reload(false);
+    return false;
   };
 
   return (
@@ -25,7 +34,7 @@ const ReviewListItem = ({ reviewListItem }) => {
             {formatDate(reviewListItem.reviewTime)}
           </small>
         </div>
-        <div>
+        <div onClick={deleteReview}>
           <i className="fa fa-times pointer p-2" />
         </div>
       </div>
@@ -33,7 +42,10 @@ const ReviewListItem = ({ reviewListItem }) => {
         {reviewListItem.reviewType === "NORMAL" && (
           <div className="mb-1 d-flex flex-row">
             <span>Overall</span>
-            <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
+            <StarComponent
+              rating={reviewListItem.reviewRating}
+              disabled={true}
+            />
           </div>
         )}
         {reviewListItem.reviewType === "CRITIC" && (
