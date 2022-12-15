@@ -39,27 +39,3 @@ const ReviewListItem = ({ reviewListItem }) => {
 };
 
 export default ReviewListItem;
-// <div className="wd-bookmark-details p-1">
-//   <img
-//       src={"https://tinyurl.com/4xpka8wb"}
-//       width={48} height={48}
-//       className="wd-profile-pic  d-inline-block me-2
-//             rounded-circle float-start
-//       "
-//       alt=""
-//   />
-//   <div className="d-flex">
-//     <h4>
-//       {" "}
-//       {"Joel"}{" "}
-//       <span className="text-light fs-6">
-//                 {"rating"}
-//         <span className="text-muted"> </span>
-//         {"Date"}
-//               </span>
-//     </h4>
-//   </div>
-//   <p className="wd-details-bookmark text-wrap w-100 d-inline-block
-//           ms-5 mb-2">
-//     {"Details"}</p>
-// </div>
