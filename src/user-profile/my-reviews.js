@@ -11,7 +11,7 @@ const MyReviews = ({ user }) => {
     });
   }, [user]);
   return (
-    <div className="ps-3 pe-3">
+    <div>
       <ReviewList reviewList={reviews} />
     </div>
   );
