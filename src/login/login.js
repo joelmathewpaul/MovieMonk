@@ -54,10 +54,10 @@ const Login = () => {
               value={userCred.email}
               type="email"
               className="form-control rounded-pill"
-              id="floatingInput"
+              id="loginfloatingInput"
               placeholder="name@example.com"
             />
-            <label htmlFor="floatingInput" className="text-muted">
+            <label htmlFor="loginfloatingInput" className="text-muted">
               <i className="fa fa-user p-2"></i>Email
             </label>
           </div>
@@ -71,10 +71,10 @@ const Login = () => {
               value={userCred.password}
               type="password"
               className="form-control rounded-pill"
-              id="floatingPassword"
+              id="loginfloatingPassword"
               placeholder="Password"
             />
-            <label htmlFor="floatingPassword" className="text-muted">
+            <label htmlFor="loginfloatingPassword" className="text-muted">
               <i className="fa fa-lock p-2"></i>Password
             </label>
           </div>
