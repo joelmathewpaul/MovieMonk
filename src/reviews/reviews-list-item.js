@@ -12,7 +12,7 @@ const ReviewListItem = ({ reviewListItem }) => {
     <li className="list-group-item">
       <div className="d-flex flex-row mb-0">
         <img
-          src={reviewListItem.profilePhoto}
+          src={reviewListItem?.reviewedBy.profilePhoto}
           width={48}
           height={48}
           className="rounded-circle m-2"
