@@ -23,7 +23,6 @@ const MovieDetails = () => {
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
   const [show, setShow] = useState(false);
-
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
@@ -85,6 +84,7 @@ const MovieDetails = () => {
             <UserReviewsForm movieId={movieId} onSave={onSave} />}
           {!!user && user.accountType === 'CRITIC' &&
             <CriticUserReviewForm movieId={movieId} onSave={onSave} />}
+          {!user && <p className="text-muted">You need to be logged in to add the review</p>}
         </Modal.Body>
       </Modal>
       <div className="container bg-white rounded-3 overflow-hidden">
@@ -162,7 +162,7 @@ const MovieDetails = () => {
           <div className="col-6 p-3">
             <div className="d-flex flex-row">
               <h5 className="fw-bold mb-3 flex-fill text-capitalize">User Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
-              {!!user && user.accountType === 'NORMAL' &&
+              {(!user || user.accountType === 'NORMAL') &&
                 <div>
                   <button className="btn btn-sm btn-success rounded-pill ps-3 pe-3" onClick={handleShow}>
                     Add New
