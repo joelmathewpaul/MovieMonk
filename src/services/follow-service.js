@@ -8,12 +8,12 @@ const api = axios.create({
 
 
 export const findAllFollowers = async (userId) => {
-    const response = await api.get(`${USER_API}/${userId}/followers/`, user);
+    const response = await api.get(`${USER_API}/${userId}/followers/`);
     return response.data
 }
 
 export const findAllFollowing = async (user) => {
-    const response = await api.get(`${USER_API}/${user._id}/following/`, user);
+    const response = await api.get(`${USER_API}/${user._id}/following/`);
     return response.data
 }
 

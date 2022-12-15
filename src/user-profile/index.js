@@ -8,6 +8,7 @@ import UserNavigation from "../user-navigation";
 import MyReviews from "./my-reviews";
 import UserFollowers from "./user-followers";
 import UserInfo from "./user-information";
+import User from "../models/user";
 
 /**
  * Profile Component to show the current profile page of the user that includes account information, followers, following, movie reviews etc.
@@ -21,7 +22,8 @@ const Profile = () => {
 
     useEffect(() => {
         getProfile().then(dbUser => {
-            dispatch(saveUser(dbUser));
+            const modelUser = User.getUserDetails(dbUser);
+            dispatch(saveUser(modelUser));
             setLoading(false);
         }).catch(error => {
             //user is not logged in
