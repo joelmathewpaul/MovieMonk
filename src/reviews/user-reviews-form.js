@@ -3,14 +3,22 @@ import { useSelector } from "react-redux";
 import { createReview } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
-const UserReviewsForm = ({ movieId }) => {
+const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({ movieId, reviewedBy: user.id });
+  const [review, setReview] = useState(
+    reviewItem || {
+      movieId,
+      reviewedBy: user.id,
+      reviewRating: 0,
+    }
+  );
 
   const submitReview = async (e) => {
     e.preventDefault();
     const retReview = await createReview(review);
-    console.log(retReview);
+    if (onSave && typeof onSave === "function") {
+      onSave(retReview);
+    }
     return false;
   };
 
@@ -29,11 +37,17 @@ const UserReviewsForm = ({ movieId }) => {
 
   useEffect(() => {
     editHandler("movieId", movieId);
-  }, [movieId]);
+    if (reviewItem) {
+      setReview(reviewItem);
+    }
+  }, [movieId, reviewItem]);
 
   return (
     <div className="container">
-      <StarComponent onChange={updateRating} rating={4} />
+      <StarComponent
+        onChange={updateRating}
+        rating={reviewItem ? reviewItem.reviewRating : 0}
+      />
       <form onSubmit={submitReview}>
         <fieldset>
           <div className="form-group">
@@ -54,12 +68,6 @@ const UserReviewsForm = ({ movieId }) => {
             ></textarea>
           </div>
           <div className="d-flex justify-content-end mt-3">
-            <button
-              type="reset"
-              className="btn btn-secondary me-4"
-            >
-              Discard
-            </button>
             <button type="submit" className="btn btn-success">
               Submit
             </button>

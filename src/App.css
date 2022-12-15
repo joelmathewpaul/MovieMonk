@@ -71,3 +71,20 @@ body {
   font-size: 11px;
   line-height: 12px;
 }
+
+.mx-width150 {
+  width: 150px;
+  display: inline-block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-underline-hover {
+  text-decoration: none;
+}
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+}

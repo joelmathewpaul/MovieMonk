@@ -22,7 +22,7 @@ const MovieListItem = ({ movie }) => {
                         <p className="m-0 text-muted"><small>Release: {movie.releaseDate}</small></p>
                         <p className="m-0 text-muted"><small><i className="fa-solid text-warning fa-star pe-1" /> 4</small></p>
                         <div className="mt-2">
-                            <p className="m-0 text-muted"><small>Votes: {movie.voteCount}</small></p>
+                            <p className="m-0 text-muted"><small>IMDB Votes: {movie.voteCount}</small></p>
                         </div>
                     </div>
                 </div>

@@ -40,11 +40,11 @@ const Profile = () => {
                     <div className="row">
                         <div className="col ptrem mb-0">
                             <div className="backdrop-holder rounded-3" style={{
-                                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000')`,
+                                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('${user.headerImage}')`,
                             }}></div>
                             <div className="d-flex flex-row pull-det-up">
                                 <div className="ms-4 card-imgs user-thumb">
-                                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="User Profile" />
+                                    <img src={user.profilePhoto} alt="User Profile" />
                                 </div>
                                 <div className="ps-4">
                                     <h4 className="text-white fw-bold">{user.name}</h4>
