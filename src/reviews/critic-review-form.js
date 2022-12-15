@@ -9,6 +9,10 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
     movieId,
     reviewedBy: user.id,
     reviewType: "CRITIC",
+    actingRating: 0,
+    directionRating: 0,
+    soundtrackRating: 0,
+    cinematographyRating: 0,
   });
 
   const submitReview = async (e) => {

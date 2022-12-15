@@ -5,7 +5,7 @@ import StarComponent from "../star-component/star-component";
 
 const UserReviewsForm = ({ movieId, onSave }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({ movieId, reviewedBy: user.id });
+  const [review, setReview] = useState({ movieId, reviewedBy: user.id, reviewRating: 0 });
 
   const submitReview = async (e) => {
     e.preventDefault();

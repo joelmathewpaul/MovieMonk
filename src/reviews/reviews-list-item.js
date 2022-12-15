@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import Review from "../models/review";
 import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
 const ReviewListItem = ({ reviewListItem }) => {
+  const user = useSelector(state => state.user);
+
   const formatDate = (sentOn) => {
     const postedOn = new Date(sentOn);
     const formattedDate = `${postedOn.getFullYear()}/${postedOn.getMonth()}/${postedOn.getDate()}`;
@@ -11,9 +14,7 @@ const ReviewListItem = ({ reviewListItem }) => {
 
   const deleteReview = async () => {
     const reviewId = reviewListItem.id;
-    const delRev = await deleteReviewByID(reviewId);
-    window.Location.reload(false);
-    return false;
+    await deleteReviewByID(reviewId);
   };
 
   return (
@@ -34,9 +35,11 @@ const ReviewListItem = ({ reviewListItem }) => {
             {formatDate(reviewListItem.reviewTime)}
           </small>
         </div>
-        <div onClick={deleteReview}>
-          <i className="fa fa-times pointer p-2" />
-        </div>
+        {!!user && user.id === reviewListItem.reviewedBy._id &&
+          <div onClick={deleteReview}>
+            <i className="fa fa-times pointer p-2" />
+          </div>
+        }
       </div>
       <div className="ms-2">
         {reviewListItem.reviewType === "NORMAL" && (
