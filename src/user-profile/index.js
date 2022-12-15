@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Header from "../header";
 import { saveUser } from "../reducers/user-reducer";
 import { getProfile } from "../services/auth-service";
@@ -59,7 +59,10 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className="col-md-9 pt-3 pb-3 bg-light">
-                                <UserInfo user={user} />
+                                <Routes>
+                                    <Route exact path="/" element={<UserInfo user={user} />} />
+                                    <Route exact path="/my-reviews" element={<UserInfo user={user} />} />
+                                </Routes>
                             </div>
                         </div>
                     </div>
