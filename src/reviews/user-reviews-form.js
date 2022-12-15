@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { createReview } from "../services/user-review-services";
+import {
+  createReview,
+  updateReviewById,
+} from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
 const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
@@ -15,10 +18,18 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
 
   const submitReview = async (e) => {
     e.preventDefault();
-    const retReview = await createReview(review);
-    if (onSave && typeof onSave === "function") {
-      onSave(retReview);
+    if (reviewItem) {
+      const retReview = await updateReviewById(reviewItem.id);
+      if (typeof onSave === "function") {
+        onSave(retReview);
+      }
+    } else {
+      const retReview = await createReview(review);
+      if (typeof onSave === "function") {
+        onSave(retReview);
+      }
     }
+
     return false;
   };
 

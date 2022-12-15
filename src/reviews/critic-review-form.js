@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { createReview } from "../services/user-review-services";
+import {
+  createReview,
+  updateReviewById,
+} from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
-const CriticUserReviewForm = ({ movieId, onSave }) => {
+const CriticUserReviewForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({
-    movieId,
-    reviewedBy: user.id,
-    reviewType: "CRITIC",
-    actingRating: 0,
-    directionRating: 0,
-    soundtrackRating: 0,
-    cinematographyRating: 0,
-  });
+  const [review, setReview] = useState(
+    reviewItem || {
+      movieId,
+      reviewedBy: user.id,
+      reviewType: "CRITIC",
+      actingRating: 0,
+      directionRating: 0,
+      soundtrackRating: 0,
+      cinematographyRating: 0,
+    }
+  );
 
   const submitReview = async (e) => {
     e.preventDefault();
@@ -24,10 +29,18 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
         review.cinematographyRating) /
       4;
     review.reviewRating = overallRating;
-    const retReview = await createReview(review);
-    if (typeof onSave === "function") {
-      onSave(retReview);
+    if (reviewItem) {
+      const retReview = await updateReviewById(reviewItem.id, review);
+      if (typeof onSave === "function") {
+        onSave(retReview);
+      }
+    } else {
+      const retReview = await createReview(review);
+      if (typeof onSave === "function") {
+        onSave(retReview);
+      }
     }
+
     return false;
   };
 
@@ -64,19 +77,31 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
       <form onSubmit={submitReview}>
         <div className="mb-1 d-flex flex-row">
           <span className="mx-width150">Acting</span>
-          <StarComponent onChange={updateActingRating} rating={0} />
+          <StarComponent
+            onChange={updateActingRating}
+            rating={reviewItem?.actingRating || 0}
+          />
         </div>
         <div className="mb-1 d-flex flex-row">
           <span className="mx-width150">Direction</span>
-          <StarComponent onChange={updateDirectionRating} rating={0} />
+          <StarComponent
+            onChange={updateDirectionRating}
+            rating={reviewItem?.directionRating || 0}
+          />
         </div>
         <div className="mb-1 d-flex flex-row">
           <span className="mx-width150">Cinematography</span>
-          <StarComponent rating={0} onChange={updateCinematographyRating} />
+          <StarComponent
+            rating={reviewItem?.cinematographyRating || 0}
+            onChange={updateCinematographyRating}
+          />
         </div>
         <div className="mb-1 d-flex flex-row">
           <span className="mx-width150">Soundtrack</span>
-          <StarComponent rating={0} onChange={updateSoundtrackRating} />
+          <StarComponent
+            rating={reviewItem?.soundtrackRating || 0}
+            onChange={updateSoundtrackRating}
+          />
         </div>
         <fieldset>
           <div className="form-group">
