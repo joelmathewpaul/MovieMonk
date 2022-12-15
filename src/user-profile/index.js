@@ -5,6 +5,8 @@ import Header from "../header";
 import { saveUser } from "../reducers/user-reducer";
 import { getProfile } from "../services/auth-service";
 import UserNavigation from "../user-navigation";
+import MyReviews from "./my-reviews";
+import UserFollowers from "./user-followers";
 import UserInfo from "./user-information";
 
 /**
@@ -61,7 +63,8 @@ const Profile = () => {
                             <div className="col-md-9 pt-3 pb-3 bg-light">
                                 <Routes>
                                     <Route exact path="/" element={<UserInfo user={user} />} />
-                                    <Route exact path="/my-reviews" element={<UserInfo user={user} />} />
+                                    <Route exact path="/my-reviews" element={<MyReviews user={user} />} />
+                                    <Route exact path="/followers" element={<UserFollowers user={user} />} />
                                 </Routes>
                             </div>
                         </div>
