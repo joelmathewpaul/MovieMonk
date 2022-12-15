@@ -63,7 +63,7 @@ const Profile = () => {
                                     <UserNavigation />
                                 </div>
                             </div>
-                            <div className="col-md-9 pt-3 pb-3 bg-light">
+                            <div className="col-md-9 p-3 bg-light">
                                 <Routes>
                                     <Route exact path="/" element={<UserInfo user={user} />} />
                                     <Route exact path="/my-reviews" element={<MyReviews user={user} />} />
