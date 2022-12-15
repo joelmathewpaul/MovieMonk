@@ -5,11 +5,13 @@ import StarComponent from "../star-component/star-component";
 
 const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
-  const [review, setReview] = useState({
-    movieId,
-    reviewedBy: user.id,
-    reviewRating: 0,
-  });
+  const [review, setReview] = useState(
+    reviewItem || {
+      movieId,
+      reviewedBy: user.id,
+      reviewRating: 0,
+    }
+  );
 
   const submitReview = async (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
     if (reviewItem) {
       setReview(reviewItem);
     }
-  }, [movieId]);
+  }, [movieId, reviewItem]);
 
   return (
     <div className="container">

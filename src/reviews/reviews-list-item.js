@@ -4,16 +4,21 @@ import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 import { formatDate } from "../utils";
 
-const ReviewListItem = ({ reviewListItem }) => {
+const ReviewListItem = ({ reviewListItem, onUpdate, onDelete }) => {
   const user = useSelector((state) => state.user);
 
   const deleteReview = async () => {
     const reviewId = reviewListItem.id;
     await deleteReviewByID(reviewId);
+    if (onDelete && typeof onDelete === "function") {
+      onDelete(reviewListItem);
+    }
   };
 
   const updateReview = async () => {
-    const reviewId = reviewListItem.id;
+    if (onUpdate && typeof onUpdate === "function") {
+      onUpdate(reviewListItem);
+    }
   };
 
   return (
@@ -50,12 +55,17 @@ const ReviewListItem = ({ reviewListItem }) => {
         {!!user && user.id === reviewListItem.reviewedBy._id && (
           <div className="d-flex flex-row">
             <div>
-              <i className="fa fa-edit pointer p-2 pt-3" title="Edit Review" />
+              <i
+                className="fa fa-edit pointer p-2 pt-3"
+                onClick={updateReview}
+                title="Edit Review"
+              />
             </div>
-            <div onClick={deleteReview}>
+            <div>
               <i
                 className="fa fa-times pointer pt-3 ps-2"
                 title="Delete Review"
+                onClick={deleteReview}
               />
             </div>
           </div>

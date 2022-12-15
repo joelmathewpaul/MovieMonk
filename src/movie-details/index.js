@@ -21,6 +21,7 @@ const MovieDetails = () => {
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
   const [show, setShow] = useState(false);
+  const [editedReview, setEditReview] = useState();
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
@@ -73,6 +74,13 @@ const MovieDetails = () => {
     handleClose();
   };
 
+  const onUpdate = (reviewItem) => {
+    setEditReview(reviewItem);
+    handleShow();
+  };
+
+  const onDelete = () => {};
+
   return (
     <div>
       <Header />
@@ -82,7 +90,11 @@ const MovieDetails = () => {
         </Modal.Header>
         <Modal.Body>
           {!!user && user.accountType === "NORMAL" && (
-            <UserReviewsForm movieId={movieId} onSave={onSave} />
+            <UserReviewsForm
+              movieId={movieId}
+              onSave={onSave}
+              reviewItem={editedReview}
+            />
           )}
           {!!user && user.accountType === "CRITIC" && (
             <CriticUserReviewForm movieId={movieId} onSave={onSave} />
@@ -173,7 +185,11 @@ const MovieDetails = () => {
               )}
             </div>
             {criticUserReview.length > 0 && (
-              <ReviewList reviewList={criticUserReview} />
+              <ReviewList
+                reviewList={criticUserReview}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
             )}
             {criticUserReview.length === 0 && (
               <small className="text-muted">
@@ -201,7 +217,11 @@ const MovieDetails = () => {
               )}
             </div>
             {normalUserReview.length > 0 && (
-              <ReviewList reviewList={normalUserReview} />
+              <ReviewList
+                reviewList={normalUserReview}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
             )}
             {normalUserReview.length === 0 && (
               <small className="text-muted">
