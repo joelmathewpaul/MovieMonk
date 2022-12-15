@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Review from "../models/review";
 import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
@@ -28,9 +29,9 @@ const ReviewListItem = ({ reviewListItem }) => {
           alt="User DP"
         />
         <div className="flex-fill m-2">
-          <p className="m-0 text-primary fw-bold">
+          <Link to={`/view-profile/${reviewListItem.reviewedBy._id}`} className="m-0 d-block text-primary fw-bold text-underline">
             {reviewListItem.reviewedBy.name}
-          </p>
+          </Link>
           <small className="smaller-font text-muted">
             {formatDate(reviewListItem.reviewTime)}
           </small>

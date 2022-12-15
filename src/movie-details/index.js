@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import * as movieService from "../services/movie-service";
 import Header from "../header";
 import Movie from "../models/movie";
@@ -15,38 +15,43 @@ import CriticUserReviewForm from "../reviews/critic-review-form";
 const MovieDetails = () => {
   const user = useSelector((state) => state.user);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const [similarMovies, setSimilarMovies] = useState([]);
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
   const [show, setShow] = useState(false);
-  const [editing, setEditing] = useState(false);
-
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
-    movieService.getMovieDetailsById(movieId).then((movieData) => {
-      let mov = Movie.getListFromJsonArray([movieData]);
-      let movieModel = mov[0];
-      setMovie(movieModel);
-      // Fetch the normal reviews
-      findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
-        const resArr = Review.getListFromJsonArray(res);
-        setNormalReview(resArr);
+    movieService
+      .getMovieDetailsById(movieId)
+      .then((movieData) => {
+        let mov = Movie.getListFromJsonArray([movieData]);
+        let movieModel = mov[0];
+        setMovie(movieModel);
+        // Fetch the similar movies as well
+        movieService.getSimilarMovies(movieId).then((res) => {
+          const moviesList = Movie.getListFromJsonArray(res.results);
+          // we only want to show 6 movies as similar, but api does not allow it
+          moviesList.length = 6;
+          setSimilarMovies(moviesList);
+        });
+        // Fetch the normal reviews
+        findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
+          const resArr = Review.getListFromJsonArray(res);
+          setNormalReview(resArr);
+        });
+        // Fetch the critic reviews
+        findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
+          const resArr = Review.getListFromJsonArray(res);
+          setCriticUserReview(resArr);
+        });
+      })
+      .catch((err) => {
+        // Cannot fetch details of that movie, navigate to home
+        navigate("/");
       });
-      // Fetch the critic reviews
-      findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
-        const resArr = Review.getListFromJsonArray(res);
-        setCriticUserReview(resArr);
-      });
-    });
-    // Fetch the similar movies as well
-    movieService.getSimilarMovies(movieId).then((res) => {
-      const moviesList = Movie.getListFromJsonArray(res.results);
-      // we only want to show 6 movies as similar, but api does not allow it
-      moviesList.length = 6;
-      setSimilarMovies(moviesList);
-    });
   }, [movieId]);
 
   const handleClose = () => setShow(false);
@@ -81,6 +86,11 @@ const MovieDetails = () => {
           )}
           {!!user && user.accountType === "CRITIC" && (
             <CriticUserReviewForm movieId={movieId} onSave={onSave} />
+          )}
+          {!user && (
+            <p className="text-muted">
+              You need to be logged in to add the review
+            </p>
           )}
         </Modal.Body>
       </Modal>
@@ -179,7 +189,7 @@ const MovieDetails = () => {
                   <i className="fa fa-arrow-right"></i>
                 </small>
               </h5>
-              {!!user && user.accountType === "NORMAL" && (
+              {(!user || user.accountType === "NORMAL") && (
                 <div>
                   <button
                     className="btn btn-sm btn-success rounded-pill ps-3 pe-3"
