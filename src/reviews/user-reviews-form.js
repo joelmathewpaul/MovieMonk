@@ -44,7 +44,7 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
     <div className="container">
       <StarComponent
         onChange={updateRating}
-        rating={reviewItem.reviewRating ? reviewItem.reviewRating : 0}
+        rating={reviewItem ? reviewItem.reviewRating : 0}
       />
       <form onSubmit={submitReview}>
         <fieldset>
