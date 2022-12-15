@@ -4,7 +4,7 @@ import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
 const ReviewListItem = ({ reviewListItem }) => {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   const formatDate = (sentOn) => {
     const postedOn = new Date(sentOn);
@@ -35,11 +35,19 @@ const ReviewListItem = ({ reviewListItem }) => {
             {formatDate(reviewListItem.reviewTime)}
           </small>
         </div>
-        {!!user && user.id === reviewListItem.reviewedBy._id &&
-          <div onClick={deleteReview}>
-            <i className="fa fa-times pointer p-2" />
+        {!!user && user.id === reviewListItem.reviewedBy._id && (
+          <div className="d-flex flex-row">
+            <div>
+              <i className="fa fa-edit pointer p-2 pt-3" title="Edit Review" />
+            </div>
+            <div onClick={deleteReview}>
+              <i
+                className="fa fa-times pointer pt-3 ps-2"
+                title="Delete Review"
+              />
+            </div>
           </div>
-        }
+        )}
       </div>
       <div className="ms-2">
         {reviewListItem.reviewType === "NORMAL" && (
