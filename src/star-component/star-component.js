@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
+const StarComponent = ({ disabled, rating, onChange }) => {
   const [currentRating, setRating] = useState(rating);
   const ratingChanged = (newRating) => {
     setRating(newRating);
@@ -38,7 +38,6 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
               <i className="fas fa-star-half d-inline-block"></i>
             )}{" "}
           </label>
-
 
           <label
             className="st-label star  d-inline-flex ps-2"
@@ -82,7 +81,6 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
             )}
           </label>
 
-
           <label
             className="st-label star  d-inline-flex ps-2"
             role="button"
@@ -103,7 +101,6 @@ const StarComponent = ({ disabled, rating = 3.6, onChange }) => {
               <i className="fas fa-star-half d-inline-block"></i>
             )}{" "}
           </label>
-
 
           <label
             className="st-label star d-inline-flex ps-2"
