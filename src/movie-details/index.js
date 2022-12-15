@@ -4,18 +4,16 @@ import * as movieService from "../services/movie-service";
 import Header from "../header";
 import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 import UserReviewsForm from "../reviews/user-reviews-form";
-import {
-  findReviewByMovieIdAndType,
-} from "../services/user-review-services";
+import { findReviewByMovieIdAndType } from "../services/user-review-services";
 import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
 import { useSelector } from "react-redux";
 import CriticUserReviewForm from "../reviews/critic-review-form";
 
 const MovieDetails = () => {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [movie, setMovie] = useState({});
@@ -23,54 +21,65 @@ const MovieDetails = () => {
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
   const [show, setShow] = useState(false);
+  const [editedReview, setEditReview] = useState();
   const movieId = pathname.split("/")[2];
 
   useEffect(() => {
-    movieService.getMovieDetailsById(movieId).then((movieData) => {
-      let mov = Movie.getListFromJsonArray([movieData]);
-      let movieModel = mov[0];
-      setMovie(movieModel);
-      // Fetch the similar movies as well
-      movieService.getSimilarMovies(movieId).then((res) => {
-        const moviesList = Movie.getListFromJsonArray(res.results);
-        // we only want to show 6 movies as similar, but api does not allow it
-        moviesList.length = 6;
-        setSimilarMovies(moviesList);
+    movieService
+      .getMovieDetailsById(movieId)
+      .then((movieData) => {
+        let mov = Movie.getListFromJsonArray([movieData]);
+        let movieModel = mov[0];
+        setMovie(movieModel);
+        // Fetch the similar movies as well
+        movieService.getSimilarMovies(movieId).then((res) => {
+          const moviesList = Movie.getListFromJsonArray(res.results);
+          // we only want to show 6 movies as similar, but api does not allow it
+          moviesList.length = 6;
+          setSimilarMovies(moviesList);
+        });
+        // Fetch the normal reviews
+        findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
+          const resArr = Review.getListFromJsonArray(res);
+          setNormalReview(resArr);
+        });
+        // Fetch the critic reviews
+        findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
+          const resArr = Review.getListFromJsonArray(res);
+          setCriticUserReview(resArr);
+        });
+      })
+      .catch((err) => {
+        // Cannot fetch details of that movie, navigate to home
+        navigate("/");
       });
-      // Fetch the normal reviews
-      findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
-        const resArr = Review.getListFromJsonArray(res);
-        setNormalReview(resArr);
-      });
-      // Fetch the critic reviews
-      findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
-        const resArr = Review.getListFromJsonArray(res);
-        setCriticUserReview(resArr);
-      });
-    }).catch(err => {
-      // Cannot fetch details of that movie, navigate to home
-      navigate("/");
-    });
   }, [movieId]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const onSave = (dbReview) => {
-    const revObj = (Review.getListFromJsonArray([dbReview]))[0];
-    if (revObj.reviewType === 'CRITIC') {
-      setCriticUserReview(revs => {
+    const revObj = Review.getListFromJsonArray([dbReview])[0];
+    if (revObj.reviewType === "CRITIC") {
+      setCriticUserReview((revs) => {
         revs.unshift(revObj);
         return revs;
       });
     } else {
-      setNormalReview(revs => {
+      setNormalReview((revs) => {
         revs.unshift(revObj);
         return revs;
       });
     }
     handleClose();
-  }
+  };
+
+  const onUpdate = (reviewItem) => {
+    setEditReview(reviewItem);
+    handleShow();
+  };
+
+  const onDelete = () => {};
 
   return (
     <div>
@@ -80,11 +89,21 @@ const MovieDetails = () => {
           <Modal.Title>Add your review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {!!user && user.accountType === 'NORMAL' &&
-            <UserReviewsForm movieId={movieId} onSave={onSave} />}
-          {!!user && user.accountType === 'CRITIC' &&
-            <CriticUserReviewForm movieId={movieId} onSave={onSave} />}
-          {!user && <p className="text-muted">You need to be logged in to add the review</p>}
+          {!!user && user.accountType === "NORMAL" && (
+            <UserReviewsForm
+              movieId={movieId}
+              onSave={onSave}
+              reviewItem={editedReview}
+            />
+          )}
+          {!!user && user.accountType === "CRITIC" && (
+            <CriticUserReviewForm movieId={movieId} onSave={onSave} />
+          )}
+          {!user && (
+            <p className="text-muted">
+              You need to be logged in to add the review
+            </p>
+          )}
         </Modal.Body>
       </Modal>
       <div className="container bg-white rounded-3 overflow-hidden">
@@ -129,7 +148,10 @@ const MovieDetails = () => {
               {movie.genres &&
                 movie.genres.map((gen) => {
                   return (
-                    <span key={`gen-${gen.id}`} className="badge bg-secondary ms-2">
+                    <span
+                      key={`gen-${gen.id}`}
+                      className="badge bg-secondary ms-2"
+                    >
                       {gen.name}
                     </span>
                   );
@@ -145,35 +167,67 @@ const MovieDetails = () => {
           {/* Here will go the review section, critic and normal user*/}
           <div className="col-6 p-3">
             <div className="d-flex flex-row">
-              <h5 className="fw-bold mb-3 flex-fill text-capitalize">Critic Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
-              {!!user && user.accountType === 'CRITIC' &&
+              <h5 className="fw-bold mb-3 flex-fill text-capitalize">
+                Critic Reviews{" "}
+                <small className="text-muted ps-2">
+                  <i className="fa fa-arrow-right"></i>
+                </small>
+              </h5>
+              {!!user && user.accountType === "CRITIC" && (
                 <div>
-                  <button className="btn btn-sm btn-success rounded-pill ps-3 pe-3" onClick={handleShow}>
+                  <button
+                    className="btn btn-sm btn-success rounded-pill ps-3 pe-3"
+                    onClick={handleShow}
+                  >
                     Add New
                   </button>
                 </div>
-              }
+              )}
             </div>
-            {criticUserReview.length > 0 && <ReviewList reviewList={criticUserReview} />}
-            {criticUserReview.length === 0 &&
-              <small className="text-muted">No critic reviews exists yet, once added it will appear here.</small>
-            }
+            {criticUserReview.length > 0 && (
+              <ReviewList
+                reviewList={criticUserReview}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
+            )}
+            {criticUserReview.length === 0 && (
+              <small className="text-muted">
+                No critic reviews exists yet, once added it will appear here.
+              </small>
+            )}
           </div>
           <div className="col-6 p-3">
             <div className="d-flex flex-row">
-              <h5 className="fw-bold mb-3 flex-fill text-capitalize">User Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
-              {(!user || user.accountType === 'NORMAL') &&
+              <h5 className="fw-bold mb-3 flex-fill text-capitalize">
+                User Reviews{" "}
+                <small className="text-muted ps-2">
+                  <i className="fa fa-arrow-right"></i>
+                </small>
+              </h5>
+              {(!user || user.accountType === "NORMAL") && (
                 <div>
-                  <button className="btn btn-sm btn-success rounded-pill ps-3 pe-3" onClick={handleShow}>
+                  <button
+                    className="btn btn-sm btn-success rounded-pill ps-3 pe-3"
+                    onClick={handleShow}
+                  >
                     Add New
                   </button>
                 </div>
-              }
+              )}
             </div>
-            {normalUserReview.length > 0 && <ReviewList reviewList={normalUserReview} />}
-            {normalUserReview.length === 0 &&
-              <small className="text-muted">No user reviews exists yet, once added it will appear here.</small>
-            }
+            {normalUserReview.length > 0 && (
+              <ReviewList
+                reviewList={normalUserReview}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+              />
+            )}
+            {normalUserReview.length === 0 && (
+              <small className="text-muted">
+                No user reviews exists yet, once added it will appear here.
+              </small>
+            )}
           </div>
         </div>
         <div className="row">

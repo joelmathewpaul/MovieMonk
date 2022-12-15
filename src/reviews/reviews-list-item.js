@@ -4,12 +4,21 @@ import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 import { formatDate } from "../utils";
 
-const ReviewListItem = ({ reviewListItem }) => {
-  const user = useSelector(state => state.user);
+const ReviewListItem = ({ reviewListItem, onUpdate, onDelete }) => {
+  const user = useSelector((state) => state.user);
 
   const deleteReview = async () => {
     const reviewId = reviewListItem.id;
     await deleteReviewByID(reviewId);
+    if (onDelete && typeof onDelete === "function") {
+      onDelete(reviewListItem);
+    }
+  };
+
+  const updateReview = async () => {
+    if (onUpdate && typeof onUpdate === "function") {
+      onUpdate(reviewListItem);
+    }
   };
 
   return (
@@ -23,25 +32,44 @@ const ReviewListItem = ({ reviewListItem }) => {
           alt="User DP"
         />
         <div className="flex-fill m-2">
-          {reviewListItem.reviewedBy._id === user.id
-            && <Link to={`/profile`} className="m-0 d-block text-primary fw-bold text-underline-hover">
+          {reviewListItem.reviewedBy._id === user.id && (
+            <Link
+              to={`/profile`}
+              className="m-0 d-block text-primary fw-bold text-underline-hover"
+            >
               {reviewListItem.reviewedBy.name}
             </Link>
-          }
-          {reviewListItem.reviewedBy._id !== user.id
-            && <Link to={`/view-profile/${reviewListItem.reviewedBy._id}`} className="m-0 d-block text-primary fw-bold text-underline-hover">
+          )}
+          {reviewListItem.reviewedBy._id !== user.id && (
+            <Link
+              to={`/view-profile/${reviewListItem.reviewedBy._id}`}
+              className="m-0 d-block text-primary fw-bold text-underline-hover"
+            >
               {reviewListItem.reviewedBy.name}
             </Link>
-          }
+          )}
           <small className="smaller-font text-muted">
             {formatDate(reviewListItem.reviewTime)}
           </small>
         </div>
-        {!!user && user.id === reviewListItem.reviewedBy._id &&
-          <div onClick={deleteReview}>
-            <i className="fa fa-times pointer p-2" />
+        {!!user && user.id === reviewListItem.reviewedBy._id && (
+          <div className="d-flex flex-row">
+            <div>
+              <i
+                className="fa fa-edit pointer p-2 pt-3"
+                onClick={updateReview}
+                title="Edit Review"
+              />
+            </div>
+            <div>
+              <i
+                className="fa fa-times pointer pt-3 ps-2"
+                title="Delete Review"
+                onClick={deleteReview}
+              />
+            </div>
           </div>
-        }
+        )}
       </div>
       <div className="ms-2">
         {reviewListItem.reviewType === "NORMAL" && (
