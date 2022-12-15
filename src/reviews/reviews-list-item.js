@@ -1,17 +1,11 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Review from "../models/review";
 import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
+import { formatDate } from "../utils";
 
 const ReviewListItem = ({ reviewListItem }) => {
   const user = useSelector(state => state.user);
-
-  const formatDate = (sentOn) => {
-    const postedOn = new Date(sentOn);
-    const formattedDate = `${postedOn.getFullYear()}/${postedOn.getMonth()}/${postedOn.getDate()}`;
-    return formattedDate;
-  };
 
   const deleteReview = async () => {
     const reviewId = reviewListItem.id;
