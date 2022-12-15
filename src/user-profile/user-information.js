@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { formatDate } from "../utils";
 
 /**
  * Component with user information to be displayed on the profile page including the edit-profile part.
  */
-const UserInfo = ({ user, onCancel = () => {}, onSave = () => {} }) => {
+const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
   const [profile, setProfile] = useState(user);
   const [edit, setEdit] = useState(false);
 
@@ -24,12 +25,6 @@ const UserInfo = ({ user, onCancel = () => {}, onSave = () => {} }) => {
   const cancelProfile = () => {
     setEdit(false);
     onCancel();
-  };
-
-  const formatDate = (sentOn) => {
-    const postedOn = new Date(sentOn);
-    const formattedDate = `${postedOn.getFullYear()}/${postedOn.getMonth()}/${postedOn.getDate()}`;
-    return formattedDate;
   };
 
   return (

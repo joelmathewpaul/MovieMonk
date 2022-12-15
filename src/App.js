@@ -10,6 +10,7 @@ import { getProfile } from "./services/auth-service";
 import { saveUser } from './reducers/user-reducer';
 import Profile from "./user-profile";
 import User from './models/user';
+import ReadOnlyUserInfo from './user-profile/read-only-information';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/movie/:id/:title" element={<MovieDetails />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/profile/*" element={<Profile />} />
+          <Route exact path="/view-profile/:uid" element={<ReadOnlyUserInfo />} />
           <Route path="/*" element={<Home />} />
         </Routes>
       </div>
