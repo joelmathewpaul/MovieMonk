@@ -24,6 +24,19 @@ const MovieDetails = () => {
   const [editedReview, setEditReview] = useState();
   const movieId = pathname.split("/")[2];
 
+  const downloadReviews = (movieModel) => {
+    // Fetch the normal reviews
+    findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
+      const resArr = Review.getListFromJsonArray(res);
+      setNormalReview(resArr);
+    });
+    // Fetch the critic reviews
+    findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
+      const resArr = Review.getListFromJsonArray(res);
+      setCriticUserReview(resArr);
+    });
+  }
+
   useEffect(() => {
     movieService
       .getMovieDetailsById(movieId)
@@ -38,16 +51,7 @@ const MovieDetails = () => {
           moviesList.length = 6;
           setSimilarMovies(moviesList);
         });
-        // Fetch the normal reviews
-        findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
-          const resArr = Review.getListFromJsonArray(res);
-          setNormalReview(resArr);
-        });
-        // Fetch the critic reviews
-        findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
-          const resArr = Review.getListFromJsonArray(res);
-          setCriticUserReview(resArr);
-        });
+        downloadReviews(movieModel);
       })
       .catch((err) => {
         // Cannot fetch details of that movie, navigate to home
@@ -59,18 +63,7 @@ const MovieDetails = () => {
   const handleShow = () => setShow(true);
 
   const onSave = (dbReview) => {
-    const revObj = Review.getListFromJsonArray([dbReview])[0];
-    if (revObj.reviewType === "CRITIC") {
-      setCriticUserReview((revs) => {
-        revs.unshift(revObj);
-        return revs;
-      });
-    } else {
-      setNormalReview((revs) => {
-        revs.unshift(revObj);
-        return revs;
-      });
-    }
+    downloadReviews();
     handleClose();
   };
 
@@ -79,7 +72,9 @@ const MovieDetails = () => {
     handleShow();
   };
 
-  const onDelete = () => {};
+  const onDelete = () => {
+    downloadReviews();
+  };
 
   return (
     <div>
