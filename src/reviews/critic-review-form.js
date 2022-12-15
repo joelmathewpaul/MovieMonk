@@ -13,6 +13,13 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
 
   const submitReview = async (e) => {
     e.preventDefault();
+    const overallRating =
+      (review.actingRating +
+        review.directionRating +
+        review.soundtrackRating +
+        review.cinematographyRating) /
+      4;
+    review.reviewRating = overallRating;
     const retReview = await createReview(review);
     if (typeof onSave === "function") {
       onSave(retReview);
@@ -21,7 +28,7 @@ const CriticUserReviewForm = ({ movieId, onSave }) => {
   };
 
   const updateActingRating = (rating) => {
-    editHandler("actionRating", rating);
+    editHandler("actingRating", rating);
   };
 
   const updateDirectionRating = (rating) => {
