@@ -15,7 +15,7 @@ const UserFollowing = ({user}) => {
         }}, [user]);
 
     return <div>
-        <FollowList followList={following}/>
+        <FollowList followList={following} cancelRequired={true}/>
     </div>
 }
 
