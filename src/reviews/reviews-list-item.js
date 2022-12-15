@@ -26,37 +26,45 @@ const ReviewListItem = ({ reviewListItem }) => {
           </small>
         </div>
       </div>
-      <div className="m-0 ms-2">
-        <div className="mb-2 mt-0 d-flex flex-row">
-          <span>Overall</span>
-          <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
-        </div>
-
+      <div className="ms-2">
+        {reviewListItem.reviewType === "NORMAL" && (
+          <div className="mb-1 d-flex flex-row">
+            <span>Overall</span>
+            <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
+          </div>
+        )}
         {reviewListItem.reviewType === "CRITIC" && (
           <div>
-            <div className="mb-1 mt-0 d-flex flex-row">
-              <span>Acting</span>
+            <div className="mb-1 d-flex flex-row">
+              <span className="mx-width150">Overall</span>
+              <StarComponent
+                rating={reviewListItem.reviewRating}
+                disabled={true}
+              />
+            </div>
+            <div className="mb-1 d-flex flex-row">
+              <span className="mx-width150">Acting</span>
               <StarComponent
                 rating={reviewListItem.actingRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-1 mt-0 d-flex flex-row">
-              <span>Direction</span>
+            <div className="mb-1 d-flex flex-row">
+              <span className="mx-width150">Direction</span>
               <StarComponent
                 rating={reviewListItem.directionRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-1 mt-0 d-flex flex-row">
-              <span>Cinematography</span>
+            <div className="mb-1 d-flex flex-row">
+              <span className="mx-width150">Cinematography</span>
               <StarComponent
                 rating={reviewListItem.cinematographyRating}
                 disabled={true}
               />
             </div>
-            <div className="mb-1 mt-0 d-flex flex-row">
-              <span>Soundtrack</span>
+            <div className="mb-1 d-flex flex-row">
+              <span className="mx-width150">Soundtrack</span>
               <StarComponent
                 rating={reviewListItem.soundtrackRating}
                 disabled={true}
@@ -64,8 +72,7 @@ const ReviewListItem = ({ reviewListItem }) => {
             </div>
           </div>
         )}
-
-        <p className="mb-2">
+        <p className="pt-1 mb-2">
           <i className="fa-solid fa-quote-left"></i>
           <span className="ps-2 pe-2">{reviewListItem.reviewTitle}</span>
           <i className="fa-solid fa-quote-right"></i>
