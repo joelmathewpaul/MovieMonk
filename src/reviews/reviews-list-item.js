@@ -29,7 +29,7 @@ const ReviewListItem = ({ reviewListItem }) => {
           alt="User DP"
         />
         <div className="flex-fill m-2">
-          <Link to={`/view-profile/${reviewListItem.reviewedBy._id}`} className="m-0 d-block text-primary fw-bold text-underline">
+          <Link to={`/view-profile/${reviewListItem.reviewedBy._id}`} className="m-0 d-block text-primary fw-bold text-underline-hover">
             {reviewListItem.reviewedBy.name}
           </Link>
           <small className="smaller-font text-muted">
