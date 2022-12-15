@@ -17,13 +17,14 @@ export const findAllFollowing = async (userId) => {
     return response.data
 }
 
-export const addFollowing = async (user) => {
-    const response = await api.post(`${USER_API}/add/${user.id}/`, user);
+export const addFollowing = async (userId,followingId) => {
+    const response = await api.post(`${USER_API}/${userId}/follows/${followingId}`);
     return response.data
 }
 
-export const deleteFollowing = async (user) => {
-    const response = await api.delete(`${USER_API}/delete/${user.id}`, user);
+export const deleteFollowing = async (userId,followingId) => {
+    console.log(userId,followingId);
+    const response = await api.delete(`${USER_API}/${userId}/unfollows/${followingId}`);
     return response.data
 }
 
