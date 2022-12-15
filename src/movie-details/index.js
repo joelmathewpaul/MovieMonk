@@ -4,19 +4,23 @@ import * as movieService from "../services/movie-service";
 import Header from "../header";
 import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
+import Modal from 'react-bootstrap/Modal';
 import UserReviewsForm from "../reviews/user-reviews-form";
 import {
   findReviewByMovieIdAndType,
 } from "../services/user-review-services";
 import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
+import { useSelector } from "react-redux";
 
 const MovieDetails = () => {
+  const user = useSelector(state => state.user);
   const { pathname } = useLocation();
   const [movie, setMovie] = useState({});
   const [similarMovies, setSimilarMovies] = useState([]);
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
+  const [show, setShow] = useState(false);
 
   const movieId = pathname.split("/")[2];
 
@@ -45,9 +49,26 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const onSave = () => {
+    handleClose();
+  }
+
   return (
     <div>
       <Header />
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add your review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {!!user && user.accountType === 'NORMAL' &&
+            <UserReviewsForm movieId={movieId} onSave={onSave} />}
+
+        </Modal.Body>
+      </Modal>
       <div className="container bg-white rounded-3 overflow-hidden">
         <div className="row">
           <div className="col-lg-7 ptrem">
@@ -105,16 +126,34 @@ const MovieDetails = () => {
         <div className="row mt-4 bg-light">
           {/* Here will go the review section, critic and normal user*/}
           <div className="col-6 p-3">
-            <h5 className="fw-bold mb-3 text-capitalize">Critic Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+            <div className="d-flex flex-row">
+              <h5 className="fw-bold mb-3 flex-fill text-capitalize">Critic Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+              {!!user && user.accountType === 'CRITIC' &&
+                <div>
+                  <button className="btn btn-sm btn-success rounded-pill ps-3 pe-3" onClick={handleShow}>
+                    Add New
+                  </button>
+                </div>
+              }
+            </div>
             {criticUserReview.length > 0 && <ReviewList reviewList={criticUserReview} />}
-            {criticUserReview.length == 0 &&
+            {criticUserReview.length === 0 &&
               <small className="text-muted">No critic reviews exists yet, once added it will appear here.</small>
             }
           </div>
           <div className="col-6 p-3">
-            <h5 className="fw-bold mb-3 text-capitalize">User Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+            <div className="d-flex flex-row">
+              <h5 className="fw-bold mb-3 flex-fill text-capitalize">User Reviews <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small></h5>
+              {!!user && user.accountType === 'NORMAL' &&
+                <div>
+                  <button className="btn btn-sm btn-success rounded-pill ps-3 pe-3" onClick={handleShow}>
+                    Add New
+                  </button>
+                </div>
+              }
+            </div>
             {normalUserReview.length > 0 && <ReviewList reviewList={normalUserReview} />}
-            {normalUserReview.length == 0 &&
+            {normalUserReview.length === 0 &&
               <small className="text-muted">No user reviews exists yet, once added it will appear here.</small>
             }
           </div>

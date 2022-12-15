@@ -3,14 +3,16 @@ import { useSelector } from "react-redux";
 import { createReview } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
-const UserReviewsForm = ({ movieId }) => {
+const UserReviewsForm = ({ movieId, onSave }) => {
   const user = useSelector((state) => state.user);
   const [review, setReview] = useState({ movieId, reviewedBy: user.id });
 
   const submitReview = async (e) => {
     e.preventDefault();
     const retReview = await createReview(review);
-    console.log(retReview);
+    if (onSave && typeof onSave === 'function') {
+      onSave();
+    }
     return false;
   };
 
@@ -33,7 +35,7 @@ const UserReviewsForm = ({ movieId }) => {
 
   return (
     <div className="container">
-      <StarComponent onChange={updateRating} rating={4} />
+      <StarComponent onChange={updateRating} rating={0} />
       <form onSubmit={submitReview}>
         <fieldset>
           <div className="form-group">
@@ -54,12 +56,6 @@ const UserReviewsForm = ({ movieId }) => {
             ></textarea>
           </div>
           <div className="d-flex justify-content-end mt-3">
-            <button
-              type="reset"
-              className="btn btn-secondary me-4"
-            >
-              Discard
-            </button>
             <button type="submit" className="btn btn-success">
               Submit
             </button>
