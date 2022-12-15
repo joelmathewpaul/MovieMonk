@@ -97,7 +97,11 @@ const MovieDetails = () => {
             />
           )}
           {!!user && user.accountType === "CRITIC" && (
-            <CriticUserReviewForm movieId={movieId} onSave={onSave} />
+            <CriticUserReviewForm
+              movieId={movieId}
+              onSave={onSave}
+              reviewItem={editedReview}
+            />
           )}
           {!user && (
             <p className="text-muted">
