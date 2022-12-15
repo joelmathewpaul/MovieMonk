@@ -28,9 +28,9 @@ const ReviewListItem = ({ reviewListItem }) => {
           <StarComponent rating={reviewListItem.reviewRating} disabled={true} />
         </div>
         <p className="mb-2">
-          <i class="fa-solid fa-quote-left"></i>
+          <i className="fa-solid fa-quote-left"></i>
           <span className="ps-2 pe-2">{reviewListItem.reviewTitle}</span>
-          <i class="fa-solid fa-quote-right"></i>
+          <i className="fa-solid fa-quote-right"></i>
         </p>
         <small>{reviewListItem.reviewDetail}</small>
       </div>

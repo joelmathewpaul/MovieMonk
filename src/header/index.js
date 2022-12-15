@@ -12,7 +12,7 @@ const Header = () => {
 
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
-  const [query, setQuery] = useState(q);
+  const [query, setQuery] = useState(q || "");
 
   const searchNow = (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const Header = () => {
                 <Dropdown.Toggle variant="success" className="rounded-pill"><i className="fa fa-user"></i> {user.name}</Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Link className="dropdown-item" to="/profile">My Profile</Link>
-                  <Link className="dropdown-item" to="/signout"  onClick={signOutUser}>Sign Out</Link>
+                  <Link className="dropdown-item" to="/signout" onClick={signOutUser}>Sign Out</Link>
                 </Dropdown.Menu>
               </Dropdown>
             </>
@@ -59,7 +59,7 @@ const Header = () => {
             <>
               <span className="ps-3 pe-3 text-white">Hi, User</span>
               <Link to="/login" type="button" className="me-3 btn d-flex rounded-pill align-items-center btn-success">
-                <i className="fa fa-user"/>
+                <i className="fa fa-user" />
                 <span className="ps-3">Login / Signup</span>
               </Link>
             </>

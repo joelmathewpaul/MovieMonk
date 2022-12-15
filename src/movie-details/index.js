@@ -73,7 +73,7 @@ const MovieDetails = () => {
                     </small>
                   </p>
                   <p className="m-0 pe-3 text-muted">
-                    <small>Votes: {movie.voteCount}</small>
+                    <small>IMDB Votes: {movie.voteCount}</small>
                   </p>
                 </div>
               </div>
