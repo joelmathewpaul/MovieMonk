@@ -57,7 +57,10 @@ const ReadOnlyUserInfo = () => {
               <div className="col pt-5 pb-3">
                 {/** Here we have to show user details */}
                 <div className="pt-3">
-                  <span>Birthdate:</span> <span>{formatDate(user.joined)}</span>
+                  <span>Birthdate:</span> <span>{formatDate(user.dob)}</span>
+                </div>
+                <div className="pt-3">
+                  <span>Joined:</span> <span>{formatDate(user.joined)}</span>
                 </div>
                 <div className="pt-3">
                   <span>Bio:</span> <span>{user.biography || "N/A"}</span>

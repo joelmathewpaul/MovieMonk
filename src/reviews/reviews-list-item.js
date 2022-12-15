@@ -32,7 +32,7 @@ const ReviewListItem = ({ reviewListItem, onUpdate, onDelete }) => {
           alt="User DP"
         />
         <div className="flex-fill m-2">
-          {reviewListItem.reviewedBy._id === user.id && (
+          {reviewListItem.reviewedBy._id === user?.id && (
             <Link
               to={`/profile`}
               className="m-0 d-block text-primary fw-bold text-underline-hover"
@@ -40,7 +40,7 @@ const ReviewListItem = ({ reviewListItem, onUpdate, onDelete }) => {
               {reviewListItem.reviewedBy.name}
             </Link>
           )}
-          {reviewListItem.reviewedBy._id !== user.id && (
+          {reviewListItem.reviewedBy._id !== user?.id && (
             <Link
               to={`/view-profile/${reviewListItem.reviewedBy._id}`}
               className="m-0 d-block text-primary fw-bold text-underline-hover"
