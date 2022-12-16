@@ -123,7 +123,7 @@ const MovieDetails = () => {
           )}
           {!user && (
             <p className="text-muted">
-              You need to be logged in to add the review
+              You need to be logged in to do this operation
             </p>
           )}
         </Modal.Body>
