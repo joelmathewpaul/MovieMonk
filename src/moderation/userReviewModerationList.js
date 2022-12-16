@@ -3,6 +3,9 @@ import { findAllReviews } from "../services/user-review-services";
 import ReviewList from "../reviews/reviews-list";
 import Review from "../models/review";
 
+/**
+ * Responsible for the user reviews that are to be moderated or checked by the admin.
+ */
 const UserReviewModerationList = () => {
   const [allReviews, setAllReviews] = useState([]);
 

@@ -3,6 +3,9 @@ import UserListItem from "./user-list-item";
 import { findAllUsers } from "../services/user-service";
 import User from "../models/user";
 
+/**
+ * Responsible for the list of users in moderation list.
+ */
 const UserModerationList = () => {
   const [listOfUsers, setUserList] = useState([]);
 

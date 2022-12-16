@@ -2,6 +2,9 @@ import Header from "../header";
 import UserModerationList from "./userModeraionList";
 import UserReviewModerationList from "./userReviewModerationList";
 
+/**
+ * Responsible for providing moderation functionality to admins.
+ */
 const Moderation = () => {
   return (
     <div>

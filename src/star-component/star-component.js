@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-
+/**
+ * Responsible for the star rating component where user can rate the movie.
+ * This is also uesd to show the rating of a movie.
+ */
 const StarComponent = ({ disabled, rating, onChange }) => {
   const [currentRating, setRating] = useState(rating);
   const ratingChanged = (newRating) => {

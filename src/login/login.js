@@ -6,7 +6,10 @@ import { deleteUser, saveUser } from "../reducers/user-reducer";
 import { signin } from "../services/auth-service";
 import User from "../models/user";
 
-//function to create login page
+/**
+ * Function to create the login page.
+ * Responsible for loging in already existing users.
+ */
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +31,9 @@ const Login = () => {
     });
   };
 
+  /**
+   * logs in the user to the website.
+   */
   const makeLogin = async (e) => {
     e.preventDefault();
     try {
@@ -87,8 +93,7 @@ const Login = () => {
         >
           Sign In
         </Button>
-        <div className="mt-3">
-        </div>
+        <div className="mt-3"></div>
       </form>
     </div>
   );

@@ -6,6 +6,9 @@ import {
 } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
+/**
+ * Responsible for taking in the normal user's review.
+ */
 const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
   const [review, setReview] = useState(
@@ -16,6 +19,9 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
     }
   );
 
+  /**
+   * Save reviews on submit.
+   */
   const submitReview = async (e) => {
     e.preventDefault();
     if (reviewItem) {
@@ -33,6 +39,9 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
     return false;
   };
 
+  /**
+   * Handles changes in the ratings.
+   */
   const updateRating = (rating) => {
     editHandler("reviewRating", rating);
   };

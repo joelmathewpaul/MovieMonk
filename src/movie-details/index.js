@@ -17,6 +17,10 @@ import {
 } from "../services/watchlist-service";
 import { formatCurrency } from "../utils";
 
+/**
+ * Responsible for handling the movies in the website.
+ * To manage the list of movie details.
+ */
 const MovieDetails = () => {
   const user = useSelector((state) => state.user);
   const { pathname } = useLocation();
@@ -43,6 +47,9 @@ const MovieDetails = () => {
     });
   };
 
+  /**
+   * Add and remove movies from watchlist.
+   */
   const toggleWatchlist = async () => {
     if (user) {
       await toggleMovieInWatchlist(user.id, movie.id, movie);
@@ -52,6 +59,9 @@ const MovieDetails = () => {
     }
   };
 
+  /**
+   * Check if the movie is already in the watchlist.
+   */
   const checkMovieIsInWatchList = () => {
     if (user) {
       isMovieInWatchlist(user.id, movieId).then((watchlist) => {
