@@ -6,9 +6,12 @@ import MovieGenreList from "../movie-genre-list";
 import { useEffect, useState } from "react";
 import Movie from '../models/movie';
 import links from '../main-navigation/categories.json';
+import { useSelector } from "react-redux";
+import MyWatchlist from "../user-profile/my-watchlist";
 
 const Home = () => {
 
+  const user = useSelector(state => state.user);
   const { pathname } = useLocation();
   let genre = pathname;
   if (genre.charAt(0) == "/") {
@@ -61,6 +64,17 @@ const Home = () => {
             <Navigation />
           </div>
           <div className="col-md-9 pt-3 pb-3 bg-light">
+            {
+              !!user && (
+                <>
+                  <h5 className="fw-bold mb-3 text-capitalize">
+                    My Watchlist <small className="text-muted ps-2"><i className="fa fa-arrow-right" ></i></small>
+                  </h5>
+                  <MyWatchlist user={user} />
+                  <div className="mb-4" />
+                </>
+              )
+            }
             {
               !!genre && <MovieGenreList movieList={movies} genre={genre} />
             }
