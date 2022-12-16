@@ -39,7 +39,7 @@ const MovieDetails = () => {
   };
 
   const addToMyWatchlist = async () => {
-    await toggleMovieInWatchlist(user.id, movie.id);
+    await toggleMovieInWatchlist(user.id, movie.id, movie);
   };
 
   useEffect(() => {

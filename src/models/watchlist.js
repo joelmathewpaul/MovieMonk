@@ -1,9 +1,10 @@
 export default class Watchlist {
-  constructor(id, addedBy, movieId, addTime) {
+  constructor(id, addedBy, movieId, addTime, movie) {
     this.id = id;
     this.addedBy = addedBy;
     this.movieId = movieId;
     this.addTime = addTime;
+    this.movie = movie;
   }
 
   static getListFromJsonArray(results) {
@@ -13,7 +14,8 @@ export default class Watchlist {
         res._id,
         res.addedBy,
         res.movieId,
-        res.addTime
+        res.addTime,
+        res.movie
       );
       vals.push(watchlist);
     });

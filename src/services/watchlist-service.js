@@ -12,8 +12,11 @@ export const fetchAllMoviesInWatchlist = async (uId) => {
   return watchlist.data;
 };
 
-export const toggleMovieInWatchlist = async (uId, mId) => {
-  const watchlist = await api.post(`${API_BASE}/watchlist/${uId}/${mId}`);
+export const toggleMovieInWatchlist = async (uId, mId, movie) => {
+  const watchlist = await api.post(
+    `${API_BASE}/watchlist/${uId}/${mId}`,
+    movie
+  );
   return watchlist.data;
 };
 
