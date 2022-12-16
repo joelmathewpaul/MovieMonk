@@ -25,7 +25,7 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
   const submitReview = async (e) => {
     e.preventDefault();
     if (reviewItem) {
-      const retReview = await updateReviewById(reviewItem.id);
+      const retReview = await updateReviewById(reviewItem.id, review);
       if (typeof onSave === "function") {
         onSave(retReview);
       }
