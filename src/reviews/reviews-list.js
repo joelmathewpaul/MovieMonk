@@ -1,6 +1,6 @@
 import ReviewListItem from "./reviews-list-item";
 
-const ReviewList = ({ reviewList = [], onUpdate, onDelete }) => {
+const ReviewList = ({ reviewList = [], onUpdate, onDelete, isAdmin }) => {
   return (
     <ul className="list-group">
       {reviewList.map((review) => (
@@ -9,6 +9,7 @@ const ReviewList = ({ reviewList = [], onUpdate, onDelete }) => {
           reviewListItem={review}
           onUpdate={onUpdate}
           onDelete={onDelete}
+          isAdmin={isAdmin}
         />
       ))}
       {reviewList.length === 0 && (
