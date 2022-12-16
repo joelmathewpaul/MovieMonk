@@ -63,7 +63,7 @@ const UserReviewsForm = ({ movieId, onSave, reviewItem }) => {
         <fieldset>
           <div className="form-group">
             <input
-              placeholder="Add Headline"
+              placeholder="Review headline"
               className="form-control mt-3"
               value={review.reviewTitle}
               onChange={(e) => editHandler("reviewTitle", e.target.value)}

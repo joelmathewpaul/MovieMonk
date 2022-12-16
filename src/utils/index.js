@@ -5,6 +5,6 @@
  */
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const formattedDate = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
+  const formattedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
   return formattedDate;
 };

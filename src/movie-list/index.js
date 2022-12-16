@@ -6,7 +6,7 @@ import MovieListItem from "./movie-list-item";
  * represents a movie list displayed as slideshow on the screen.
  * @constructor
  */
-const MovieList = ({ movieList = [] }) => {
+const MovieList = ({ movieList = [], onDelete }) => {
 
     return (
         <div className="row g-3">
@@ -14,7 +14,7 @@ const MovieList = ({ movieList = [] }) => {
                 movieList.map((movie, index) => {
                     return (
                         <div key={`${movie.id}-${index}`} className="col-md-6 col-xl-4 mt-3">
-                            <MovieListItem movie={movie} />
+                            <MovieListItem movie={movie} onDelete={onDelete} />
                         </div>
                     )
                 })
