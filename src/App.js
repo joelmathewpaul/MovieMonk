@@ -11,6 +11,7 @@ import { saveUser } from "./reducers/user-reducer";
 import Profile from "./user-profile";
 import User from "./models/user";
 import ReadOnlyUserInfo from "./user-profile/read-only-information";
+import Moderation from "./moderation";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
             element={<ReadOnlyUserInfo />}
           />
           <Route path="/*" element={<Home />} />
+          <Route path="/admin/dashboard" element={<Moderation />} />
         </Routes>
       </div>
     </BrowserRouter>
