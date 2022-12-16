@@ -14,7 +14,7 @@ const Home = () => {
   const user = useSelector(state => state.user);
   const { pathname } = useLocation();
   let genre = pathname;
-  if (genre.charAt(0) == "/") {
+  if (genre.charAt(0) === "/") {
     genre = genre.substring(1);
   }
   const [movies, setMovies] = useState([]);
