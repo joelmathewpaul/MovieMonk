@@ -11,6 +11,7 @@ import UserInfo from "./user-information";
 import User from "../models/user";
 import UserFollowing from "./user-following";
 import MyWatchlist from "./my-watchlist";
+import { updateUser } from "../services/user-service";
 
 /**
  * Profile Component to show the current profile page of the user that includes account information, followers, following, movie reviews etc.
@@ -32,6 +33,11 @@ const Profile = () => {
             navigate("/login");
         });
     }, []);
+
+    const onSaveProfile = async (profile) => {
+        await updateUser(profile);
+        dispatch(saveUser(profile));
+    }
 
     return (
         !loading && (
@@ -66,7 +72,7 @@ const Profile = () => {
                             </div>
                             <div className="col-md-9 p-3 bg-light">
                                 <Routes>
-                                    <Route exact path="/" element={<UserInfo user={user} />} />
+                                    <Route exact path="/" element={<UserInfo user={user} onSave={onSaveProfile} />} />
                                     <Route exact path="/my-reviews" element={<MyReviews user={user} />} />
                                     <Route exact path="/my-watchlist" element={<MyWatchlist user={user} />} />
                                     <Route exact path="/followers" element={<UserFollowers user={user} />} />

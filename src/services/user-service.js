@@ -42,7 +42,7 @@ export const getUserById = async (userid) => {
  * @returns User object
  */
 export const updateUser = async (user) => {
-  const response = await api.put(`${USER_API}/${user._id}`, user);
+  const response = await api.put(`${USER_API}/${user.id}`, user);
   return response.data;
 };
 

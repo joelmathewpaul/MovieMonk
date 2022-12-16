@@ -4,7 +4,7 @@ import { formatDate } from "../utils";
 /**
  * Component with user information to be displayed on the profile page including the edit-profile part.
  */
-const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
+const UserInfo = ({ user, onSave }) => {
   const [profile, setProfile] = useState(user);
   const [edit, setEdit] = useState(false);
 
@@ -19,12 +19,14 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
 
   const saveProfile = () => {
     setEdit(false);
-    onSave(profile);
+    if (onSave && typeof onSave === 'function') {
+      onSave(profile);
+    }
   };
 
   const cancelProfile = () => {
     setEdit(false);
-    onCancel();
+    setProfile(user);
   };
 
   return (
@@ -43,12 +45,10 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
         </h6>
         <div className={"row"}>
           <div className={"col-3"}>
-            {edit && (
-              <h6 className="m-0 pe-3  pb-3">
-                <i className="text-success fa-solid fa-user " />
-                &nbsp;Name{" "}
-              </h6>
-            )}
+            <h6 className="m-0 pe-3  pb-3">
+              <i className="text-success fa-solid fa-user " />
+              &nbsp;Name{" "}
+            </h6>
           </div>
           <div className={"col-4 border-start"}>
             {edit && (
@@ -56,11 +56,15 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
-                  placeholder={user.name}
-                  value={user.name}
+                  placeholder="Enter your name"
+                  value={profile.name}
                   onChange={(e) => editHandler("name", e.target.value)}
                 />
+              </h6>
+            )}
+            {!edit && (
+              <h6 className="m-0 pe-3  pb-3">
+                {user.name}
               </h6>
             )}
           </div>
@@ -79,10 +83,9 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
             {edit && (
               <h6 className="m-0 pe-3  pb-3">
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
-                  id="password"
-                  placeholder={user.password}
+                  value={profile.password}
                   onChange={(e) => editHandler("password", e.target.value)}
                 />
               </h6>
@@ -98,7 +101,20 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
             </h6>
           </div>
           <div className={"col-4 border-start"}>
-            <h6 className="m-0 pe-3  pb-3">{user.email}</h6>
+            {edit && (
+              <h6 className="m-0 pe-3  pb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="email@example.com"
+                  value={profile.email}
+                  onChange={(e) => editHandler("email", e.target.value)}
+                />
+              </h6>
+            )}
+            {!edit && (
+              <h6 className="m-0 pe-3  pb-3">{user.email}</h6>
+            )}
           </div>
         </div>
 
@@ -110,19 +126,18 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
             </h6>
           </div>
           <div className={"col-4 border-start"}>
-            <h6 className="m-0 pe-3  pb-3">
+            <h6 className="m-0 pe-3 pb-3">
               {edit && (
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
-                  id="bio"
-                  placeholder={user.dob}
+                  value={formatDate(profile.dob)}
                   onChange={(e) => editHandler("dob", e.target.value)}
                 />
               )}
               {!edit && (
                 <span>
-                  {user.dob || (
+                  {formatDate(user.dob) || (
                     <span className="small fst-italic">No date of birth</span>
                   )}
                 </span>
@@ -144,8 +159,8 @@ const UserInfo = ({ user, onCancel = () => { }, onSave = () => { } }) => {
                 <input
                   type="text"
                   className="form-control"
-                  id="bio"
-                  placeholder={user.biography}
+                  placeholder="Enter your bio"
+                  value={profile.biography}
                   onChange={(e) => editHandler("biography", e.target.value)}
                 />
               )}
