@@ -10,7 +10,9 @@ import User from "../models/user";
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userCred, setUserCred] = useState({});
+  const [userCred, setUserCred] = useState({
+    accountType: 'NORMAL',
+  });
   const setName = (e) => {
     setUserCred((userCred) => {
       return {
@@ -49,7 +51,6 @@ const Register = () => {
 
   const setAccountType = (e) => {
     setUserCred((userCred) => {
-      console.log(e.target.value);
       return {
         ...userCred,
         accountType: e.target.value,
@@ -151,23 +152,22 @@ const Register = () => {
             </label>
           </div>
         </div>
-        <br/>
-        <div className="input-group mt-2 mb-4 align-content-center">
-          <p className="text-white">User Type:</p>
+        <div className="input-group mt-4 mb-4 align-items-center">
+          <div className="m-0 text-white">User Type:</div>
           <div className="form-check">
-              <div className="btn-group">
-                <input type="radio" className="btn-check" name="options" id="option1"
-                       onChange={setAccountType} value="NORMAL"/>
-                <label htmlFor="option1" className="btn btn-secondary ">Normal</label>
+            <div className="btn-group">
+              <input type="radio" className="btn-check" name="options" id="option1"
+                onChange={setAccountType} value="NORMAL" checked={userCred.accountType === 'NORMAL'} />
+              <label htmlFor="option1" className="btn btn-secondary ">Normal</label>
 
-                <input type="radio" className="btn-check" name="options" id="option2"
-                       onChange={setAccountType} value="CRITIC"/>
-                <label htmlFor="option2" className="btn btn-secondary">Critic</label>
+              <input type="radio" className="btn-check" name="options" id="option2"
+                onChange={setAccountType} value="CRITIC" checked={userCred.accountType === 'CRITIC'} />
+              <label htmlFor="option2" className="btn btn-secondary">Critic</label>
 
-                <input type="radio" className="btn-check" name="options" id="option3"
-                       onChange={setAccountType} value="ADMIN"/>
-                <label htmlFor="option3" className="btn btn-secondary">Admin</label>
-              </div>
+              <input type="radio" className="btn-check" name="options" id="option3"
+                onChange={setAccountType} value="ADMIN" checked={userCred.accountType === 'ADMIN'} />
+              <label htmlFor="option3" className="btn btn-secondary">Admin</label>
+            </div>
           </div>
         </div>
         <Button
@@ -178,8 +178,8 @@ const Register = () => {
         >
           Sign Up
         </Button>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 export default Register;
