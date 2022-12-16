@@ -11,7 +11,10 @@ import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
 import { useSelector } from "react-redux";
 import CriticUserReviewForm from "../reviews/critic-review-form";
-import { toggleMovieInWatchlist } from "../services/watchlist-service";
+import {
+  isMovieInWatchlist,
+  toggleMovieInWatchlist,
+} from "../services/watchlist-service";
 
 const MovieDetails = () => {
   const user = useSelector((state) => state.user);
@@ -23,6 +26,7 @@ const MovieDetails = () => {
   const [criticUserReview, setCriticUserReview] = useState([]);
   const [show, setShow] = useState(false);
   const [editedReview, setEditReview] = useState();
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
   const movieId = pathname.split("/")[2];
 
   const downloadReviews = () => {
@@ -38,7 +42,7 @@ const MovieDetails = () => {
     });
   };
 
-  const addToMyWatchlist = async () => {
+  const toggleWatchlist = async () => {
     await toggleMovieInWatchlist(user.id, movie.id, movie);
   };
 
@@ -57,6 +61,13 @@ const MovieDetails = () => {
           setSimilarMovies(moviesList);
         });
         downloadReviews();
+        isMovieInWatchlist(user.id, movieId).then((watchlist) => {
+          if (watchlist.length > 0) {
+            setIsInWatchlist(true);
+          } else {
+            setIsInWatchlist(false);
+          }
+        });
       })
       .catch((err) => {
         // Cannot fetch details of that movie, navigate to home
@@ -161,13 +172,24 @@ const MovieDetails = () => {
                   );
                 })}
             </p>
-            <button
-              className="btn btn-success rounded-pill mt-3"
-              onClick={addToMyWatchlist}
-            >
-              <i className="fa fa-list"></i>{" "}
-              <span className="ps-2">Add to my watchlist</span>
-            </button>
+            {!isInWatchlist && (
+              <button
+                className="btn btn-success rounded-pill mt-3"
+                onClick={toggleWatchlist}
+              >
+                <i className="fa fa-list"></i>{" "}
+                <span className="ps-2">Add to my watchlist</span>
+              </button>
+            )}
+            {isInWatchlist && (
+              <button
+                className="btn btn-danger rounded-pill mt-3"
+                onClick={toggleWatchlist}
+              >
+                <i className="fa fa-times"></i>{" "}
+                <span className="ps-2">Remove from watchlist</span>
+              </button>
+            )}
           </div>
         </div>
         <div className="row mt-4 bg-light">
