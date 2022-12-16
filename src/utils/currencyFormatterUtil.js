@@ -1,1 +1,2 @@
-const currencyFormatter = (currency) => {};
+const CurrencyFormatter = (currency) => {};
+export default CurrencyFormatter;
