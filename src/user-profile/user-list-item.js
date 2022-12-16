@@ -23,8 +23,8 @@ const UserListItem = ({ userListItem, onDelete }) => {
         />
         <div className="flex-fill flex-column pt-2">
           <p className="m-0">{userListItem.name}</p>
-          <p className="m-0">User Type : {userListItem.accountType}</p>
-          <p className="m-0">{formatDate(userListItem.joined)}</p>
+          <p className="m-0 text-muted">User Type : {userListItem.accountType}</p>
+          <p className="m-0 text-muted">Joined: {formatDate(userListItem.joined)}</p>
         </div>
         <i
           className="fa fa-trash pointer text-danger pe-2 pt-1"
