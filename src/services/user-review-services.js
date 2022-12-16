@@ -84,3 +84,13 @@ export const deleteReviewByID = async (rId) => {
   const response = await api.delete(`${API_BASE}/movie/reviews/${rId}`);
   return response.data;
 };
+
+/**
+ * Returns the rating counr for movies.
+ * @param {*} mId  The movie id
+ * @returns The rating count
+ */
+export const getRatingCount = async (mId) => {
+  const response = await api.get(`${API_BASE}/movie/reviews/${mId}/count`);
+  return response.data;
+};

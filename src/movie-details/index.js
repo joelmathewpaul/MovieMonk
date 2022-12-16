@@ -6,7 +6,7 @@ import Movie from "../models/movie";
 import MovieGenreList from "../movie-genre-list";
 import Modal from "react-bootstrap/Modal";
 import UserReviewsForm from "../reviews/user-reviews-form";
-import { findReviewByMovieIdAndType } from "../services/user-review-services";
+import { findReviewByMovieIdAndType, getRatingCount } from "../services/user-review-services";
 import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
 import { useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import {
   toggleMovieInWatchlist,
 } from "../services/watchlist-service";
 import { formatCurrency } from "../utils";
+import StarComponent from "../star-component/star-component";
 
 /**
  * Responsible for handling the movies in the website.
@@ -26,6 +27,7 @@ const MovieDetails = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [movie, setMovie] = useState({});
+  const [ratingCount, setRatingCount] = useState(0);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [normalUserReview, setNormalReview] = useState([]);
   const [criticUserReview, setCriticUserReview] = useState([]);
@@ -44,6 +46,9 @@ const MovieDetails = () => {
     findReviewByMovieIdAndType(movieId, "CRITIC").then((res) => {
       const resArr = Review.getListFromJsonArray(res);
       setCriticUserReview(resArr);
+    });
+    getRatingCount(movieId).then(r => {
+      setRatingCount(r.rating);
     });
   };
 
@@ -162,11 +167,12 @@ const MovieDetails = () => {
                   <p className="m-0 pe-3 text-muted">
                     <small>Release: {movie.releaseDate}</small>
                   </p>
-                  <p className="m-0 pe-3 text-muted">
-                    <small>
-                      <i className="fa-solid text-warning fa-star pe-1" /> 4
-                    </small>
-                  </p>
+                  <div className="d-flex flex-row align-items-center m-0 pe-3 text-muted">
+                    <div>
+                      <StarComponent rating={ratingCount} disabled={true} />
+                    </div>
+                    <span className="ps-3 pe-3">({ratingCount.toFixed(1)})</span>
+                  </div>
                   <p className="m-0 pe-3 text-muted">
                     <small>IMDB Votes: {movie.voteCount}</small>
                   </p>

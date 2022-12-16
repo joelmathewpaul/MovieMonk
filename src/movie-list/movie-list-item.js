@@ -48,7 +48,8 @@ const MovieListItem = ({ movie, onDelete }) => {
             </p>
             <p className="m-0 text-muted">
               <small>
-                <i className="fa-solid text-warning fa-star pe-1" /> 4
+                {/* <i className="fa-solid text-warning fa-star pe-1" /> 4 */}
+                &nbsp;
               </small>
             </p>
             <div className="mt-2">
