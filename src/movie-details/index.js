@@ -11,6 +11,7 @@ import Review from "../models/review";
 import ReviewList from "../reviews/reviews-list";
 import { useSelector } from "react-redux";
 import CriticUserReviewForm from "../reviews/critic-review-form";
+import { toggleMovieInWatchlist } from "../services/watchlist-service";
 
 const MovieDetails = () => {
   const user = useSelector((state) => state.user);
@@ -35,7 +36,11 @@ const MovieDetails = () => {
       const resArr = Review.getListFromJsonArray(res);
       setCriticUserReview(resArr);
     });
-  }
+  };
+
+  const addToMyWatchlist = async () => {
+    await toggleMovieInWatchlist(user.id, movie.id, movie);
+  };
 
   useEffect(() => {
     movieService
@@ -156,7 +161,10 @@ const MovieDetails = () => {
                   );
                 })}
             </p>
-            <button className="btn btn-success rounded-pill mt-3">
+            <button
+              className="btn btn-success rounded-pill mt-3"
+              onClick={addToMyWatchlist}
+            >
               <i className="fa fa-list"></i>{" "}
               <span className="ps-2">Add to my watchlist</span>
             </button>
