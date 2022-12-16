@@ -28,6 +28,7 @@ const UserListItem = ({ userListItem, onDelete }) => {
         </div>
         <i
           className="fa fa-trash pointer text-danger pe-2 pt-1"
+          title="Delete User"
           onClick={deleteUser}
         ></i>
       </div>

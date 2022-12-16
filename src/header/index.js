@@ -4,6 +4,7 @@ import { ButtonGroup, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../services/auth-service";
 import { deleteUser } from "../reducers/user-reducer";
+import Moderation from "../moderation";
 
 const Header = () => {
   const { search } = useLocation();
@@ -20,6 +21,10 @@ const Header = () => {
       navigate(`/search?query=${query}`);
     }
     return false;
+  };
+
+  const adminPanel = () => {
+    navigate("/admin/dashboard");
   };
 
   const signOutUser = async (e) => {
@@ -69,6 +74,15 @@ const Header = () => {
                   <Link className="dropdown-item" to="/profile">
                     My Profile
                   </Link>
+                  {user && user.accountType === "ADMIN" && (
+                    <Link
+                      className="dropdown-item"
+                      to="/admin/dashboard"
+                      onClick={adminPanel}
+                    >
+                      Admin Dashboard
+                    </Link>
+                  )}
                   <Link
                     className="dropdown-item"
                     to="/signout"
