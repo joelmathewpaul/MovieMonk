@@ -107,7 +107,7 @@ const CriticUserReviewForm = ({ movieId, onSave, reviewItem }) => {
           <div className="form-group">
             <input
               id="reviewHeadLine"
-              placeholder="Headline"
+              placeholder="Review headline"
               className="form-control mt-4 mb-2"
               value={review.reviewTitle}
               onChange={(e) => editHandler("reviewTitle", e.target.value)}
