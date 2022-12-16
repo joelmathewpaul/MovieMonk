@@ -5,18 +5,20 @@ import Review from "../models/review";
 
 const UserReviewModerationList = () => {
   const [allReviews, setAllReviews] = useState([]);
-  const onDelete = () => {
+
+  const refresh = () => {
     findAllReviews().then((reviews) => {
       const list = Review.getListFromJsonArray(reviews);
       setAllReviews(list);
     });
   };
 
+  const onDelete = () => {
+    refresh();
+  };
+
   useEffect(() => {
-    findAllReviews().then((reviews) => {
-      const list = Review.getListFromJsonArray(reviews);
-      setAllReviews(list);
-    });
+    refresh();
   }, []);
 
   return (
