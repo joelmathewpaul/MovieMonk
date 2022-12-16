@@ -6,7 +6,6 @@ import { getUserById } from "../services/user-service";
 import { formatDate } from "../utils";
 import {useSelector} from "react-redux";
 import {addFollowing, deleteFollowing, findAllFollowing} from "../services/follow-service";
-import {getProfile} from "../services/auth-service";
 
 const ReadOnlyUserInfo = () => {
   const navigate = useNavigate();
@@ -19,19 +18,18 @@ const ReadOnlyUserInfo = () => {
   const addFollowingOnClick = async () => {
     await addFollowing(loggedInUser.id, user.id);
     setIsFollowing(true);
-    await getProfile();
+
   }
 
 
   const deleteFollowingOnClick = async () => {
     await deleteFollowing(loggedInUser.id, user.id);
     setIsFollowing(false);
-    await getProfile();
   }
 
   useEffect(() => {
     const paths = pathname.split("/");
-    console.log(paths);
+
     if (paths.length === 3) {
       const uid = paths[2];
       getUserById(uid).then(dbUser => {
