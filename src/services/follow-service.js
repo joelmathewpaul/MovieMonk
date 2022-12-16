@@ -3,8 +3,8 @@ const API_BASE = process.env.REACT_APP_API_BASES;
 const USER_API = `${API_BASE}/user`;
 
 const api = axios.create({
-                             withCredentials: true
-                         });
+    withCredentials: true
+});
 
 
 export const findAllFollowers = async (userId) => {
@@ -17,13 +17,12 @@ export const findAllFollowing = async (userId) => {
     return response.data
 }
 
-export const addFollowing = async (userId,followingId) => {
+export const addFollowing = async (userId, followingId) => {
     const response = await api.post(`${USER_API}/${userId}/follows/${followingId}`);
     return response.data
 }
 
-export const deleteFollowing = async (userId,followingId) => {
-    console.log(userId,followingId);
+export const deleteFollowing = async (userId, followingId) => {
     const response = await api.delete(`${USER_API}/${userId}/unfollows/${followingId}`);
     return response.data
 }
