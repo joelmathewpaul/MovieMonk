@@ -1,22 +1,27 @@
-import {useEffect, useState} from "react";
-import {findAllFollowing} from "../services/follow-service";
+import { useEffect, useState } from "react";
+import { findAllFollowing } from "../services/follow-service";
 import FollowList from "../follow-list";
 
-const UserFollowing = ({user}) => {
+const UserFollowing = ({ user }) => {
 
     const [following, setFollowing] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const findFollowings = () => {
+        if (user.id) {
+            findAllFollowing(user.id).then(res => {
+                setFollowing(res);
+                setLoading(false);
+            });
+        }
+    }
 
     useEffect(() => {
-        // console.log(user)
-        if (user.id){
-             findAllFollowing(user.id).then(res => {
-                setFollowing(res);
-            })
-        }}, [user]);
+        findAllFollowing();
+    }, [user]);
 
-    return <div>
-        <FollowList followList={following} cancelRequired={true}/>
-    </div>
+    return !loading &&
+        <FollowList followList={following} cancelRequired={true} onCancel={findFollowings} />
 }
 
 

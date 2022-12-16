@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { deleteFollowing } from "../services/follow-service";
 import { useSelector } from "react-redux";
 
-const FollowListItem = ({ followUser, cancelRequired }) => {
+const FollowListItem = ({ followUser, cancelRequired, onCancel }) => {
 
     const navigate = useNavigate();
     const profileUser = useSelector(state => state.user);
@@ -14,6 +14,9 @@ const FollowListItem = ({ followUser, cancelRequired }) => {
             e.stopPropagation();
         }
         await deleteFollowing(profileUser.id, followUser._id);
+        if (onCancel && typeof onCancel === 'function') {
+            onCancel();
+        }
     }
 
     return (

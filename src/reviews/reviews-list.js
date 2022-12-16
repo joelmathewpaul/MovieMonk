@@ -11,6 +11,11 @@ const ReviewList = ({ reviewList = [], onUpdate, onDelete }) => {
           onDelete={onDelete}
         />
       ))}
+      {reviewList.length === 0 && (
+        <small className="text-muted">
+          No reviews exists yet, once added it will appear here.
+        </small>
+      )}
     </ul>
   );
 };

@@ -183,18 +183,11 @@ const MovieDetails = () => {
                 </div>
               )}
             </div>
-            {criticUserReview.length > 0 && (
-              <ReviewList
-                reviewList={criticUserReview}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-              />
-            )}
-            {criticUserReview.length === 0 && (
-              <small className="text-muted">
-                No critic reviews exists yet, once added it will appear here.
-              </small>
-            )}
+            <ReviewList
+              reviewList={criticUserReview}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+            />
           </div>
           <div className="col-6 p-3">
             <div className="d-flex flex-row">
@@ -215,18 +208,11 @@ const MovieDetails = () => {
                 </div>
               )}
             </div>
-            {normalUserReview.length > 0 && (
-              <ReviewList
-                reviewList={normalUserReview}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-              />
-            )}
-            {normalUserReview.length === 0 && (
-              <small className="text-muted">
-                No user reviews exists yet, once added it will appear here.
-              </small>
-            )}
+            <ReviewList
+              reviewList={normalUserReview}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+            />
           </div>
         </div>
         <div className="row">
