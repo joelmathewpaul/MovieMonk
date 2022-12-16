@@ -48,13 +48,15 @@ const MovieDetails = () => {
   };
 
   const checkMovieIsInWatchList = () => {
-    isMovieInWatchlist(user.id, movieId).then((watchlist) => {
-      if (watchlist.length > 0) {
-        setIsInWatchlist(true);
-      } else {
-        setIsInWatchlist(false);
-      }
-    });
+    if (user) {
+      isMovieInWatchlist(user.id, movieId).then((watchlist) => {
+        if (watchlist.length > 0) {
+          setIsInWatchlist(true);
+        } else {
+          setIsInWatchlist(false);
+        }
+      });
+    }
   }
 
   useEffect(() => {
