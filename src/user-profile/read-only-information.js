@@ -74,31 +74,36 @@ const ReadOnlyUserInfo = () => {
               }}>
 
               </div>
-              <div className="d-flex flex-row pull-det-up">
-                <div className="ms-4 card-imgs user-thumb">
-                  <img src={user.profilePhoto} alt="User Profile" />
-                </div>
-
-                <div className="ps-4">
-                  <h4 className="text-white fw-bold">{user.name}</h4>
-                  <div className="d-flex flex-row text-white">
-                    <p className="pe-4">Followers: {user.followersCount}</p>
-                    <p className="pe-4">Following: {user.followingCount}</p>
+              <div className="position-relative">
+                <div className="d-flex flex-row pull-det-up w-100">
+                  <div className="ms-4 card-imgs user-thumb">
+                    <img src={user.profilePhoto} alt="User Profile" />
                   </div>
-                </div>
-                {
-                  !isFollowing &&
-                  (<div className="flex-fill justify-content-end">
-                    <button type="button" className="btn btn-success rounded-pill" onClick={addFollowingOnClick}>Follow</button>
-                  </div>)
-                }
 
-                {
-                  isFollowing &&
-                  (<div className="flex-fill justify-content-end">
-                    <button type="button" className="btn btn-success rounded-pill" onClick={deleteFollowingOnClick}>Unfollow</button>
-                  </div>)
-                }
+                  <div className="ps-4">
+                    <h4 className="text-white fw-bold">{user.name}</h4>
+                    <div className="d-flex flex-row text-white">
+                      <p className="pe-4">Followers: {user.followersCount}</p>
+                      <p className="pe-4">Following: {user.followingCount}</p>
+                    </div>
+                  </div>
+                  {
+                    !isFollowing &&
+                    (<div className="flex-fill text-end me-4">
+                      <button type="button" className="btn btn-success rounded-pill" onClick={addFollowingOnClick}>
+                        <i className="fa fa-check"></i>
+                        <span className="ps-2">Follow</span>
+                      </button>
+                    </div>)
+                  }
+
+                  {
+                    isFollowing &&
+                    (<div className="flex-fill text-end me-4">
+                      <button type="button" className="btn btn-danger rounded-pill" onClick={deleteFollowingOnClick}>Unfollow</button>
+                    </div>)
+                  }
+                </div>
               </div>
             </div>
           </div>
