@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { deleteUser, saveUser } from "../reducers/user-reducer";
+import { signin } from "../services/auth-service";
+import User from "../models/user";
 
-//function to create login page
+/**
+ * Function to create the login page.
+ * Responsible for loging in already existing users.
+ */
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userCred, setUserCred] = useState({});
   const setEmail = (e) => {
     setUserCred((userCred) => {
@@ -21,9 +31,20 @@ const Login = () => {
     });
   };
 
-  const makeLogin = (e) => {
+  /**
+   * logs in the user to the website.
+   */
+  const makeLogin = async (e) => {
     e.preventDefault();
-    //function to check if the credentials provided are valid and proceed with login
+    try {
+      const dbUser = await signin(userCred);
+      const modelUser = User.getUserDetails(dbUser);
+      dispatch(saveUser(modelUser));
+      navigate("/");
+    } catch (error) {
+      dispatch(deleteUser());
+      alert(error.message);
+    }
     return false;
   };
 
@@ -39,10 +60,10 @@ const Login = () => {
               value={userCred.email}
               type="email"
               className="form-control rounded-pill"
-              id="floatingInput"
+              id="loginfloatingInput"
               placeholder="name@example.com"
             />
-            <label htmlFor="floatingInput" className="text-muted">
+            <label htmlFor="loginfloatingInput" className="text-muted">
               <i className="fa fa-user p-2"></i>Email
             </label>
           </div>
@@ -56,10 +77,10 @@ const Login = () => {
               value={userCred.password}
               type="password"
               className="form-control rounded-pill"
-              id="floatingPassword"
+              id="loginfloatingPassword"
               placeholder="Password"
             />
-            <label htmlFor="floatingPassword" className="text-muted">
+            <label htmlFor="loginfloatingPassword" className="text-muted">
               <i className="fa fa-lock p-2"></i>Password
             </label>
           </div>
@@ -72,11 +93,7 @@ const Login = () => {
         >
           Sign In
         </Button>
-        <div className="mt-3">
-          <a href="#" className="text-white">
-            Forgot Password?
-          </a>
-        </div>
+        <div className="mt-3"></div>
       </form>
     </div>
   );

@@ -1,0 +1,64 @@
+[
+  {
+    "label": "Home",
+    "icon": "fa-home",
+    "image": "../../images/action.png",
+    "path": "/"
+  },
+  {
+    "label": "Action",
+    "icon": "fa-home",
+    "image": "../../images/action.png",
+    "path": "/action",
+    "id": "28"
+  },
+  {
+    "label": "Horror",
+    "icon": "fa-home",
+    "image": "../../images/horror.png",
+    "path": "/horror",
+    "id": "27"
+  },
+  {
+    "label": "Thriller",
+    "icon": "fa-home",
+    "image": "../../images/thriller.png",
+    "path": "/thriller",
+    "id": "53"
+  },
+  {
+    "label": "Fantasy",
+    "icon": "fa-home",
+    "image": "../../images/fiction.png",
+    "path": "/fantasy",
+    "id": "14"
+  },
+  {
+    "label": "Family",
+    "icon": "fa-home",
+    "image": "../../images/family.png",
+    "path": "/family",
+    "id": "10751"
+  },
+  {
+    "label": "Sci-Fi",
+    "icon": "fa-home",
+    "image": "../../images/sci-fi.png",
+    "path": "/sci-fi",
+    "id": "878"
+  },
+  {
+    "label": "Romance",
+    "icon": "fa-home",
+    "image": "../../images/romance.png",
+    "path": "/romance",
+    "id": "10749"
+  },
+  {
+    "label": "Kids",
+    "icon": "fa-home",
+    "image": "../../images/family.png",
+    "path": "/kids",
+    "id": "16"
+  }
+]
