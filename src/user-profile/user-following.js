@@ -17,7 +17,7 @@ const UserFollowing = ({ user }) => {
     }
 
     useEffect(() => {
-        findAllFollowing();
+        findFollowings();
     }, [user]);
 
     return !loading &&

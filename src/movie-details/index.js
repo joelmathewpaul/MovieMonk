@@ -24,14 +24,14 @@ const MovieDetails = () => {
   const [editedReview, setEditReview] = useState();
   const movieId = pathname.split("/")[2];
 
-  const downloadReviews = (movieModel) => {
+  const downloadReviews = () => {
     // Fetch the normal reviews
-    findReviewByMovieIdAndType(movieModel.id, "NORMAL").then((res) => {
+    findReviewByMovieIdAndType(movieId, "NORMAL").then((res) => {
       const resArr = Review.getListFromJsonArray(res);
       setNormalReview(resArr);
     });
     // Fetch the critic reviews
-    findReviewByMovieIdAndType(movieModel.id, "CRITIC").then((res) => {
+    findReviewByMovieIdAndType(movieId, "CRITIC").then((res) => {
       const resArr = Review.getListFromJsonArray(res);
       setCriticUserReview(resArr);
     });
@@ -51,7 +51,7 @@ const MovieDetails = () => {
           moviesList.length = 6;
           setSimilarMovies(moviesList);
         });
-        downloadReviews(movieModel);
+        downloadReviews();
       })
       .catch((err) => {
         // Cannot fetch details of that movie, navigate to home
