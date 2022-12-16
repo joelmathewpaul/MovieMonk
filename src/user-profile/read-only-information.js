@@ -18,6 +18,7 @@ const ReadOnlyUserInfo = () => {
   const addFollowingOnClick = async () => {
     await addFollowing(loggedInUser.id, user.id);
     setIsFollowing(true);
+
   }
 
 
@@ -43,6 +44,7 @@ const ReadOnlyUserInfo = () => {
 
   useEffect(() => {
     const paths = pathname.split("/");
+
     if (paths.length === 3) {
       const uid = paths[2];
       getUserById(uid).then(dbUser => {
