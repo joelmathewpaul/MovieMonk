@@ -12,14 +12,11 @@ const MyWatchlist = ({ user }) => {
       const list = Watchlist.getListFromJsonArray(result);
       list.forEach((l) => movies.push(l.movie));
       setWatchlist(movies);
-      console.log(movies);
     });
   }, [user]);
 
   return (
-    <div>
-      <MovieList MovieList={watchList} />
-    </div>
+    <MovieList movieList={watchList} />
   );
 };
 
