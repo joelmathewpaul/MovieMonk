@@ -1,16 +1,29 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-const MovieListItem = ({ movie }) => {
+const MovieListItem = ({ movie, onDelete }) => {
     const navigate = useNavigate();
     const onMovieItemClick = () => {
         let nameEncoded = movie.name.replace(/\s/g, "-").toLowerCase();
         navigate(`/movie/${movie.id}/${nameEncoded}`);
     }
 
+    const onDeleteClicked = (e) => {
+        e.stopPropagation();
+        if (onDelete && typeof onDelete === 'function') {
+            onDelete(movie);
+        }
+    }
+
+
     return (
         <div className="mv-card pt-3" title={movie.name} onClick={onMovieItemClick}>
             <div className="p-15 rounded-3">
+                {!!onDelete &&
+                    <div className="position-relative">
+                        <i className="position-absolute fa fa-times p-2 text-muted" title="Remove" style={{ right: -10 }} onClick={onDeleteClicked} />
+                    </div>
+                }
                 <div className="d-flex flex-row">
                     <div className="thumbnail-holder position-relative">
                         <div className="card-img position-absolute rounded-3">

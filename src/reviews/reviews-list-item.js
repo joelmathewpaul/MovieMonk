@@ -58,13 +58,13 @@ const ReviewListItem = ({ reviewListItem, onUpdate, onDelete, isAdmin }) => {
               <i
                 className="fa fa-edit pointer p-2 pt-3"
                 onClick={updateReview}
-                title="Edit Review"
+                title="Edit"
               />
             </div>
             <div>
               <i
                 className="fa fa-times pointer pt-3 ps-2"
-                title="Delete Review"
+                title="Delete"
                 onClick={deleteReview}
               />
             </div>
