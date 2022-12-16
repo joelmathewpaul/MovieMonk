@@ -1,3 +1,5 @@
-const UserReviewModerationList = () => {};
+const UserReviewModerationList = () => {
+  return <div></div>;
+};
 
 export default UserReviewModerationList;

@@ -18,6 +18,15 @@ export const createReview = async (newReview) => {
 };
 
 /**
+ * Responsible for geting all the reviews.
+ * @returns the complete collection of reviews.
+ */
+export const findAllReviews = async () => {
+  const response = await api.get(`${API_BASE}/admin/reviews`);
+  return response.data;
+};
+
+/**
  * Responsible for finding all the reviews for a particular movie.
  * @param {Number} mId passes in the id of the movie whos reviews are to be retreived.
  * @returns the retrieved reviews for the movie.
