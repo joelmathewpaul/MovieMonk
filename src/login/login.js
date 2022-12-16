@@ -88,9 +88,6 @@ const Login = () => {
           Sign In
         </Button>
         <div className="mt-3">
-          <a href="#" className="text-white">
-            Forgot Password?
-          </a>
         </div>
       </form>
     </div>
