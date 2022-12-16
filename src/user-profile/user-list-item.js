@@ -1,9 +1,19 @@
+import { deletUserById } from "../services/user-service";
 import { formatDate } from "../utils";
 
-const UserListItem = ({ userListItem }) => {
+const UserListItem = ({ userListItem, onDelete }) => {
+  const deleteUser = () => {
+    const id = userListItem.id;
+    deletUserById(id).then((resposnse) => {
+      if (onDelete && onDelete === "function") {
+        onDelete();
+      }
+    });
+  };
+
   return (
-    <li className="list-group-item">
-      <div className="d-flex flex-row">
+    <li className="list-group-item ">
+      <div className="d-flex flex-row p-1">
         <img
           src={userListItem ? userListItem.profilePhoto : ""}
           width={48}
@@ -16,6 +26,10 @@ const UserListItem = ({ userListItem }) => {
           <p className="m-0">User Type : {userListItem.accountType}</p>
           <p className="m-0">{formatDate(userListItem.joined)}</p>
         </div>
+        <i
+          className="fa fa-trash pointer text-danger pe-2 pt-1"
+          onClick={deleteUser}
+        ></i>
       </div>
     </li>
   );
