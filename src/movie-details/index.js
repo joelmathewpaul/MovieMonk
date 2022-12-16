@@ -43,8 +43,12 @@ const MovieDetails = () => {
   };
 
   const toggleWatchlist = async () => {
-    await toggleMovieInWatchlist(user.id, movie.id, movie);
-    checkMovieIsInWatchList();
+    if (user) {
+      await toggleMovieInWatchlist(user.id, movie.id, movie);
+      checkMovieIsInWatchList();
+    } else {
+      handleShow();
+    }
   };
 
   const checkMovieIsInWatchList = () => {
@@ -104,7 +108,7 @@ const MovieDetails = () => {
       <Header />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add your review</Modal.Title>
+          <Modal.Title>Add/Update</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {!!user && user.accountType === "NORMAL" && (
