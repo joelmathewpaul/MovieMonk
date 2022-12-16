@@ -44,7 +44,18 @@ const MovieDetails = () => {
 
   const toggleWatchlist = async () => {
     await toggleMovieInWatchlist(user.id, movie.id, movie);
+    checkMovieIsInWatchList();
   };
+
+  const checkMovieIsInWatchList = () => {
+    isMovieInWatchlist(user.id, movieId).then((watchlist) => {
+      if (watchlist.length > 0) {
+        setIsInWatchlist(true);
+      } else {
+        setIsInWatchlist(false);
+      }
+    });
+  }
 
   useEffect(() => {
     movieService
@@ -61,13 +72,7 @@ const MovieDetails = () => {
           setSimilarMovies(moviesList);
         });
         downloadReviews();
-        isMovieInWatchlist(user.id, movieId).then((watchlist) => {
-          if (watchlist.length > 0) {
-            setIsInWatchlist(true);
-          } else {
-            setIsInWatchlist(false);
-          }
-        });
+        checkMovieIsInWatchList();
       })
       .catch((err) => {
         // Cannot fetch details of that movie, navigate to home
