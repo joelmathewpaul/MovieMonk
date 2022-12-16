@@ -43,7 +43,6 @@ const ReadOnlyUserInfo = () => {
 
   useEffect(() => {
     const paths = pathname.split("/");
-    console.log(paths);
     if (paths.length === 3) {
       const uid = paths[2];
       getUserById(uid).then(dbUser => {
