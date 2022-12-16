@@ -29,7 +29,7 @@ const MyWatchlist = ({ user }) => {
       {watchList.length > 0 &&
         <MovieList movieList={watchList} onDelete={deleteMyWatchlist} />
       }
-      {watchList.length == 0 &&
+      {watchList.length === 0 &&
         <p className="text-muted"> Your watch list is currently empty.</p>
       }
     </>

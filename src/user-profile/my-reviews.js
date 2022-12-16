@@ -13,6 +13,7 @@ const MyReviews = ({ user }) => {
 
   const downloadReviews = () => {
     findReviewByUserId(user.id).then((reviewList) => {
+      console.log(reviewList);
       setReviewList(Review.getListFromJsonArray(reviewList));
     });
   }
