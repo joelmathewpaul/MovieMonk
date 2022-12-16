@@ -42,10 +42,10 @@ const Header = () => {
         <div className="d-flex align-items-center mt-3 mt-lg-0">
           {user && (
             <>
-              <button type="button" className="me-3 btn d-flex rounded-pill align-items-center btn-outline-success">
+              <Link to="/profile/my-watchlist" className="me-3 btn d-flex rounded-pill align-items-center btn-outline-success">
                 <i className="fa fa-list"></i>
                 <span className="ps-3">Watchlist</span>
-              </button>
+              </Link>
               <Dropdown as={ButtonGroup}>
                 <Dropdown.Toggle variant="success" className="rounded-pill"><i className="fa fa-user"></i> {user.name}</Dropdown.Toggle>
                 <Dropdown.Menu>

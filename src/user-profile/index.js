@@ -10,6 +10,7 @@ import UserFollowers from "./user-followers";
 import UserInfo from "./user-information";
 import User from "../models/user";
 import UserFollowing from "./user-following";
+import MyWatchlist from "./my-watchlist";
 
 /**
  * Profile Component to show the current profile page of the user that includes account information, followers, following, movie reviews etc.
@@ -67,6 +68,7 @@ const Profile = () => {
                                 <Routes>
                                     <Route exact path="/" element={<UserInfo user={user} />} />
                                     <Route exact path="/my-reviews" element={<MyReviews user={user} />} />
+                                    <Route exact path="/my-watchlist" element={<MyWatchlist user={user} />} />
                                     <Route exact path="/followers" element={<UserFollowers user={user} />} />
                                     <Route exact path="/following" element={<UserFollowing user={user} />} />
                                 </Routes>
