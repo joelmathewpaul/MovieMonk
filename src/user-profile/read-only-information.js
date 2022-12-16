@@ -4,8 +4,8 @@ import Header from "../header";
 import User from "../models/user";
 import { getUserById } from "../services/user-service";
 import { formatDate } from "../utils";
-import {useSelector} from "react-redux";
-import {addFollowing, deleteFollowing, findAllFollowing} from "../services/follow-service";
+import { useSelector } from "react-redux";
+import { addFollowing, deleteFollowing, findAllFollowing } from "../services/follow-service";
 
 const ReadOnlyUserInfo = () => {
   const navigate = useNavigate();
@@ -26,8 +26,24 @@ const ReadOnlyUserInfo = () => {
     setIsFollowing(false);
   }
 
+  const findTheAllFollowing = () => {
+    if (user) {
+      findAllFollowing(loggedInUser.id).then(res => {
+        const matches = res.filter((followedUser) => user.id === followedUser._id);
+        if (matches.length === 1) {
+          // set here
+          setIsFollowing(true);
+        } else {
+          // you didnt get a match
+          setIsFollowing(false);
+        }
+      });
+    }
+  }
+
   useEffect(() => {
     const paths = pathname.split("/");
+    console.log(paths);
     if (paths.length === 3) {
       const uid = paths[2];
       getUserById(uid).then(dbUser => {
@@ -35,22 +51,16 @@ const ReadOnlyUserInfo = () => {
         const modelUser = User.getUserDetails(dbUser);
         setUser(modelUser);
         setLoading(false);
-        findAllFollowing(loggedInUser.id).then(res => {
-          const matches = res.filter((followedUser) => modelUser.id === followedUser._id);
-          if (matches.length === 1) {
-            // set here
-            setIsFollowing(true);
-          } else {
-            // you didnt get a match
-          }
-        });
       }).catch(err => {
         navigate("/");
-      })
+      });
+      if (loggedInUser) {
+        findTheAllFollowing();
+      }
     } else {
       navigate("/");
     }
-  }, [pathname]);
+  }, [pathname, loggedInUser]);
 
   return (
 
@@ -79,9 +89,9 @@ const ReadOnlyUserInfo = () => {
                 </div>
                 {
                   !isFollowing &&
-                 (<div className="flex-fill justify-content-end">
-                   <button type="button" className="btn btn-success rounded-pill" onClick={addFollowingOnClick}>Follow</button>
-                 </div>)
+                  (<div className="flex-fill justify-content-end">
+                    <button type="button" className="btn btn-success rounded-pill" onClick={addFollowingOnClick}>Follow</button>
+                  </div>)
                 }
 
                 {
