@@ -15,7 +15,7 @@ import {
   isMovieInWatchlist,
   toggleMovieInWatchlist,
 } from "../services/watchlist-service";
-import CurrencyFormatter from "../utils/currencyFormatterUtil";
+import { formatCurrency } from "../utils";
 
 const MovieDetails = () => {
   const user = useSelector((state) => state.user);
@@ -169,7 +169,7 @@ const MovieDetails = () => {
             <p className="m-0">{movie.overview}</p>
             <p className="mt-3">
               <b>Budget:</b>{" "}
-              {movie.budget ? `${CurrencyFormatter(movie.budget)}` : `N/A`}
+              {movie.budget ? `${formatCurrency(movie.budget)}` : `N/A`}
             </p>
             <p className="mt-3">
               <b>Genre:</b>

@@ -6,6 +6,7 @@ import { getUserById } from "../services/user-service";
 import { formatDate } from "../utils";
 import { useSelector } from "react-redux";
 import { addFollowing, deleteFollowing, findAllFollowing } from "../services/follow-service";
+import { Modal } from "react-bootstrap";
 
 const ReadOnlyUserInfo = () => {
   const navigate = useNavigate();
@@ -14,67 +15,85 @@ const ReadOnlyUserInfo = () => {
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
   const loggedInUser = useSelector(state => state.user);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const addFollowingOnClick = async () => {
-    await addFollowing(loggedInUser.id, user.id);
-    setIsFollowing(true);
-
+    if (loggedInUser) {
+      await addFollowing(loggedInUser.id, user.id);
+      setIsFollowing(true);
+      getUserDetails(user.id);
+    } else {
+      handleShow();
+    }
   }
 
 
   const deleteFollowingOnClick = async () => {
-    await deleteFollowing(loggedInUser.id, user.id);
-    setIsFollowing(false);
+    if (loggedInUser) {
+      await deleteFollowing(loggedInUser.id, user.id);
+      setIsFollowing(false);
+      getUserDetails(user.id);
+    }
   }
 
-  const findTheAllFollowing = () => {
-    if (user) {
-      findAllFollowing(loggedInUser.id).then(res => {
-        const matches = res.filter((followedUser) => user.id === followedUser._id);
-        if (matches.length === 1) {
-          // set here
-          setIsFollowing(true);
-        } else {
-          // you didnt get a match
-          setIsFollowing(false);
-        }
-      });
+  const getUserDetails = async (uid) => {
+    try {
+      const dbUser = await getUserById(uid);
+      const modelUser = User.getUserDetails(dbUser);
+      setUser(modelUser);
+      setLoading(false);
+      if (loggedInUser) {
+        findAllFollowing(loggedInUser.id).then(res => {
+          const matches = res.filter((followedUser) => modelUser.id === followedUser._id);
+          if (matches.length === 1) {
+            // set here
+            setIsFollowing(true);
+          } else {
+            // you didnt get a match
+            setIsFollowing(false);
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      navigate("/");
     }
   }
 
   useEffect(() => {
     const paths = pathname.split("/");
-
     if (paths.length === 3) {
       const uid = paths[2];
-      getUserById(uid).then(dbUser => {
-        // we got the user
-        const modelUser = User.getUserDetails(dbUser);
-        setUser(modelUser);
-        setLoading(false);
-      }).catch(err => {
-        navigate("/");
-      });
-      if (loggedInUser) {
-        findTheAllFollowing();
-      }
+      getUserDetails(uid);
     } else {
       navigate("/");
     }
-  }, [pathname, loggedInUser]);
+  }, [pathname, loggedInUser, navigate]);
 
   return (
 
     !loading && (
       <div>
         <Header />
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Follow</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p className="text-muted">
+              You need to be logged in to do this operation
+            </p>
+          </Modal.Body>
+        </Modal>
         <div className="container bg-white rounded-3 overflow-hidden">
           <div className="row">
             <div className="col ptrem mb-0">
               <div className="backdrop-holder rounded-3" style={{
                 backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('${user.headerImage}')`,
               }}>
-
               </div>
               <div className="position-relative">
                 <div className="d-flex flex-row pull-det-up w-100">
