@@ -48,6 +48,9 @@ export default class User {
     );
   }
 
+  /**
+   * Responsible for returning a list of users from the array of users passed in.
+   */
   static getListFromJsonArray(results) {
     let vals = [];
     results.forEach((res) => {

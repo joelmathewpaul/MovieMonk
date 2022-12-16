@@ -1,7 +1,14 @@
 import { deletUserById } from "../services/user-service";
 import { formatDate } from "../utils";
 
+/**
+ * Responsible for each item in the user list.
+ *
+ */
 const UserListItem = ({ userListItem, onDelete }) => {
+  /**
+   * resposnible for deleting a user from the list
+   */
   const deleteUser = () => {
     const id = userListItem.id;
     deletUserById(id).then((resposnse) => {

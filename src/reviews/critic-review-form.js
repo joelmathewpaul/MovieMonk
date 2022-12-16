@@ -6,6 +6,10 @@ import {
 } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 
+/**
+ * Responsible for showing the review form for critics.
+ * Critic users can post theri opinion on this.
+ */
 const CriticUserReviewForm = ({ movieId, onSave, reviewItem }) => {
   const user = useSelector((state) => state.user);
   const [review, setReview] = useState(
@@ -20,6 +24,9 @@ const CriticUserReviewForm = ({ movieId, onSave, reviewItem }) => {
     }
   );
 
+  /**
+   * responsible for saving the reviews once submitted.
+   */
   const submitReview = async (e) => {
     e.preventDefault();
     const overallRating =

@@ -6,12 +6,15 @@ import { deleteUser, saveUser } from "../reducers/user-reducer";
 import { signup } from "../services/auth-service";
 import User from "../models/user";
 
-//function to create register page
+/**
+ * Responsible for registering a new user into the website.
+ * Adds the new user details to the databse.
+ */
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userCred, setUserCred] = useState({
-    accountType: 'NORMAL',
+    accountType: "NORMAL",
   });
   const setName = (e) => {
     setUserCred((userCred) => {
@@ -22,6 +25,9 @@ const Register = () => {
     });
   };
 
+  /**
+   * Responsible for getting and saving the email of the new user into the system.
+   */
   const setEmail = (e) => {
     setUserCred((userCred) => {
       return {
@@ -31,6 +37,9 @@ const Register = () => {
     });
   };
 
+  /**
+   * Responsible for getting and saving the passowrd of the new user into the system.
+   */
   const setPassword = (e) => {
     setUserCred((userCred) => {
       return {
@@ -40,6 +49,9 @@ const Register = () => {
     });
   };
 
+  /**
+   * Responsible for checking if the password is re entered correctly.
+   */
   const setConfirmPassword = (e) => {
     setUserCred((userCred) => {
       return {
@@ -49,6 +61,9 @@ const Register = () => {
     });
   };
 
+  /**
+   * Responsible for setting the account type for new users (ADMIN / CRITIC / NORMAL).
+   */
   const setAccountType = (e) => {
     setUserCred((userCred) => {
       return {
@@ -58,6 +73,9 @@ const Register = () => {
     });
   };
 
+  /**
+   * Responsible for Singing in the new user into the website.
+   */
   const makeSignUp = async (e) => {
     e.preventDefault();
     //function to check if the credentials provided are valid and proceed with login
@@ -156,17 +174,44 @@ const Register = () => {
           <div className="m-0 text-white">User Type:</div>
           <div className="form-check">
             <div className="btn-group">
-              <input type="radio" className="btn-check" name="options" id="option1"
-                onChange={setAccountType} value="NORMAL" checked={userCred.accountType === 'NORMAL'} />
-              <label htmlFor="option1" className="btn btn-secondary ">Normal</label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="options"
+                id="option1"
+                onChange={setAccountType}
+                value="NORMAL"
+                checked={userCred.accountType === "NORMAL"}
+              />
+              <label htmlFor="option1" className="btn btn-secondary ">
+                Normal
+              </label>
 
-              <input type="radio" className="btn-check" name="options" id="option2"
-                onChange={setAccountType} value="CRITIC" checked={userCred.accountType === 'CRITIC'} />
-              <label htmlFor="option2" className="btn btn-secondary">Critic</label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="options"
+                id="option2"
+                onChange={setAccountType}
+                value="CRITIC"
+                checked={userCred.accountType === "CRITIC"}
+              />
+              <label htmlFor="option2" className="btn btn-secondary">
+                Critic
+              </label>
 
-              <input type="radio" className="btn-check" name="options" id="option3"
-                onChange={setAccountType} value="ADMIN" checked={userCred.accountType === 'ADMIN'} />
-              <label htmlFor="option3" className="btn btn-secondary">Admin</label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="options"
+                id="option3"
+                onChange={setAccountType}
+                value="ADMIN"
+                checked={userCred.accountType === "ADMIN"}
+              />
+              <label htmlFor="option3" className="btn btn-secondary">
+                Admin
+              </label>
             </div>
           </div>
         </div>
@@ -178,8 +223,8 @@ const Register = () => {
         >
           Sign Up
         </Button>
-      </form >
-    </div >
+      </form>
+    </div>
   );
 };
 export default Register;

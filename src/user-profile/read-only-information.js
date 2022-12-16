@@ -5,16 +5,23 @@ import User from "../models/user";
 import { getUserById } from "../services/user-service";
 import { formatDate } from "../utils";
 import { useSelector } from "react-redux";
-import { addFollowing, deleteFollowing, findAllFollowing } from "../services/follow-service";
+import {
+  addFollowing,
+  deleteFollowing,
+  findAllFollowing,
+} from "../services/follow-service";
 import { Modal } from "react-bootstrap";
 
+/**
+ * Responsible for handling the read only data
+ */
 const ReadOnlyUserInfo = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
-  const loggedInUser = useSelector(state => state.user);
+  const loggedInUser = useSelector((state) => state.user);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,8 +35,7 @@ const ReadOnlyUserInfo = () => {
     } else {
       handleShow();
     }
-  }
-
+  };
 
   const deleteFollowingOnClick = async () => {
     if (loggedInUser) {
@@ -37,7 +43,7 @@ const ReadOnlyUserInfo = () => {
       setIsFollowing(false);
       getUserDetails(user.id);
     }
-  }
+  };
 
   const getUserDetails = async (uid) => {
     try {
@@ -46,8 +52,10 @@ const ReadOnlyUserInfo = () => {
       setUser(modelUser);
       setLoading(false);
       if (loggedInUser) {
-        findAllFollowing(loggedInUser.id).then(res => {
-          const matches = res.filter((followedUser) => modelUser.id === followedUser._id);
+        findAllFollowing(loggedInUser.id).then((res) => {
+          const matches = res.filter(
+            (followedUser) => modelUser.id === followedUser._id
+          );
           if (matches.length === 1) {
             // set here
             setIsFollowing(true);
@@ -61,7 +69,7 @@ const ReadOnlyUserInfo = () => {
       console.log(err);
       navigate("/");
     }
-  }
+  };
 
   useEffect(() => {
     const paths = pathname.split("/");
@@ -74,7 +82,6 @@ const ReadOnlyUserInfo = () => {
   }, [pathname, loggedInUser, navigate]);
 
   return (
-
     !loading && (
       <div>
         <Header />
@@ -91,10 +98,12 @@ const ReadOnlyUserInfo = () => {
         <div className="container bg-white rounded-3 overflow-hidden">
           <div className="row">
             <div className="col ptrem mb-0">
-              <div className="backdrop-holder rounded-3" style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('${user.headerImage}')`,
-              }}>
-              </div>
+              <div
+                className="backdrop-holder rounded-3"
+                style={{
+                  backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url('${user.headerImage}')`,
+                }}
+              ></div>
               <div className="position-relative">
                 <div className="d-flex flex-row pull-det-up w-100">
                   <div className="ms-4 card-imgs user-thumb">
@@ -108,22 +117,30 @@ const ReadOnlyUserInfo = () => {
                       <p className="pe-4">Following: {user.followingCount}</p>
                     </div>
                   </div>
-                  {
-                    !isFollowing &&
-                    (<div className="flex-fill text-end me-4">
-                      <button type="button" className="btn btn-success rounded-pill" onClick={addFollowingOnClick}>
+                  {!isFollowing && (
+                    <div className="flex-fill text-end me-4">
+                      <button
+                        type="button"
+                        className="btn btn-success rounded-pill"
+                        onClick={addFollowingOnClick}
+                      >
                         <i className="fa fa-check"></i>
                         <span className="ps-2">Follow</span>
                       </button>
-                    </div>)
-                  }
+                    </div>
+                  )}
 
-                  {
-                    isFollowing &&
-                    (<div className="flex-fill text-end me-4">
-                      <button type="button" className="btn btn-danger rounded-pill" onClick={deleteFollowingOnClick}>Unfollow</button>
-                    </div>)
-                  }
+                  {isFollowing && (
+                    <div className="flex-fill text-end me-4">
+                      <button
+                        type="button"
+                        className="btn btn-danger rounded-pill"
+                        onClick={deleteFollowingOnClick}
+                      >
+                        Unfollow
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -150,7 +167,7 @@ const ReadOnlyUserInfo = () => {
         </div>
       </div>
     )
-  )
-}
+  );
+};
 
 export default ReadOnlyUserInfo;

@@ -4,9 +4,16 @@ import { deleteReviewByID } from "../services/user-review-services";
 import StarComponent from "../star-component/star-component";
 import { formatDate } from "../utils";
 
+/**
+ * Responsible for handling reviews.
+ * Stores single review list item.
+ */
 const ReviewListItem = ({ reviewListItem, onUpdate, onDelete, isAdmin }) => {
   const user = useSelector((state) => state.user);
 
+  /**
+   * Deletes a review item from the list.
+   */
   const deleteReview = async () => {
     const reviewId = reviewListItem.id;
     await deleteReviewByID(reviewId);
@@ -15,6 +22,9 @@ const ReviewListItem = ({ reviewListItem, onUpdate, onDelete, isAdmin }) => {
     }
   };
 
+  /**
+   * Updates an already existing review from the list.
+   */
   const updateReview = async () => {
     if (onUpdate && typeof onUpdate === "function") {
       onUpdate(reviewListItem);

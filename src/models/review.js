@@ -1,3 +1,7 @@
+/**
+ * A Review class to store reviews made by the user on movies.
+ * Represents individual reviews made by the users.
+ */
 export default class Review {
   constructor(
     id,
@@ -26,6 +30,10 @@ export default class Review {
     this.cinematographyRating = cinematographyRating;
     this.soundtrackRating = soundtrackRating;
   }
+
+  /**
+   * Responsible for returning a list of reviews from the input of review array.
+   */
   static getListFromJsonArray(results) {
     let vals = [];
     results.forEach((res) => {

@@ -1,5 +1,8 @@
 import ReviewListItem from "./reviews-list-item";
 
+/**
+ * Responsible for handling the review list.
+ */
 const ReviewList = ({ reviewList = [], onUpdate, onDelete, isAdmin }) => {
   return (
     <ul className="list-group">

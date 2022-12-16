@@ -6,17 +6,23 @@ import ReviewList from "../reviews/reviews-list";
 import UserReviewsForm from "../reviews/user-reviews-form";
 import { findReviewByUserId } from "../services/user-review-services";
 
+/**
+ * Responsible for the reviews made by a particular user.
+ */
 const MyReviews = ({ user }) => {
   const [reviews, setReviewList] = useState([]);
   const [show, setShow] = useState(false);
   const [editedReview, setEditReview] = useState();
 
+  /**
+   * Downloads all the reviews the passed in user has made in the past.
+   */
   const downloadReviews = () => {
     findReviewByUserId(user.id).then((reviewList) => {
       console.log(reviewList);
       setReviewList(Review.getListFromJsonArray(reviewList));
     });
-  }
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,7 +44,6 @@ const MyReviews = ({ user }) => {
   useEffect(() => {
     downloadReviews();
   }, [user]);
-
 
   return (
     <div>
@@ -68,7 +73,11 @@ const MyReviews = ({ user }) => {
           )}
         </Modal.Body>
       </Modal>
-      <ReviewList reviewList={reviews} onUpdate={onUpdate} onDelete={onDelete} />
+      <ReviewList
+        reviewList={reviews}
+        onUpdate={onUpdate}
+        onDelete={onDelete}
+      />
     </div>
   );
 };

@@ -4,8 +4,10 @@ import { ButtonGroup, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../services/auth-service";
 import { deleteUser } from "../reducers/user-reducer";
-import Moderation from "../moderation";
 
+/**
+ * Responsible for the head part of the website which includes the search area, user profile dorpdown, website name and logo.
+ */
 const Header = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
@@ -15,6 +17,9 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const [query, setQuery] = useState(q || "");
 
+  /**
+   * Responsible for the search functionality.
+   */
   const searchNow = (e) => {
     e.preventDefault();
     if (query) {
@@ -23,10 +28,16 @@ const Header = () => {
     return false;
   };
 
+  /**
+   * Navigates the user, if an admin, to the admins dashboard.
+   */
   const adminPanel = () => {
     navigate("/admin/dashboard");
   };
 
+  /**
+   * Responsible for signing out a signed in user.
+   */
   const signOutUser = async (e) => {
     e.preventDefault();
     await signOut();

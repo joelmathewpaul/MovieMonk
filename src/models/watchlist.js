@@ -1,3 +1,7 @@
+/**
+ * A class that represents teh watchlist of users.
+ * Represents individual watchlist item.
+ */
 export default class Watchlist {
   constructor(id, addedBy, movieId, addTime, movie) {
     this.id = id;
@@ -7,6 +11,9 @@ export default class Watchlist {
     this.movie = movie;
   }
 
+  /**
+   * Responsible for returning a list of watchlist from the array of watchlist passed.
+   */
   static getListFromJsonArray(results) {
     let vals = [];
     results.forEach((res) => {
